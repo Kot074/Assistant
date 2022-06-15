@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "VectorConnectionString": "datasource=192.168.1.116;initial catalog=vector;user id=Kot074;password=12345;Allow Zero DateTime=true;Convert Zero Datetime=true;"
+  }
+}
