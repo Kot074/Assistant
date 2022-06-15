@@ -57,8 +57,6 @@ namespace NewsEditor.Forms
                 Mask = 0,
                 Catid = (uint)CategoriesEnum.NEWS,
                 CreatedBy = 62,
-                Modified = now,
-                ModifiedBy = 62,
                 CheckedOut = 0,
                 Attribs = "show_title=\nlink_titles =\nshow_intro =\nshow_section =\nlink_section =\nshow_category =\nlink_category =\nshow_vote =\nshow_author =\nshow_create_date =\nshow_modify_date =\nshow_pdf_icon =\nshow_print_icon =\nshow_email_icon =\nlanguage =\nkeyref =\nreadmore = ",
                 Version = 1,
@@ -103,7 +101,7 @@ namespace NewsEditor.Forms
             _content.Title = txtTitle.Text;
             _content.Introtext = tinyMceEditor.HtmlContent;
             _content.PublishUp = dtpDate.Value.ToUniversalTime();
-            _content.Created = dtpDate.Value;
+            _content.Created = dtpDate.Value.ToUniversalTime();
 
             this.Close();
         }

@@ -49,7 +49,7 @@ namespace Atom.VectorSiteLibrary.Storage
             }
         }
 
-        public void Save(JosCategory entity)
+        public JosCategory Save(JosCategory entity)
         {
             using (var context = new VectorContext(_connectionString))
             {
@@ -63,6 +63,8 @@ namespace Atom.VectorSiteLibrary.Storage
                     context.Entry(entity).State = EntityState.Modified;
                 }
                 context.SaveChanges();
+
+                return context.Entry(entity).Entity;
             }
         }
     }

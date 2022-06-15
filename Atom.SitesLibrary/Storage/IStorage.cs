@@ -11,7 +11,7 @@ namespace Atom.VectorSiteLibrary.Storage
     {
         public List<T> GetAll();
         public T Get(int id);
-        public void Save(T entity);
+        public T Save(T entity);
         public void Remove(T entity);
     }
 }

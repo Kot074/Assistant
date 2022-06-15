@@ -27,6 +27,7 @@ namespace Atom.VectorSiteLibrary.Data
         public virtual DbSet<JosCategory> JosCategories { get; set; }
         public virtual DbSet<JosContent> JosContents { get; set; }
         public virtual DbSet<JosSection> JosSections { get; set; }
+        public virtual DbSet<JosContentFrontpage> JosContentFrontpages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,6 +41,17 @@ namespace Atom.VectorSiteLibrary.Data
         {
             modelBuilder.HasCharSet("utf8mb4")
                 .UseCollation("utf8mb4_0900_ai_ci");
+
+            modelBuilder.Entity<JosContentFrontpage>(entity =>
+            {
+                entity.ToTable("jos_content_frontpage");
+                entity.HasKey(e => e.ContentId);
+                entity.HasCharSet("utf8")
+                    .UseCollation("utf8_general_ci");
+
+                entity.Property(e => e.ContentId).HasColumnName("content_id");
+                entity.Property(e => e.Ordering).HasColumnName("ordering");
+            });
 
             modelBuilder.Entity<JosCategory>(entity =>
             {

@@ -62,7 +62,7 @@ namespace Atom.VectorSiteLibrary.Storage
             }
         }
 
-        public void Save(JosContent entity)
+        public JosContent Save(JosContent entity)
         {
             using (var context = new VectorContext(_connectionString))
             {
@@ -79,6 +79,7 @@ namespace Atom.VectorSiteLibrary.Storage
                     }
 
                     context.SaveChanges();
+                    return context.Entry(entity).Entity;
                 }
                 catch (Exception ex)
                 {

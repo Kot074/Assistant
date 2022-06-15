@@ -14,6 +14,7 @@ namespace NewsEditor
     public partial class MainForm : Form
     {
         private IStorage<JosContent> _content;
+        private IStorage<JosContentFrontpage> _contentFrontpage;
         private IWarehouse _warehouse;
         private string _currentPath;
 
@@ -42,6 +43,8 @@ namespace NewsEditor
 
             var factory = new StorageFactory(StorageTypes.MYSQL, configuration.MySql.ConnectionString);
             _content = factory.GetContentStorage();
+            _contentFrontpage = factory.GetContentFrontpageStorage();
+            var cfp = _contentFrontpage.GetAll();
             RefreshNews();
 
             var collectionsTheme = _content.GetAll().Where(c =>
@@ -70,7 +73,13 @@ namespace NewsEditor
             var editor = new EditorForm();
             if (editor.ShowDialog(this) == DialogResult.OK)
             {
-                _content.Save(editor.Content);
+                var news = _content.Save(editor.Content);
+                var front = new JosContentFrontpage()
+                {
+                    ContentId = (int)news.Id
+                };
+                _contentFrontpage.Save(front);
+
                 RefreshNews();
             }
         }

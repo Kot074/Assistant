@@ -59,5 +59,20 @@ namespace Atom.VectorSiteLibrary.Storage
 
             return categoryStorage;
         }
+
+        public IStorage<JosContentFrontpage> GetContentFrontpageStorage()
+        {
+            IStorage<JosContentFrontpage> contentFrontpageStorage = null;
+            switch (_storageType)
+            {
+                case StorageTypes.MYSQL:
+                    contentFrontpageStorage = new MySql.MySqlContentFrontpageStorage(_connectionString);
+                    break;
+                default:
+                    throw new ArgumentException("ОШИБКА! Данный тип хранилища отсутствует!");
+            }
+
+            return contentFrontpageStorage;
+        }
     }
 }
