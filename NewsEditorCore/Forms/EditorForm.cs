@@ -99,8 +99,11 @@ namespace NewsEditor.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             _content.Title = txtTitle.Text;
-            _content.Introtext = tinyMceEditor.HtmlContent;
+            _content.Introtext = 
+                tinyMceEditor.HtmlContent
+                    .Replace("<p>", "<p style=\"text-indent: 1.25cm; font-family:Times New Roman, Times, serif; font-size: 12pt; margin-top: 0.5em; margin-bottom: 0.5em; line-height: 150%;\">");
             _content.PublishUp = dtpDate.Value.ToUniversalTime();
+            _content.PublishDown = DateTime.MaxValue;
             _content.Created = dtpDate.Value.ToUniversalTime();
 
             this.Close();
