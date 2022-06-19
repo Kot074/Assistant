@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.32510.428
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atom.VectorSiteLibrary", "Atom.SitesLibrary\Atom.VectorSiteLibrary.csproj", "{2DFD3E0F-6F7C-4FF1-951F-0A749CA59415}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsEditorCore", "NewsEditorCore\NewsEditorCore.csproj", "{37EA6DC2-77EF-41AF-918F-A16D3A64672E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssistantCore", "NewsEditorCore\AssistantCore.csproj", "{37EA6DC2-77EF-41AF-918F-A16D3A64672E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,6 +6,10 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="tinymce\changelog.txt" />
     <None Remove="tinymce\js\tinymce\jquery.tinymce.min.js" />
