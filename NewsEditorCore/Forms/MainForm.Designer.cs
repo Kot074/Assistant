@@ -540,6 +540,7 @@ namespace NewsEditor
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Помощник";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.newsDataGrid)).EndInit();
             this.newsPanel.ResumeLayout(false);
             this.tabsControl.ResumeLayout(false);

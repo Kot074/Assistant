@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using AssistantCore.Forms;
 using Atom.VectorSiteLibrary.Storage;
 using Atom.VectorSiteLibrary.Enums;
 using Atom.VectorSiteLibrary.Models;
@@ -17,6 +18,7 @@ namespace NewsEditor
         private IStorage<JosContentFrontpage> _contentFrontpage;
         private IWarehouse _warehouse;
         private string _currentPath;
+        private SplashScreenForm splashScreen;
 
         private readonly string ftpHost;
         private readonly string fptPath;
@@ -25,8 +27,11 @@ namespace NewsEditor
 
         public MainForm()
         {
-            InitializeComponent();
+            splashScreen = new SplashScreenForm();
+            splashScreen.Show();
 
+            InitializeComponent();
+            
             var configuration = ConfigurationManager.Instance;
 
             ftpHost = configuration.Ftp.Host;
@@ -562,6 +567,11 @@ namespace NewsEditor
             {
                 e.Value = dt.ToLocalTime();
             }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            splashScreen.Close();
         }
     }
 }
