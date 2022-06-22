@@ -185,9 +185,9 @@ namespace NewsEditor.Forms
             // 
             // btnDelete
             // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(903, 537);
+            this.btnDelete.Location = new System.Drawing.Point(903, 535);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(150, 30);
@@ -222,9 +222,9 @@ namespace NewsEditor.Forms
             // 
             // btnCopyAddress
             // 
-            this.btnCopyAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopyAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCopyAddress.Enabled = false;
-            this.btnCopyAddress.Location = new System.Drawing.Point(903, 501);
+            this.btnCopyAddress.Location = new System.Drawing.Point(903, 499);
             this.btnCopyAddress.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCopyAddress.Name = "btnCopyAddress";
             this.btnCopyAddress.Size = new System.Drawing.Size(150, 30);
