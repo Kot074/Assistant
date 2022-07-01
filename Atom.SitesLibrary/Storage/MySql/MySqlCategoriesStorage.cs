@@ -9,63 +9,51 @@ namespace Atom.VectorSiteLibrary.Storage
 {
     internal class MySqlCategoriesStorage : IStorage<JosCategory>
     {
-        private readonly string _connectionString;
+        private readonly VectorContext _context;
 
-        public MySqlCategoriesStorage(string connectionString)
+        public MySqlCategoriesStorage(VectorContext context)
         {
-            _connectionString = connectionString;
+            _context = context;
         }
 
         public JosCategory Get(int id)
         {
-            using (var context = new VectorContext(_connectionString))
-            {
-                return context.JosCategories.AsNoTracking().FirstOrDefault(s => s.Id == id);
-            }
+            return _context.JosCategories.AsNoTracking().FirstOrDefault(s => s.Id == id);
         }
 
-        public List<JosCategory> GetAll()
+        public IQueryable<JosCategory> GetAll()
         {
-            using (var context = new VectorContext(_connectionString))
-            {
-                return context.JosCategories.AsNoTracking().ToList();
-            }
+            return _context.JosCategories.AsNoTracking();
         }
 
         public void Remove(JosCategory entity)
         {
-            using (var context = new VectorContext(_connectionString))
+            var currentSection = _context.JosCategories.AsNoTracking().FirstOrDefault(s => s.Id == entity.Id);
+            if (currentSection is null)
             {
-                var currentSection = context.JosCategories.AsNoTracking().FirstOrDefault(s => s.Id == entity.Id);
-                if (currentSection is null)
-                {
-                    throw new NullReferenceException("ОШИБКА! Такой категории не существует!");
-                }
-                else
-                {
-                    context.Entry(entity).State = EntityState.Deleted;
-                }
-                context.SaveChanges();
+                throw new NullReferenceException("ОШИБКА! Такой категории не существует!");
             }
+            else
+            {
+                _context.Entry(entity).State = EntityState.Deleted;
+            }
+            _context.SaveChanges();
         }
 
         public JosCategory Save(JosCategory entity)
         {
-            using (var context = new VectorContext(_connectionString))
+            var currentSection = _context.JosCategories.AsNoTracking().FirstOrDefault(s => s.Id == entity.Id);
+            if (currentSection is null)
             {
-                var currentSection = context.JosCategories.AsNoTracking().FirstOrDefault(s => s.Id == entity.Id);
-                if (currentSection is null)
-                {
-                    context.JosCategories.Add(entity);
-                }
-                else
-                {
-                    context.Entry(entity).State = EntityState.Modified;
-                }
-                context.SaveChanges();
-
-                return context.Entry(entity).Entity;
+                _context.JosCategories.Add(entity);
             }
+            else
+            {
+                _context.Entry(entity).State = EntityState.Modified;
+            }
+            _context.SaveChanges();
+            _context.Entry(entity).State = EntityState.Detached;
+            return _context.Entry(entity).Entity;
         }
     }
 }

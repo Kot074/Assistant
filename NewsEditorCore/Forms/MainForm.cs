@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using AssistantCore.Forms;
+using Atom.VectorSiteLibrary.Data;
 using Atom.VectorSiteLibrary.Storage;
 using Atom.VectorSiteLibrary.Enums;
 using Atom.VectorSiteLibrary.Models;
@@ -27,6 +29,9 @@ namespace NewsEditor
 
         public MainForm()
         {
+#if (DEBUG)
+            var startInitialization = DateTime.UtcNow;
+#endif
             splashScreen = new SplashScreenForm();
             splashScreen.Show();
 
@@ -46,14 +51,15 @@ namespace NewsEditor
             var list = _warehouse.GetList(null);
             listBox.Items.AddRange(list);
 
-            var factory = new StorageFactory(StorageTypes.MYSQL, configuration.MySql.ConnectionString);
+            var context = new VectorContext(configuration.MySql.ConnectionString);
+
+            var factory = new StorageFactory(StorageTypes.MYSQL, context);
             _content = factory.GetContentStorage();
             _contentFrontpage = factory.GetContentFrontpageStorage();
-            var cfp = _contentFrontpage.GetAll();
             RefreshNews();
 
             var collectionsTheme = _content.GetAll().Where(c =>
-                    c.Catid == (uint)CategoriesEnum.SALES_OF_COLLECTIONS && c.Sectionid == (uint)SectionsEnum.SALES_OF_COLLECTIONS).OrderBy(c => c.Title);
+                c.Catid == (uint)CategoriesEnum.SALES_OF_COLLECTIONS && c.Sectionid == (uint)SectionsEnum.SALES_OF_COLLECTIONS).OrderBy(c => c.Title);
             listOfCollectionsTheme.DisplayMember = "Title";
             listOfCollections.DisplayMember = "Text";
             listOfCollectionsTheme.DataSource = collectionsTheme.ToArray();
@@ -71,6 +77,14 @@ namespace NewsEditor
                     column.Visible = false;
                 }
             }
+#if (DEBUG)
+            var endInitialization = DateTime.UtcNow;
+            File.AppendAllText(
+                Environment.ExpandEnvironmentVariables(
+                    "%USERPROFILE%\\Desktop\\log.txt"),
+                    endInitialization.ToString("dd-MM-yyyy HH:mm:ss") + " - Initialization span: " + (endInitialization - startInitialization).ToString("G") + "\n"
+                );
+#endif
         }
 
         private void btnCreate_Click(object sender, EventArgs e)

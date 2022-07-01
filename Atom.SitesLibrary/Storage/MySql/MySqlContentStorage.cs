@@ -9,82 +9,71 @@ namespace Atom.VectorSiteLibrary.Storage
 {
     internal class MySqlContentStorage : IStorage<JosContent>
     {
-        private readonly string _connectionString;
+        private readonly VectorContext _context;
 
-        public MySqlContentStorage(string connectionString)
+        public MySqlContentStorage(VectorContext context)
         {
-            _connectionString = connectionString;
+            _context = context;
         }
         public JosContent Get(int id)
         {
-            using (var context = new VectorContext(_connectionString))
+            try
             {
-                try
-                {
-                    return context.JosContents.AsNoTracking().FirstOrDefault(s => s.Id == id);
-                }
-                catch (InvalidOperationException ex)
-                {
-                    throw new InvalidOperationException("Произошла ошибка при попытке получения данных из базы.");
-                }
+                return _context.JosContents.AsNoTracking().FirstOrDefault(s => s.Id == id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new InvalidOperationException("Произошла ошибка при попытке получения данных из базы.");
             }
         }
 
-        public List<JosContent> GetAll()
+        public IQueryable<JosContent> GetAll()
         {
-            using (var context = new VectorContext(_connectionString))
+            try
             {
-                try
-                {
-                    return context.JosContents.AsNoTracking().ToList();
-                }
-                catch (InvalidOperationException ex)
-                {
-                    throw new InvalidOperationException("Произошла ошибка при попытке получения данных из базы.");
-                }
+                return _context.JosContents.AsNoTracking();
+            }
+            catch (InvalidOperationException)
+            {
+                throw new InvalidOperationException("Произошла ошибка при попытке получения данных из базы.");
             }
         }
 
         public void Remove(JosContent entity)
         {
-            using (var context = new VectorContext(_connectionString))
+            var currentSection = _context.JosContents.AsNoTracking().FirstOrDefault(s => s.Id == entity.Id);
+            if (currentSection is null)
             {
-                var currentSection = context.JosContents.AsNoTracking().FirstOrDefault(s => s.Id == entity.Id);
-                if (currentSection is null)
-                {
-                    throw new ArgumentException("ОШИБКА! Такого контента не существует!");
-                }
-                else
-                {
-                    context.Entry(entity).State = EntityState.Deleted;
-                }
-                context.SaveChanges();
+                throw new ArgumentException("ОШИБКА! Такого контента не существует!");
             }
+            else
+            {
+                _context.Entry(entity).State = EntityState.Deleted;
+            }
+            _context.SaveChanges();
         }
 
         public JosContent Save(JosContent entity)
         {
-            using (var context = new VectorContext(_connectionString))
+            var currentContent = _context.JosContents.AsNoTracking().FirstOrDefault(s => s.Id == entity.Id);
+            try
             {
-                var currentContent = context.JosContents.AsNoTracking().FirstOrDefault(s => s.Id == entity.Id);
-                try
+                if (currentContent is null)
                 {
-                    if (currentContent is null)
-                    {
-                        context.JosContents.Add(entity);
-                    }
-                    else
-                    {
-                        context.Entry(entity).State = EntityState.Modified;
-                    }
+                    _context.JosContents.Add(entity);
+                }
+                else
+                {
+                    _context.Entry(entity).State = EntityState.Modified;
+                }
 
-                    context.SaveChanges();
-                    return context.Entry(entity).Entity;
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Возникла ошибка при попытке сохранения в базу данных.");
-                }
+                _context.SaveChanges();
+                _context.Entry(entity).State = EntityState.Detached;
+                return _context.Entry(entity).Entity;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Возникла ошибка при попытке сохранения в базу данных.");
             }
         }
     }

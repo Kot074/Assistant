@@ -1,18 +1,19 @@
 ﻿using Atom.VectorSiteLibrary.Enums;
 using Atom.VectorSiteLibrary.Models;
 using System;
+using Atom.VectorSiteLibrary.Data;
 
 namespace Atom.VectorSiteLibrary.Storage
 {
     public class StorageFactory
     {
         private readonly StorageTypes _storageType;
-        private readonly string _connectionString;
+        private readonly VectorContext _context;
 
-        public StorageFactory(StorageTypes type, string connectionString)
+        public StorageFactory(StorageTypes type, VectorContext context)
         {
             _storageType = type;
-            _connectionString = connectionString;
+            _context = context;
         }
 
         public IStorage<JosContent> GetContentStorage()
@@ -21,7 +22,7 @@ namespace Atom.VectorSiteLibrary.Storage
             switch (_storageType)
             {
                 case StorageTypes.MYSQL:
-                    contentStorage = new MySqlContentStorage(_connectionString);
+                    contentStorage = new MySqlContentStorage(_context);
                     break;
                 default:
                     throw new ArgumentException("ОШИБКА! Данный тип хранилища отсутствует!");
@@ -36,7 +37,7 @@ namespace Atom.VectorSiteLibrary.Storage
             switch (_storageType)
             {
                 case StorageTypes.MYSQL:
-                    sectionStorage = new MySqlSectionStorage(_connectionString);
+                    sectionStorage = new MySqlSectionStorage(_context);
                     break;
                 default:
                     throw new ArgumentException("ОШИБКА! Данный тип хранилища отсутствует!");
@@ -51,7 +52,7 @@ namespace Atom.VectorSiteLibrary.Storage
             switch (_storageType)
             {
                 case StorageTypes.MYSQL:
-                    categoryStorage = new MySqlCategoriesStorage(_connectionString);
+                    categoryStorage = new MySqlCategoriesStorage(_context);
                     break;
                 default:
                     throw new ArgumentException("ОШИБКА! Данный тип хранилища отсутствует!");
@@ -66,7 +67,7 @@ namespace Atom.VectorSiteLibrary.Storage
             switch (_storageType)
             {
                 case StorageTypes.MYSQL:
-                    contentFrontpageStorage = new MySql.MySqlContentFrontpageStorage(_connectionString);
+                    contentFrontpageStorage = new MySql.MySqlContentFrontpageStorage(_context);
                     break;
                 default:
                     throw new ArgumentException("ОШИБКА! Данный тип хранилища отсутствует!");

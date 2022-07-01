@@ -9,63 +9,51 @@ namespace Atom.VectorSiteLibrary.Storage.MySql
 {
     public class MySqlContentFrontpageStorage : IStorage<JosContentFrontpage>
     {
-        private readonly string _connectionString;
+        private readonly VectorContext _context;
 
-        public MySqlContentFrontpageStorage(string connectionString)
+        public MySqlContentFrontpageStorage(VectorContext context)
         {
-            _connectionString = connectionString;
+            _context = context;
         }
 
-        public List<JosContentFrontpage> GetAll()
+        public IQueryable<JosContentFrontpage> GetAll()
         {
-            using (var context = new VectorContext(_connectionString))
-            {
-                return context.JosContentFrontpages.AsNoTracking().ToList();
-            }
+            return _context.JosContentFrontpages.AsNoTracking();
         }
 
         public JosContentFrontpage Get(int id)
         {
-            using (var context = new VectorContext(_connectionString))
-            {
-                return context.JosContentFrontpages.AsNoTracking().FirstOrDefault(s => s.ContentId == id);
-            }
+            return _context.JosContentFrontpages.AsNoTracking().FirstOrDefault(s => s.ContentId == id);
         }
 
         public JosContentFrontpage Save(JosContentFrontpage entity)
         {
-            using (var context = new VectorContext(_connectionString))
+            var currentContentFrontpage = _context.JosContentFrontpages.AsNoTracking().FirstOrDefault(s => s.ContentId == entity.ContentId);
+            if (currentContentFrontpage is null)
             {
-                var currentContentFrontpage = context.JosContentFrontpages.AsNoTracking().FirstOrDefault(s => s.ContentId == entity.ContentId);
-                if (currentContentFrontpage is null)
-                {
-                    context.JosContentFrontpages.Add(entity);
-                }
-                else
-                {
-                    context.Entry(entity).State = EntityState.Modified;
-                }
-                context.SaveChanges();
-
-                return context.Entry(entity).Entity;
+                _context.JosContentFrontpages.Add(entity);
             }
+            else
+            {
+                _context.Entry(entity).State = EntityState.Modified;
+            }
+            _context.SaveChanges();
+            _context.Entry(entity).State = EntityState.Detached;
+            return _context.Entry(entity).Entity;
         }
 
         public void Remove(JosContentFrontpage entity)
         {
-            using (var context = new VectorContext(_connectionString))
+            var currentContentFrontpage = _context.JosContentFrontpages.AsNoTracking().FirstOrDefault(s => s.ContentId == entity.ContentId);
+            if (currentContentFrontpage is null)
             {
-                var currentContentFrontpage = context.JosContentFrontpages.AsNoTracking().FirstOrDefault(s => s.ContentId == entity.ContentId);
-                if (currentContentFrontpage is null)
-                {
-                    throw new NullReferenceException("ОШИБКА! Такой записи не существует!");
-                }
-                else
-                {
-                    context.Entry(entity).State = EntityState.Deleted;
-                }
-                context.SaveChanges();
+                throw new NullReferenceException("ОШИБКА! Такой записи не существует!");
             }
+            else
+            {
+                _context.Entry(entity).State = EntityState.Deleted;
+            }
+            _context.SaveChanges();
         }
     }
 }
