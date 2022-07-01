@@ -71,7 +71,7 @@ namespace Atom.VectorSiteLibrary.Storage
                 _context.Entry(entity).State = EntityState.Detached;
                 return _context.Entry(entity).Entity;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new Exception("Возникла ошибка при попытке сохранения в базу данных.");
             }
