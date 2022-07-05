@@ -70,6 +70,11 @@ namespace NewsEditorCore
             return path;
         }
 
+        public string GetPath()
+        {
+            return _path;
+        }
+
         public DirectoryItem UploadFile(string sourcePath, string targetPath)
         {
             var name = Path.GetFileName(sourcePath);

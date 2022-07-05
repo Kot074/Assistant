@@ -23,11 +23,6 @@ namespace NewsEditor.Forms
         private readonly IWarehouse _warehouse;
         private string _currentPath;
 
-        private readonly string ftpHost;
-        private readonly string ftpPath;
-        private readonly string ftpLogin;
-        private readonly string ftpPassword;
-
         public JosContent Content
         {
             get
@@ -36,15 +31,9 @@ namespace NewsEditor.Forms
             }
         }
 
-        public EditorForm()
+        public EditorForm(IWarehouse warehouse)
         {
             InitializeComponent();
-
-            var config = ConfigurationManager.Instance;
-            ftpHost = config.Ftp.Host;
-            ftpPath = config.Ftp.Path;
-            ftpLogin = config.Ftp.Login;
-            ftpPassword = config.Ftp.Password;
 
             var now = DateTime.UtcNow;
             _content = new JosContent()
@@ -76,15 +65,15 @@ namespace NewsEditor.Forms
                 Title = string.Empty
             };
 
-            _warehouse = new FTPWirehouse(ftpLogin, ftpPassword, ftpHost, ftpPath);
-            _currentPath = ftpPath;
+            _warehouse = warehouse;
+            _currentPath = warehouse.GetPath();
 
             listBox.DisplayMember = "Label";
             var list = _warehouse.GetList(null);
             listBox.Items.AddRange(list);
         }
 
-        public EditorForm(JosContent content) : this()
+        public EditorForm(IWarehouse warehouse, JosContent content) : this(warehouse)
         {
             _content = content;
         }

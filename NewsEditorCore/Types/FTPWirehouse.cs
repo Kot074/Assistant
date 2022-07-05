@@ -134,6 +134,11 @@ namespace NewsEditorCore
             return "http://" + path.Replace("docs/", "");
         }
 
+        public string GetPath()
+        {
+            return _path;
+        }
+
         private FtpWebRequest CreateRequest(string uri, string method)
         {
             var r = (FtpWebRequest) WebRequest.Create("ftp://" + uri);

@@ -20,42 +20,26 @@ namespace NewsEditor
         private readonly IStorage<JosContentFrontpage> _contentFrontpage;
         private readonly IWarehouse _warehouse;
         private string _currentPath;
-        private readonly SplashScreenForm splashScreen;
+        private readonly SplashScreenForm _splashScreen;
 
-        private readonly string ftpHost;
-        private readonly string fptPath;
-        private readonly string ftpLogin;
-        private readonly string ftpPassword;
-
-        public MainForm()
+        public MainForm(IWarehouse warehouse, IStorage<JosContent> content, IStorage<JosContentFrontpage> contentFrontpage, SplashScreenForm splashScreen)
         {
 #if (DEBUG)
             var startInitialization = DateTime.UtcNow;
 #endif
-            splashScreen = new SplashScreenForm();
-            splashScreen.Show();
+            _splashScreen = splashScreen;
+            _splashScreen.Show();
+            _warehouse = warehouse;
+            _currentPath = warehouse.GetPath();
+            _content = content;
+            _contentFrontpage = contentFrontpage;
 
             InitializeComponent();
-            
-            var configuration = ConfigurationManager.Instance;
-
-            ftpHost = configuration.Ftp.Host;
-            fptPath = configuration.Ftp.Path;
-            ftpLogin = configuration.Ftp.Login;
-            ftpPassword = configuration.Ftp.Password;
-
-            _warehouse = new FTPWirehouse(ftpLogin, ftpPassword, ftpHost, fptPath);
-            _currentPath = fptPath;
 
             listBox.DisplayMember = "Label";
             var list = _warehouse.GetList(null);
             listBox.Items.AddRange(list);
 
-            var context = new VectorContext(configuration.MySql.ConnectionString);
-
-            var factory = new StorageFactory(StorageTypes.MYSQL, context);
-            _content = factory.GetContentStorage();
-            _contentFrontpage = factory.GetContentFrontpageStorage();
             RefreshNews();
 
             var collectionsTheme = _content.GetAll().Where(c =>
@@ -89,7 +73,7 @@ namespace NewsEditor
 
         private void BtnCreateClick(object sender, EventArgs e)
         {
-            var editor = new EditorForm();
+            var editor = new EditorForm(_warehouse);
             if (editor.ShowDialog(this) == DialogResult.OK)
             {
                 var news = _content.Save(editor.Content);
@@ -106,7 +90,7 @@ namespace NewsEditor
         private void BtnEditClick(object sender, EventArgs e)
         {
             var content = (JosContent)newsDataGrid.SelectedRows[0].DataBoundItem;
-            var editor = new EditorForm(content);
+            var editor = new EditorForm(_warehouse, content);
             if (editor.ShowDialog(this) == DialogResult.OK)
             {
                 _content.Save(editor.Content);
@@ -585,7 +569,7 @@ namespace NewsEditor
 
         private void MainFormLoad(object sender, EventArgs e)
         {
-            splashScreen.Close();
+            _splashScreen.Close();
         }
     }
 }
