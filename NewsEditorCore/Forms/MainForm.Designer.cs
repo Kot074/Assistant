@@ -166,6 +166,7 @@ namespace NewsEditor
             this.tabsControl.SelectedIndex = 0;
             this.tabsControl.Size = new System.Drawing.Size(1094, 620);
             this.tabsControl.TabIndex = 3;
+            this.tabsControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabsControlSelecting);
             // 
             // tabPage1
             // 
@@ -205,7 +206,6 @@ namespace NewsEditor
             // 
             // splitContainerCollections
             // 
-            this.splitContainerCollections.Cursor = System.Windows.Forms.Cursors.Default;
             this.splitContainerCollections.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerCollections.Location = new System.Drawing.Point(0, 0);
             this.splitContainerCollections.Name = "splitContainerCollections";
@@ -338,7 +338,6 @@ namespace NewsEditor
             // 
             // splitContainer
             // 
-            this.splitContainer.Cursor = System.Windows.Forms.Cursors.Default;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer.Location = new System.Drawing.Point(0, 0);
             this.splitContainer.Name = "splitContainer";

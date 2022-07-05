@@ -36,23 +36,7 @@ namespace NewsEditor
 
             InitializeComponent();
 
-            listBox.DisplayMember = "Label";
-            var list = _warehouse.GetList(null);
-            listBox.Items.AddRange(list);
-
             RefreshNews();
-
-            var collectionsTheme = _content.GetAll().Where(c =>
-                c.Catid == (uint)CategoriesEnum.SALES_OF_COLLECTIONS && c.Sectionid == (uint)SectionsEnum.SALES_OF_COLLECTIONS).OrderBy(c => c.Title);
-            listOfCollectionsTheme.DisplayMember = "Title";
-            listOfCollections.DisplayMember = "Text";
-            listOfCollectionsTheme.DataSource = collectionsTheme.ToArray();
-
-            var conferenceProgramsThemes = _content.GetAll().Where(c =>
-                c.Catid == (uint)CategoriesEnum.CONFERENCES_PROGRAMS && c.Sectionid == (uint)SectionsEnum.CONFERENCES_PROGRAM).OrderBy(c => c.Title);
-            listOfConferenceProgramsTheme.DisplayMember = "Title";
-            listOfConferenceProgramsTheme.DataSource = conferenceProgramsThemes.ToArray();
-            listOfConferencePrograms.DisplayMember = "Title";
 
             foreach (DataGridViewColumn column in newsDataGrid.Columns)
             {
@@ -570,6 +554,39 @@ namespace NewsEditor
         private void MainFormLoad(object sender, EventArgs e)
         {
             _splashScreen.Close();
+        }
+
+        private void TabsControlSelecting(object sender, TabControlCancelEventArgs e)
+        {
+            var tab = e.TabPage;
+
+            switch (tab.Text)
+            {
+                case "Файлы":
+                    listBox.DisplayMember = "Label";
+                    var list = _warehouse.GetList(null);
+                    listBox.Items.AddRange(list);
+                    break;
+                case "Программы конференций":
+                    var conferenceProgramsThemes = _content.GetAll().Where(c =>
+                        c.Catid == (uint)CategoriesEnum.CONFERENCES_PROGRAMS && c.Sectionid == (uint)SectionsEnum.CONFERENCES_PROGRAM).OrderBy(c => c.Title);
+                    listOfConferenceProgramsTheme.DisplayMember = "Title";
+                    listOfConferenceProgramsTheme.DataSource = conferenceProgramsThemes.ToArray();
+                    listOfConferencePrograms.DisplayMember = "Title";
+                    break;
+                case "Продажа сборников":
+                    var collectionsTheme = _content.GetAll().Where(c =>
+                        c.Catid == (uint)CategoriesEnum.SALES_OF_COLLECTIONS && c.Sectionid == (uint)SectionsEnum.SALES_OF_COLLECTIONS).OrderBy(c => c.Title);
+                    listOfCollectionsTheme.DisplayMember = "Title";
+                    listOfCollections.DisplayMember = "Text";
+                    listOfCollectionsTheme.DataSource = collectionsTheme.ToArray();
+                    break;
+                case "Новости":
+                    break;
+                default:
+                    MessageBox.Show("Не удалось открыть вкладку.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
         }
     }
 }
