@@ -73,6 +73,16 @@ namespace NewsEditor
 
         private void BtnEditClick(object sender, EventArgs e)
         {
+            EditNews();
+        }
+
+        private void BtnRemoveClick(object sender, EventArgs e)
+        {
+            RemoveNews();
+        }
+
+        private void EditNews()
+        {
             var content = (JosContent)newsDataGrid.SelectedRows[0].DataBoundItem;
             var editor = new EditorForm(_warehouse, content);
             if (editor.ShowDialog(this) == DialogResult.OK)
@@ -81,8 +91,7 @@ namespace NewsEditor
                 RefreshNews();
             }
         }
-
-        private void BtnRemoveClick(object sender, EventArgs e)
+        private void RemoveNews()
         {
             var content = (JosContent)newsDataGrid.SelectedRows[0].DataBoundItem;
 
@@ -92,7 +101,6 @@ namespace NewsEditor
                 RefreshNews();
             }
         }
-
         private void RefreshNews()
         {
             try
@@ -560,32 +568,53 @@ namespace NewsEditor
         {
             var tab = e.TabPage;
 
-            switch (tab.Text)
+            switch (tab.Name)
             {
-                case "Файлы":
+                case "tabFiles":
                     listBox.DisplayMember = "Label";
                     var list = _warehouse.GetList(null);
                     listBox.Items.AddRange(list);
                     break;
-                case "Программы конференций":
+                case "tabProgramsOfConferences":
                     var conferenceProgramsThemes = _content.GetAll().Where(c =>
                         c.Catid == (uint)CategoriesEnum.CONFERENCES_PROGRAMS && c.Sectionid == (uint)SectionsEnum.CONFERENCES_PROGRAM).OrderBy(c => c.Title);
                     listOfConferenceProgramsTheme.DisplayMember = "Title";
                     listOfConferenceProgramsTheme.DataSource = conferenceProgramsThemes.ToArray();
                     listOfConferencePrograms.DisplayMember = "Title";
                     break;
-                case "Продажа сборников":
+                case "tabSaleCollections":
                     var collectionsTheme = _content.GetAll().Where(c =>
                         c.Catid == (uint)CategoriesEnum.SALES_OF_COLLECTIONS && c.Sectionid == (uint)SectionsEnum.SALES_OF_COLLECTIONS).OrderBy(c => c.Title);
                     listOfCollectionsTheme.DisplayMember = "Title";
                     listOfCollections.DisplayMember = "Text";
                     listOfCollectionsTheme.DataSource = collectionsTheme.ToArray();
                     break;
-                case "Новости":
+                case "tabNews":
                     break;
                 default:
                     MessageBox.Show("Не удалось открыть вкладку.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
+            }
+        }
+
+        private void newsDataGrid_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    EditNews();       
+                    break;
+                case Keys.Delete:
+                    RemoveNews();
+                    break;
+            }
+        }
+
+        private void newsDataGrid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
             }
         }
     }

@@ -36,9 +36,9 @@ namespace NewsEditor
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.tabsControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabNews = new System.Windows.Forms.TabPage();
             this.btnCreate = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabSaleCollections = new System.Windows.Forms.TabPage();
             this.splitContainerCollections = new System.Windows.Forms.SplitContainer();
             this.listOfCollectionsTheme = new System.Windows.Forms.ListBox();
             this.btnCreateTheme = new System.Windows.Forms.Button();
@@ -48,7 +48,7 @@ namespace NewsEditor
             this.btnRemoveCollection = new System.Windows.Forms.Button();
             this.btnEditCollection = new System.Windows.Forms.Button();
             this.btnCreateCollection = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabProgramsOfConferences = new System.Windows.Forms.TabPage();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.btnRemoveConferenceProgramsTheme = new System.Windows.Forms.Button();
             this.btnEditConferenceProgramsTheme = new System.Windows.Forms.Button();
@@ -58,7 +58,7 @@ namespace NewsEditor
             this.btnEditConferenceProgram = new System.Windows.Forms.Button();
             this.btnAddConferenceProgram = new System.Windows.Forms.Button();
             this.listOfConferencePrograms = new System.Windows.Forms.ListBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabFiles = new System.Windows.Forms.TabPage();
             this.listBox = new System.Windows.Forms.ListBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnLoadFile = new System.Windows.Forms.Button();
@@ -67,18 +67,18 @@ namespace NewsEditor
             ((System.ComponentModel.ISupportInitialize)(this.newsDataGrid)).BeginInit();
             this.newsPanel.SuspendLayout();
             this.tabsControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabNews.SuspendLayout();
+            this.tabSaleCollections.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerCollections)).BeginInit();
             this.splitContainerCollections.Panel1.SuspendLayout();
             this.splitContainerCollections.Panel2.SuspendLayout();
             this.splitContainerCollections.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tabProgramsOfConferences.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabFiles.SuspendLayout();
             this.SuspendLayout();
             // 
             // newsDataGrid
@@ -102,6 +102,9 @@ namespace NewsEditor
             this.newsDataGrid.Size = new System.Drawing.Size(914, 578);
             this.newsDataGrid.TabIndex = 0;
             this.newsDataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.NewsDataGridCellFormatting);
+            this.newsDataGrid.DoubleClick += new System.EventHandler(this.BtnEditClick);
+            this.newsDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.newsDataGrid_KeyDown);
+            this.newsDataGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.newsDataGrid_KeyUp);
             // 
             // Title
             // 
@@ -156,10 +159,10 @@ namespace NewsEditor
             // 
             // tabsControl
             // 
-            this.tabsControl.Controls.Add(this.tabPage1);
-            this.tabsControl.Controls.Add(this.tabPage3);
-            this.tabsControl.Controls.Add(this.tabPage4);
-            this.tabsControl.Controls.Add(this.tabPage2);
+            this.tabsControl.Controls.Add(this.tabNews);
+            this.tabsControl.Controls.Add(this.tabSaleCollections);
+            this.tabsControl.Controls.Add(this.tabProgramsOfConferences);
+            this.tabsControl.Controls.Add(this.tabFiles);
             this.tabsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabsControl.Location = new System.Drawing.Point(0, 0);
             this.tabsControl.Name = "tabsControl";
@@ -168,19 +171,19 @@ namespace NewsEditor
             this.tabsControl.TabIndex = 3;
             this.tabsControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabsControlSelecting);
             // 
-            // tabPage1
+            // tabNews
             // 
-            this.tabPage1.Controls.Add(this.newsPanel);
-            this.tabPage1.Controls.Add(this.btnRemove);
-            this.tabPage1.Controls.Add(this.btnCreate);
-            this.tabPage1.Controls.Add(this.btnEdit);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1086, 592);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Новости";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabNews.Controls.Add(this.newsPanel);
+            this.tabNews.Controls.Add(this.btnRemove);
+            this.tabNews.Controls.Add(this.btnCreate);
+            this.tabNews.Controls.Add(this.btnEdit);
+            this.tabNews.Location = new System.Drawing.Point(4, 24);
+            this.tabNews.Name = "tabNews";
+            this.tabNews.Padding = new System.Windows.Forms.Padding(3);
+            this.tabNews.Size = new System.Drawing.Size(1086, 592);
+            this.tabNews.TabIndex = 0;
+            this.tabNews.Text = "Новости";
+            this.tabNews.UseVisualStyleBackColor = true;
             // 
             // btnCreate
             // 
@@ -194,15 +197,15 @@ namespace NewsEditor
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.BtnCreateClick);
             // 
-            // tabPage3
+            // tabSaleCollections
             // 
-            this.tabPage3.Controls.Add(this.splitContainerCollections);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1086, 592);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Продажа сборников";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabSaleCollections.Controls.Add(this.splitContainerCollections);
+            this.tabSaleCollections.Location = new System.Drawing.Point(4, 24);
+            this.tabSaleCollections.Name = "tabSaleCollections";
+            this.tabSaleCollections.Size = new System.Drawing.Size(1086, 592);
+            this.tabSaleCollections.TabIndex = 2;
+            this.tabSaleCollections.Text = "Продажа сборников";
+            this.tabSaleCollections.UseVisualStyleBackColor = true;
             // 
             // splitContainerCollections
             // 
@@ -326,15 +329,15 @@ namespace NewsEditor
             this.btnCreateCollection.UseVisualStyleBackColor = true;
             this.btnCreateCollection.Click += new System.EventHandler(this.BtnCreateCollectionClick);
             // 
-            // tabPage4
+            // tabProgramsOfConferences
             // 
-            this.tabPage4.Controls.Add(this.splitContainer);
-            this.tabPage4.Location = new System.Drawing.Point(4, 24);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1086, 592);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Программы конференций";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabProgramsOfConferences.Controls.Add(this.splitContainer);
+            this.tabProgramsOfConferences.Location = new System.Drawing.Point(4, 24);
+            this.tabProgramsOfConferences.Name = "tabProgramsOfConferences";
+            this.tabProgramsOfConferences.Size = new System.Drawing.Size(1086, 592);
+            this.tabProgramsOfConferences.TabIndex = 3;
+            this.tabProgramsOfConferences.Text = "Программы конференций";
+            this.tabProgramsOfConferences.UseVisualStyleBackColor = true;
             // 
             // splitContainer
             // 
@@ -450,20 +453,20 @@ namespace NewsEditor
             this.listOfConferencePrograms.Size = new System.Drawing.Size(601, 544);
             this.listOfConferencePrograms.TabIndex = 0;
             // 
-            // tabPage2
+            // tabFiles
             // 
-            this.tabPage2.Controls.Add(this.listBox);
-            this.tabPage2.Controls.Add(this.btnDelete);
-            this.tabPage2.Controls.Add(this.btnLoadFile);
-            this.tabPage2.Controls.Add(this.btnCreateDirectory);
-            this.tabPage2.Controls.Add(this.btnCopyAddress);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1086, 592);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Файлы";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabFiles.Controls.Add(this.listBox);
+            this.tabFiles.Controls.Add(this.btnDelete);
+            this.tabFiles.Controls.Add(this.btnLoadFile);
+            this.tabFiles.Controls.Add(this.btnCreateDirectory);
+            this.tabFiles.Controls.Add(this.btnCopyAddress);
+            this.tabFiles.Location = new System.Drawing.Point(4, 24);
+            this.tabFiles.Name = "tabFiles";
+            this.tabFiles.Padding = new System.Windows.Forms.Padding(3);
+            this.tabFiles.Size = new System.Drawing.Size(1086, 592);
+            this.tabFiles.TabIndex = 1;
+            this.tabFiles.Text = "Файлы";
+            this.tabFiles.UseVisualStyleBackColor = true;
             // 
             // listBox
             // 
@@ -543,18 +546,18 @@ namespace NewsEditor
             ((System.ComponentModel.ISupportInitialize)(this.newsDataGrid)).EndInit();
             this.newsPanel.ResumeLayout(false);
             this.tabsControl.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
+            this.tabNews.ResumeLayout(false);
+            this.tabSaleCollections.ResumeLayout(false);
             this.splitContainerCollections.Panel1.ResumeLayout(false);
             this.splitContainerCollections.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerCollections)).EndInit();
             this.splitContainerCollections.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
+            this.tabProgramsOfConferences.ResumeLayout(false);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.tabFiles.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -567,15 +570,15 @@ namespace NewsEditor
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.TabControl tabsControl;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabNews;
+        private System.Windows.Forms.TabPage tabFiles;
         private System.Windows.Forms.Button btnCopyAddress;
         private System.Windows.Forms.Button btnCreateDirectory;
         private System.Windows.Forms.Button btnLoadFile;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ListBox listBox;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabSaleCollections;
+        private System.Windows.Forms.TabPage tabProgramsOfConferences;
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Button btnRemoveCollection;
         private System.Windows.Forms.ListBox listOfCollections;
