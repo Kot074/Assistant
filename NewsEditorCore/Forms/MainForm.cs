@@ -24,9 +24,8 @@ namespace NewsEditor
 
         public MainForm(IWarehouse warehouse, IStorage<JosContent> content, IStorage<JosContentFrontpage> contentFrontpage, SplashScreenForm splashScreen)
         {
-#if (DEBUG)
             var startInitialization = DateTime.UtcNow;
-#endif
+
             _splashScreen = splashScreen;
             _splashScreen.Show();
             _warehouse = warehouse;
@@ -45,11 +44,17 @@ namespace NewsEditor
                     column.Visible = false;
                 }
             }
-#if (DEBUG)
+
             var endInitialization = DateTime.UtcNow;
+#if (DEBUG)
             File.AppendAllText(
                 Environment.ExpandEnvironmentVariables(
                     "%USERPROFILE%\\Desktop\\log.txt"),
+                    endInitialization.ToString("dd-MM-yyyy HH:mm:ss") + " - Initialization span: " + (endInitialization - startInitialization).ToString("G") + "\n"
+                );
+#elif (RELEASE)
+            File.WriteAllText(
+                    "initSpan.txt",
                     endInitialization.ToString("dd-MM-yyyy HH:mm:ss") + " - Initialization span: " + (endInitialization - startInitialization).ToString("G") + "\n"
                 );
 #endif
