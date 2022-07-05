@@ -16,11 +16,11 @@ namespace NewsEditor
 {
     public partial class MainForm : Form
     {
-        private IStorage<JosContent> _content;
-        private IStorage<JosContentFrontpage> _contentFrontpage;
-        private IWarehouse _warehouse;
+        private readonly IStorage<JosContent> _content;
+        private readonly IStorage<JosContentFrontpage> _contentFrontpage;
+        private readonly IWarehouse _warehouse;
         private string _currentPath;
-        private SplashScreenForm splashScreen;
+        private readonly SplashScreenForm splashScreen;
 
         private readonly string ftpHost;
         private readonly string fptPath;
@@ -87,7 +87,7 @@ namespace NewsEditor
 #endif
         }
 
-        private void btnCreate_Click(object sender, EventArgs e)
+        private void BtnCreateClick(object sender, EventArgs e)
         {
             var editor = new EditorForm();
             if (editor.ShowDialog(this) == DialogResult.OK)
@@ -103,7 +103,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void BtnEditClick(object sender, EventArgs e)
         {
             var content = (JosContent)newsDataGrid.SelectedRows[0].DataBoundItem;
             var editor = new EditorForm(content);
@@ -114,7 +114,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnRemove_Click(object sender, EventArgs e)
+        private void BtnRemoveClick(object sender, EventArgs e)
         {
             var content = (JosContent)newsDataGrid.SelectedRows[0].DataBoundItem;
 
@@ -141,7 +141,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnCopyAddress_Click(object sender, EventArgs e)
+        private void BtnCopyAddressClick(object sender, EventArgs e)
         {
             var selected = (DirectoryItem) listBox.SelectedItem;
             if (selected is not null)
@@ -150,7 +150,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnCreateDirectory_Click(object sender, EventArgs e)
+        private void BtnCreateDirectoryClick(object sender, EventArgs e)
         {
             var input = new TextInputForm();
             if (input.ShowDialog() == DialogResult.OK)
@@ -161,7 +161,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnLoadFile_Click(object sender, EventArgs e)
+        private void BtnLoadFileClick(object sender, EventArgs e)
         {
             var fileDialog = new OpenFileDialog();
             if (fileDialog.ShowDialog() == DialogResult.OK)
@@ -172,7 +172,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDeleteClick(object sender, EventArgs e)
         {
             var selected = (DirectoryItem) listBox.SelectedItem;
 
@@ -190,7 +190,7 @@ namespace NewsEditor
             }
         }
 
-        private void listBox_Enter(object sender, EventArgs e)
+        private void ListBoxEnter(object sender, EventArgs e)
         {
             var selected = (DirectoryItem) listBox.SelectedItem;
 
@@ -203,7 +203,7 @@ namespace NewsEditor
             }
         }
 
-        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBoxSelectedIndexChanged(object sender, EventArgs e)
         {
             var selected = listBox.SelectedItem;
             if (selected is not null)
@@ -218,7 +218,7 @@ namespace NewsEditor
             }
         }
 
-        private void listOfCollectionsTheme_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListOfCollectionsThemeSelectedIndexChanged(object sender, EventArgs e)
         {
             var selected = (JosContent)listOfCollectionsTheme.SelectedItem;
 
@@ -238,7 +238,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnCreateTheme_Click(object sender, EventArgs e)
+        private void BtnCreateThemeClick(object sender, EventArgs e)
         {
             var inputForm = new TextInputForm();
             if (inputForm.ShowDialog() == DialogResult.OK)
@@ -286,7 +286,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnEditTheme_Click(object sender, EventArgs e)
+        private void BtnEditThemeClick(object sender, EventArgs e)
         {
             var selected = (JosContent)listOfCollectionsTheme.SelectedItem;
 
@@ -309,7 +309,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnRemoveTheme_Click(object sender, EventArgs e)
+        private void BtnRemoveThemeClick(object sender, EventArgs e)
         {
             var selected = (JosContent)listOfCollectionsTheme.SelectedItem;
             if (selected is not null)
@@ -327,7 +327,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnCreateCollection_Click(object sender, EventArgs e)
+        private void BtnCreateCollectionClick(object sender, EventArgs e)
         {
             var collectionToSaleForm = new CollectionToSaleForm();
 
@@ -347,7 +347,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnEditCollection_Click(object sender, EventArgs e)
+        private void BtnEditCollectionClick(object sender, EventArgs e)
         {
             var selectedTheme = (JosContent)listOfCollectionsTheme.SelectedItem;
             if (selectedTheme is not null)
@@ -374,7 +374,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnRemoveCollection_Click(object sender, EventArgs e)
+        private void BtnRemoveCollectionClick(object sender, EventArgs e)
         {
             var selectedTheme = (JosContent)listOfCollectionsTheme.SelectedItem;
             if (selectedTheme is not null)
@@ -401,7 +401,7 @@ namespace NewsEditor
             }
         }
 
-        private void listOfConferenceProgramsTheme_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListOfConferenceProgramsThemeSelectedIndexChanged(object sender, EventArgs e)
         {
             var selected = (JosContent) listOfConferenceProgramsTheme.SelectedItem;
 
@@ -412,7 +412,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnCreateConferenceProgramsTheme_Click(object sender, EventArgs e)
+        private void BtnCreateConferenceProgramsThemeClick(object sender, EventArgs e)
         {
             var inputForm = new TextInputForm();
             if (inputForm.ShowDialog() == DialogResult.OK)
@@ -460,7 +460,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnEditConferenceProgramsTheme_Click(object sender, EventArgs e)
+        private void BtnEditConferenceProgramsThemeClick(object sender, EventArgs e)
         {
             var selected = (JosContent)listOfConferenceProgramsTheme.SelectedItem;
 
@@ -483,7 +483,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnRemoveConferenceProgramsTheme_Click(object sender, EventArgs e)
+        private void BtnRemoveConferenceProgramsThemeClick(object sender, EventArgs e)
         {
             var selected = (JosContent)listOfConferenceProgramsTheme.SelectedItem;
             if (selected is not null)
@@ -501,7 +501,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnAddConferenceProgram_Click(object sender, EventArgs e)
+        private void BtnAddConferenceProgramClick(object sender, EventArgs e)
         {
             var conferenceProgramForm = new ConferenceProgramForm();
 
@@ -521,7 +521,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnEditConferenceProgram_Click(object sender, EventArgs e)
+        private void BtnEditConferenceProgramClick(object sender, EventArgs e)
         {
             var selectedTheme = (JosContent)listOfConferenceProgramsTheme.SelectedItem;
             if (selectedTheme is not null)
@@ -548,7 +548,7 @@ namespace NewsEditor
             }
         }
 
-        private void btnDeleteConferenceProgram_Click(object sender, EventArgs e)
+        private void BtnDeleteConferenceProgramClick(object sender, EventArgs e)
         {
             var selectedTheme = (JosContent)listOfConferenceProgramsTheme.SelectedItem;
             if (selectedTheme is not null)
@@ -575,7 +575,7 @@ namespace NewsEditor
             }
         }
 
-        private void newsDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void NewsDataGridCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value is DateTime dt)
             {
@@ -583,7 +583,7 @@ namespace NewsEditor
             }
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void MainFormLoad(object sender, EventArgs e)
         {
             splashScreen.Close();
         }

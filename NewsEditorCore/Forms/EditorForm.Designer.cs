@@ -73,7 +73,7 @@ namespace NewsEditor.Forms
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.button1_Click);
+            this.btnSave.Click += new System.EventHandler(this.Button1Click);
             // 
             // lblTitle
             // 
@@ -124,7 +124,7 @@ namespace NewsEditor.Forms
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancelClick);
             // 
             // tabControl
             // 
@@ -180,8 +180,8 @@ namespace NewsEditor.Forms
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(890, 559);
             this.listBox.TabIndex = 12;
-            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
-            this.listBox.DoubleClick += new System.EventHandler(this.listBox_Enter);
+            this.listBox.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
+            this.listBox.DoubleClick += new System.EventHandler(this.ListBoxEnter);
             // 
             // btnDelete
             // 
@@ -194,7 +194,7 @@ namespace NewsEditor.Forms
             this.btnDelete.TabIndex = 11;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.Click += new System.EventHandler(this.BtnDeleteClick);
             // 
             // btnLoadFile
             // 
@@ -206,7 +206,7 @@ namespace NewsEditor.Forms
             this.btnLoadFile.TabIndex = 10;
             this.btnLoadFile.Text = "Загрузить файл";
             this.btnLoadFile.UseVisualStyleBackColor = true;
-            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            this.btnLoadFile.Click += new System.EventHandler(this.BtnLoadFileClick);
             // 
             // btnCreateDirectory
             // 
@@ -218,7 +218,7 @@ namespace NewsEditor.Forms
             this.btnCreateDirectory.TabIndex = 9;
             this.btnCreateDirectory.Text = "Создать папку";
             this.btnCreateDirectory.UseVisualStyleBackColor = true;
-            this.btnCreateDirectory.Click += new System.EventHandler(this.btnCreateDirectory_Click);
+            this.btnCreateDirectory.Click += new System.EventHandler(this.BtnCreateDirectoryClick);
             // 
             // btnCopyAddress
             // 
@@ -231,7 +231,7 @@ namespace NewsEditor.Forms
             this.btnCopyAddress.TabIndex = 8;
             this.btnCopyAddress.Text = "Скопировать адрес";
             this.btnCopyAddress.UseVisualStyleBackColor = true;
-            this.btnCopyAddress.Click += new System.EventHandler(this.btnCopyAddress_Click);
+            this.btnCopyAddress.Click += new System.EventHandler(this.BtnCopyAddressClick);
             // 
             // EditorForm
             // 

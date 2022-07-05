@@ -49,10 +49,12 @@ namespace NewsEditorCore.Types
             var matches = Regex.Matches(src, pattern, options);
             foreach (Match match in matches)
             {
-                var item = new CollectionToSale();
-                item.FilePath = match.Groups[1].Value;
-                item.ImgPath = match.Groups[2].Value;
-                item.Text = match.Groups[3].Value;
+                var item = new CollectionToSale
+                {
+                    FilePath = match.Groups[1].Value,
+                    ImgPath = match.Groups[2].Value,
+                    Text = match.Groups[3].Value
+                };
 
                 result.Add(item);
             }

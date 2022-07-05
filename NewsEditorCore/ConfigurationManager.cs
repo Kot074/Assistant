@@ -15,7 +15,7 @@ namespace NewsEditorCore
 
         public static ConfigurationManager Instance
         {
-            get => _instance ?? (_instance = new ConfigurationManager());
+            get => _instance ??= new ConfigurationManager();
         }
 
         public FTPConfiguration Ftp { get; }

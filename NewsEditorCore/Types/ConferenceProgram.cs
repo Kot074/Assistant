@@ -28,9 +28,11 @@ namespace NewsEditorCore.Types
             var matches = Regex.Matches(src, pattern, options);
             foreach (Match match in matches)
             {
-                var item = new ConferenceProgram();
-                item.DocumentUrl = match.Groups[1].Value;
-                item.Title = match.Groups[2].Value;
+                var item = new ConferenceProgram
+                {
+                    DocumentUrl = match.Groups[1].Value,
+                    Title = match.Groups[2].Value
+                };
 
                 result.Add(item);
             }

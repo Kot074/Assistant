@@ -18,9 +18,9 @@ namespace NewsEditor.Forms
 {
     public partial class EditorForm : Form
     {
-        private JosContent _content;
+        private readonly JosContent _content;
 
-        private IWarehouse _warehouse;
+        private readonly IWarehouse _warehouse;
         private string _currentPath;
 
         private readonly string ftpHost;
@@ -96,7 +96,7 @@ namespace NewsEditor.Forms
             dtpDate.Value = _content.PublishUp.ToLocalTime();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1Click(object sender, EventArgs e)
         {
             _content.Title = txtTitle.Text;
             _content.Introtext = 
@@ -109,12 +109,12 @@ namespace NewsEditor.Forms
             this.Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancelClick(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void btnCopyAddress_Click(object sender, EventArgs e)
+        private void BtnCopyAddressClick(object sender, EventArgs e)
         {
             var selected = (DirectoryItem)listBox.SelectedItem;
             if (selected is not null)
@@ -123,7 +123,7 @@ namespace NewsEditor.Forms
             }
         }
 
-        private void btnCreateDirectory_Click(object sender, EventArgs e)
+        private void BtnCreateDirectoryClick(object sender, EventArgs e)
         {
             var input = new TextInputForm();
             if (input.ShowDialog() == DialogResult.OK)
@@ -134,7 +134,7 @@ namespace NewsEditor.Forms
             }
         }
 
-        private void btnLoadFile_Click(object sender, EventArgs e)
+        private void BtnLoadFileClick(object sender, EventArgs e)
         {
             var fileDialog = new OpenFileDialog();
             if (fileDialog.ShowDialog() == DialogResult.OK)
@@ -145,7 +145,7 @@ namespace NewsEditor.Forms
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDeleteClick(object sender, EventArgs e)
         {
             var selected = (DirectoryItem)listBox.SelectedItem;
 
@@ -163,7 +163,7 @@ namespace NewsEditor.Forms
             }
         }
 
-        private void listBox_Enter(object sender, EventArgs e)
+        private void ListBoxEnter(object sender, EventArgs e)
         {
             var selected = (DirectoryItem)listBox.SelectedItem;
 
@@ -176,7 +176,7 @@ namespace NewsEditor.Forms
             }
         }
 
-        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBoxSelectedIndexChanged(object sender, EventArgs e)
         {
             var selected = listBox.SelectedItem;
             if (selected is not null)

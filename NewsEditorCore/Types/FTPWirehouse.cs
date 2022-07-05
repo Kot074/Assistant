@@ -14,10 +14,10 @@ namespace NewsEditorCore
 {
     class FTPWirehouse : IWarehouse
     {
-        private string _password;
-        private string _userName;
-        private string _host;
-        private string _path;
+        private readonly string _password;
+        private readonly string _userName;
+        private readonly string _host;
+        private readonly string _path;
 
         public FTPWirehouse(string username, string password, string host, string path)
         {
@@ -43,30 +43,26 @@ namespace NewsEditorCore
                 }
             }
 
-            var request = CreateRequest(Combine(_host, validPath), WebRequestMethods.Ftp.ListDirectory);
+            var request = CreateRequest(Path.Combine(_host, validPath).Replace('\\', '/'), WebRequestMethods.Ftp.ListDirectory);
             using (var response = (FtpWebResponse)request.GetResponse())
             {
-                using (var stream = response.GetResponseStream())
+                using var stream = response.GetResponseStream();
+                using var reader = new StreamReader(stream, true);
+                while (!reader.EndOfStream)
                 {
-                    using (var reader = new StreamReader(stream, true))
+                    var info = reader.ReadLine();
+                    var name = Path.GetFileName(info);
+                    if (name == "." || name == "..")
                     {
-                        while (!reader.EndOfStream)
-                        {
-                            var info = reader.ReadLine();
-                            var name = Path.GetFileName(info);
-                            if (name == "." || name == "..")
-                            {
-                                continue;
-                            }
-                            var extension = Path.GetExtension(info);
-                            var node = new DirectoryItem(name, Combine(validPath, name), false);
-                            if (string.IsNullOrEmpty(extension))
-                            {
-                                node = new DirectoryItem(name, Combine(validPath, name), true);
-                            }
-                            result.Add(node);
-                        }
+                        continue;
                     }
+                    var extension = Path.GetExtension(info);
+                    var node = new DirectoryItem(name, Path.Combine(validPath, name).Replace('\\', '/'), false);
+                    if (string.IsNullOrEmpty(extension))
+                    {
+                        node = new DirectoryItem(name, Path.Combine(validPath, name).Replace('\\', '/'), true);
+                    }
+                    result.Add(node);
                 }
             }
 
@@ -93,7 +89,7 @@ namespace NewsEditorCore
 
         public DirectoryItem CreateDirectory(string path)
         {
-            var request = CreateRequest(Combine(_host, path), WebRequestMethods.Ftp.MakeDirectory);
+            var request = CreateRequest(Path.Combine(_host, path).Replace('\\', '/'), WebRequestMethods.Ftp.MakeDirectory);
             request.GetResponse();
             return new DirectoryItem(Path.GetFileName(path), path, true);
         }
@@ -109,7 +105,7 @@ namespace NewsEditorCore
                 }
             }
             var request = CreateRequest(
-                Combine(_host, node.FullPath),
+                Path.Combine(_host, node.FullPath).Replace('\\', '/'),
                 node.IsDirectory ? WebRequestMethods.Ftp.RemoveDirectory : WebRequestMethods.Ftp.DeleteFile);
             request.GetResponse();
         }
@@ -117,9 +113,9 @@ namespace NewsEditorCore
         public DirectoryItem UploadFile(string sourcePath, string targetPath)
         {
             var fileName = Path.GetFileName(sourcePath);
-            var filePath = Combine(targetPath, fileName);
+            var filePath = Path.Combine(targetPath, fileName).Replace('\\', '/');
             var request = CreateRequest(
-                Combine(_host, filePath),
+                Path.Combine(_host, filePath).Replace('\\', '/'),
                 WebRequestMethods.Ftp.UploadFile);
 
 
@@ -130,21 +126,12 @@ namespace NewsEditorCore
             requestStream.Write(fileContents, 0, fileContents.Length);
             requestStream.Close();
 
-            var response = request.GetResponse();
-
             return new DirectoryItem(fileName, filePath, false);
         }
 
         public string GetUrl(string path)
         {
             return "http://" + path.Replace("docs/", "");
-        }
-
-        private string Combine(string path1, string path2)
-        {
-            var end = path2.StartsWith('/') ? path2 : "/" + path2;
-            var path = $"{path1}{end}";
-            return path;
         }
 
         private FtpWebRequest CreateRequest(string uri, string method)

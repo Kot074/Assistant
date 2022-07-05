@@ -52,7 +52,7 @@ namespace NewsEditorCore.Forms
             this.btnOk.TabIndex = 5;
             this.btnOk.Text = "Ок";
             this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            this.btnOk.Click += new System.EventHandler(this.BtnOkClick);
             // 
             // btnCancel
             // 
@@ -65,7 +65,7 @@ namespace NewsEditorCore.Forms
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancelClick);
             // 
             // TextInputForm
             // 

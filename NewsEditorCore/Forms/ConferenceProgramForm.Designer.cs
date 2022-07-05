@@ -47,7 +47,7 @@ namespace NewsEditorCore.Forms
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancelClick);
             // 
             // btnSave
             // 
@@ -58,7 +58,7 @@ namespace NewsEditorCore.Forms
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSaveClick);
             // 
             // lblTitle
             // 
@@ -101,7 +101,7 @@ namespace NewsEditorCore.Forms
             this.btnDocumentUpload.TabIndex = 11;
             this.btnDocumentUpload.Text = "Загрузить";
             this.btnDocumentUpload.UseVisualStyleBackColor = true;
-            this.btnDocumentUpload.Click += new System.EventHandler(this.btnDocumentUpload_Click);
+            this.btnDocumentUpload.Click += new System.EventHandler(this.BtnDocumentUploadClick);
             // 
             // ConferenceProgramForm
             // 

@@ -27,12 +27,12 @@ namespace NewsEditorCore.Forms
             txtInput.Text = text;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancelClick(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void btnOk_Click(object sender, EventArgs e)
+        private void BtnOkClick(object sender, EventArgs e)
         {
             _text = txtInput.Text;
             this.Close();

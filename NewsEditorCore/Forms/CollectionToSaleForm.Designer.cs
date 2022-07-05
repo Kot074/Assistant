@@ -51,7 +51,7 @@ namespace NewsEditorCore.Forms
             this.btnCollectionCancel.TabIndex = 7;
             this.btnCollectionCancel.Text = "Отмена";
             this.btnCollectionCancel.UseVisualStyleBackColor = true;
-            this.btnCollectionCancel.Click += new System.EventHandler(this.btnCollectionCancel_Click);
+            this.btnCollectionCancel.Click += new System.EventHandler(this.BtnCollectionCancelClick);
             // 
             // btnSaveCollection
             // 
@@ -63,7 +63,7 @@ namespace NewsEditorCore.Forms
             this.btnSaveCollection.TabIndex = 7;
             this.btnSaveCollection.Text = "Сохранить";
             this.btnSaveCollection.UseVisualStyleBackColor = true;
-            this.btnSaveCollection.Click += new System.EventHandler(this.btnSaveCollection_Click);
+            this.btnSaveCollection.Click += new System.EventHandler(this.BtnSaveCollectionClick);
             // 
             // lblTitle
             // 
@@ -122,7 +122,7 @@ namespace NewsEditorCore.Forms
             this.bntImageLoad.TabIndex = 10;
             this.bntImageLoad.Text = "Загрузить";
             this.bntImageLoad.UseVisualStyleBackColor = true;
-            this.bntImageLoad.Click += new System.EventHandler(this.bntImageLoad_Click);
+            this.bntImageLoad.Click += new System.EventHandler(this.BntImageLoadClick);
             // 
             // btnDocumentLoad
             // 
@@ -133,7 +133,7 @@ namespace NewsEditorCore.Forms
             this.btnDocumentLoad.TabIndex = 11;
             this.btnDocumentLoad.Text = "Загрузить";
             this.btnDocumentLoad.UseVisualStyleBackColor = true;
-            this.btnDocumentLoad.Click += new System.EventHandler(this.btnDocumentLoad_Click);
+            this.btnDocumentLoad.Click += new System.EventHandler(this.BtnDocumentLoadClick);
             // 
             // CollectionToSaleForm
             // 

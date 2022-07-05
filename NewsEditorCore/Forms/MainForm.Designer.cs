@@ -101,7 +101,7 @@ namespace NewsEditor
             this.newsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.newsDataGrid.Size = new System.Drawing.Size(914, 578);
             this.newsDataGrid.TabIndex = 0;
-            this.newsDataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.newsDataGrid_CellFormatting);
+            this.newsDataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.NewsDataGridCellFormatting);
             // 
             // Title
             // 
@@ -140,7 +140,7 @@ namespace NewsEditor
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "Редактировать";
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnEdit.Click += new System.EventHandler(this.BtnEditClick);
             // 
             // btnRemove
             // 
@@ -152,7 +152,7 @@ namespace NewsEditor
             this.btnRemove.TabIndex = 2;
             this.btnRemove.Text = "Удалить";
             this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            this.btnRemove.Click += new System.EventHandler(this.BtnRemoveClick);
             // 
             // tabsControl
             // 
@@ -191,7 +191,7 @@ namespace NewsEditor
             this.btnCreate.TabIndex = 0;
             this.btnCreate.Text = "Создать";
             this.btnCreate.UseVisualStyleBackColor = true;
-            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            this.btnCreate.Click += new System.EventHandler(this.BtnCreateClick);
             // 
             // tabPage3
             // 
@@ -238,7 +238,7 @@ namespace NewsEditor
             this.listOfCollectionsTheme.Name = "listOfCollectionsTheme";
             this.listOfCollectionsTheme.Size = new System.Drawing.Size(483, 544);
             this.listOfCollectionsTheme.TabIndex = 0;
-            this.listOfCollectionsTheme.SelectedIndexChanged += new System.EventHandler(this.listOfCollectionsTheme_SelectedIndexChanged);
+            this.listOfCollectionsTheme.SelectedIndexChanged += new System.EventHandler(this.ListOfCollectionsThemeSelectedIndexChanged);
             // 
             // btnCreateTheme
             // 
@@ -250,7 +250,7 @@ namespace NewsEditor
             this.btnCreateTheme.TabIndex = 2;
             this.btnCreateTheme.Text = "Новая тема";
             this.btnCreateTheme.UseVisualStyleBackColor = true;
-            this.btnCreateTheme.Click += new System.EventHandler(this.btnCreateTheme_Click);
+            this.btnCreateTheme.Click += new System.EventHandler(this.BtnCreateThemeClick);
             // 
             // btnEditTheme
             // 
@@ -263,7 +263,7 @@ namespace NewsEditor
             this.btnEditTheme.TabIndex = 3;
             this.btnEditTheme.Text = "Переименовать тему";
             this.btnEditTheme.UseVisualStyleBackColor = true;
-            this.btnEditTheme.Click += new System.EventHandler(this.btnEditTheme_Click);
+            this.btnEditTheme.Click += new System.EventHandler(this.BtnEditThemeClick);
             // 
             // btnRemoveTheme
             // 
@@ -276,7 +276,7 @@ namespace NewsEditor
             this.btnRemoveTheme.TabIndex = 4;
             this.btnRemoveTheme.Text = "Удалить тему";
             this.btnRemoveTheme.UseVisualStyleBackColor = true;
-            this.btnRemoveTheme.Click += new System.EventHandler(this.btnRemoveTheme_Click);
+            this.btnRemoveTheme.Click += new System.EventHandler(this.BtnRemoveThemeClick);
             // 
             // listOfCollections
             // 
@@ -300,7 +300,7 @@ namespace NewsEditor
             this.btnRemoveCollection.TabIndex = 1;
             this.btnRemoveCollection.Text = "Удалить сборник";
             this.btnRemoveCollection.UseVisualStyleBackColor = true;
-            this.btnRemoveCollection.Click += new System.EventHandler(this.btnRemoveCollection_Click);
+            this.btnRemoveCollection.Click += new System.EventHandler(this.BtnRemoveCollectionClick);
             // 
             // btnEditCollection
             // 
@@ -312,7 +312,7 @@ namespace NewsEditor
             this.btnEditCollection.TabIndex = 5;
             this.btnEditCollection.Text = "Редактировать сборник";
             this.btnEditCollection.UseVisualStyleBackColor = true;
-            this.btnEditCollection.Click += new System.EventHandler(this.btnEditCollection_Click);
+            this.btnEditCollection.Click += new System.EventHandler(this.BtnEditCollectionClick);
             // 
             // btnCreateCollection
             // 
@@ -324,7 +324,7 @@ namespace NewsEditor
             this.btnCreateCollection.TabIndex = 6;
             this.btnCreateCollection.Text = "Добавить сборник";
             this.btnCreateCollection.UseVisualStyleBackColor = true;
-            this.btnCreateCollection.Click += new System.EventHandler(this.btnCreateCollection_Click);
+            this.btnCreateCollection.Click += new System.EventHandler(this.BtnCreateCollectionClick);
             // 
             // tabPage4
             // 
@@ -369,7 +369,7 @@ namespace NewsEditor
             this.btnRemoveConferenceProgramsTheme.TabIndex = 3;
             this.btnRemoveConferenceProgramsTheme.Text = "Удалить тему";
             this.btnRemoveConferenceProgramsTheme.UseVisualStyleBackColor = true;
-            this.btnRemoveConferenceProgramsTheme.Click += new System.EventHandler(this.btnRemoveConferenceProgramsTheme_Click);
+            this.btnRemoveConferenceProgramsTheme.Click += new System.EventHandler(this.BtnRemoveConferenceProgramsThemeClick);
             // 
             // btnEditConferenceProgramsTheme
             // 
@@ -380,7 +380,7 @@ namespace NewsEditor
             this.btnEditConferenceProgramsTheme.TabIndex = 2;
             this.btnEditConferenceProgramsTheme.Text = "Переименовать тему";
             this.btnEditConferenceProgramsTheme.UseVisualStyleBackColor = true;
-            this.btnEditConferenceProgramsTheme.Click += new System.EventHandler(this.btnEditConferenceProgramsTheme_Click);
+            this.btnEditConferenceProgramsTheme.Click += new System.EventHandler(this.BtnEditConferenceProgramsThemeClick);
             // 
             // btnCreateConferenceProgramsTheme
             // 
@@ -391,7 +391,7 @@ namespace NewsEditor
             this.btnCreateConferenceProgramsTheme.TabIndex = 1;
             this.btnCreateConferenceProgramsTheme.Text = "Создать тему";
             this.btnCreateConferenceProgramsTheme.UseVisualStyleBackColor = true;
-            this.btnCreateConferenceProgramsTheme.Click += new System.EventHandler(this.btnCreateConferenceProgramsTheme_Click);
+            this.btnCreateConferenceProgramsTheme.Click += new System.EventHandler(this.BtnCreateConferenceProgramsThemeClick);
             // 
             // listOfConferenceProgramsTheme
             // 
@@ -404,7 +404,7 @@ namespace NewsEditor
             this.listOfConferenceProgramsTheme.Name = "listOfConferenceProgramsTheme";
             this.listOfConferenceProgramsTheme.Size = new System.Drawing.Size(481, 544);
             this.listOfConferenceProgramsTheme.TabIndex = 0;
-            this.listOfConferenceProgramsTheme.SelectedIndexChanged += new System.EventHandler(this.listOfConferenceProgramsTheme_SelectedIndexChanged);
+            this.listOfConferenceProgramsTheme.SelectedIndexChanged += new System.EventHandler(this.ListOfConferenceProgramsThemeSelectedIndexChanged);
             // 
             // btnDeleteConferenceProgram
             // 
@@ -415,7 +415,7 @@ namespace NewsEditor
             this.btnDeleteConferenceProgram.TabIndex = 4;
             this.btnDeleteConferenceProgram.Text = "Удалить программу";
             this.btnDeleteConferenceProgram.UseVisualStyleBackColor = true;
-            this.btnDeleteConferenceProgram.Click += new System.EventHandler(this.btnDeleteConferenceProgram_Click);
+            this.btnDeleteConferenceProgram.Click += new System.EventHandler(this.BtnDeleteConferenceProgramClick);
             // 
             // btnEditConferenceProgram
             // 
@@ -426,7 +426,7 @@ namespace NewsEditor
             this.btnEditConferenceProgram.TabIndex = 3;
             this.btnEditConferenceProgram.Text = "Изменить программу";
             this.btnEditConferenceProgram.UseVisualStyleBackColor = true;
-            this.btnEditConferenceProgram.Click += new System.EventHandler(this.btnEditConferenceProgram_Click);
+            this.btnEditConferenceProgram.Click += new System.EventHandler(this.BtnEditConferenceProgramClick);
             // 
             // btnAddConferenceProgram
             // 
@@ -437,7 +437,7 @@ namespace NewsEditor
             this.btnAddConferenceProgram.TabIndex = 2;
             this.btnAddConferenceProgram.Text = "Добавить программу";
             this.btnAddConferenceProgram.UseVisualStyleBackColor = true;
-            this.btnAddConferenceProgram.Click += new System.EventHandler(this.btnAddConferenceProgram_Click);
+            this.btnAddConferenceProgram.Click += new System.EventHandler(this.BtnAddConferenceProgramClick);
             // 
             // listOfConferencePrograms
             // 
@@ -477,8 +477,8 @@ namespace NewsEditor
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(914, 574);
             this.listBox.TabIndex = 7;
-            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
-            this.listBox.DoubleClick += new System.EventHandler(this.listBox_Enter);
+            this.listBox.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
+            this.listBox.DoubleClick += new System.EventHandler(this.ListBoxEnter);
             // 
             // btnDelete
             // 
@@ -491,7 +491,7 @@ namespace NewsEditor
             this.btnDelete.TabIndex = 6;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.Click += new System.EventHandler(this.BtnDeleteClick);
             // 
             // btnLoadFile
             // 
@@ -503,7 +503,7 @@ namespace NewsEditor
             this.btnLoadFile.TabIndex = 4;
             this.btnLoadFile.Text = "Загрузить файл";
             this.btnLoadFile.UseVisualStyleBackColor = true;
-            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            this.btnLoadFile.Click += new System.EventHandler(this.BtnLoadFileClick);
             // 
             // btnCreateDirectory
             // 
@@ -515,7 +515,7 @@ namespace NewsEditor
             this.btnCreateDirectory.TabIndex = 2;
             this.btnCreateDirectory.Text = "Создать папку";
             this.btnCreateDirectory.UseVisualStyleBackColor = true;
-            this.btnCreateDirectory.Click += new System.EventHandler(this.btnCreateDirectory_Click);
+            this.btnCreateDirectory.Click += new System.EventHandler(this.BtnCreateDirectoryClick);
             // 
             // btnCopyAddress
             // 
@@ -528,7 +528,7 @@ namespace NewsEditor
             this.btnCopyAddress.TabIndex = 1;
             this.btnCopyAddress.Text = "Скопировать адрес";
             this.btnCopyAddress.UseVisualStyleBackColor = true;
-            this.btnCopyAddress.Click += new System.EventHandler(this.btnCopyAddress_Click);
+            this.btnCopyAddress.Click += new System.EventHandler(this.BtnCopyAddressClick);
             // 
             // MainForm
             // 
@@ -540,7 +540,7 @@ namespace NewsEditor
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Помощник";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Load += new System.EventHandler(this.MainFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.newsDataGrid)).EndInit();
             this.newsPanel.ResumeLayout(false);
             this.tabsControl.ResumeLayout(false);

@@ -15,7 +15,7 @@ namespace NewsEditorCore.Forms
 {
     public partial class CollectionToSaleForm : Form
     {
-        private CollectionToSale _collection;
+        private readonly CollectionToSale _collection;
         public CollectionToSale CollectionToSale {
             get => _collection;
         }
@@ -45,14 +45,16 @@ namespace NewsEditorCore.Forms
             txtImageLink.Text = collection.ImgPath;
         }
 
-        private void bntImageLoad_Click(object sender, EventArgs e)
+        private void BntImageLoadClick(object sender, EventArgs e)
         {
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "Images|*.jpg;*.jpeg;*.png;*.bmp|All files|*.*";
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Images|*.jpg;*.jpeg;*.png;*.bmp|All files|*.*"
+            };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 var extension = Path.GetExtension(dialog.FileName);
-                var filePath = $"{_ftpPath}/sborniki{DateTime.Now.ToString("yyyy")}/{DateTime.Now.ToString("yyyyMMdd_HHmmss")}{extension}";
+                var filePath = $"{_ftpPath}/sborniki{DateTime.Now:yyyy}/{DateTime.Now:yyyyMMdd_HHmmss}{extension}";
                 var ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + $"{_ftpHost}/{filePath}");
 
                 ftpRequest.Credentials = new NetworkCredential(_ftpLogin, _ftpPass);
@@ -74,14 +76,16 @@ namespace NewsEditorCore.Forms
             }
         }
 
-        private void btnDocumentLoad_Click(object sender, EventArgs e)
+        private void BtnDocumentLoadClick(object sender, EventArgs e)
         {
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "Documents|*.pdf;*.doc;*.docx|All files|*.*";
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Documents|*.pdf;*.doc;*.docx|All files|*.*"
+            };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 var extension = Path.GetExtension(dialog.FileName);
-                var filePath = $"{_ftpPath}/sborniki{DateTime.Now.ToString("yyyy")}/{DateTime.Now.ToString("yyyyMMdd_HHmmss")}{extension}";
+                var filePath = $"{_ftpPath}/sborniki{DateTime.Now:yyyy}/{DateTime.Now:yyyyMMdd_HHmmss}{extension}";
                 var ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + $"{_ftpHost}/{filePath}");
 
                 ftpRequest.Credentials = new NetworkCredential(_ftpLogin, _ftpPass);
@@ -103,7 +107,7 @@ namespace NewsEditorCore.Forms
             }
         }
 
-        private void btnSaveCollection_Click(object sender, EventArgs e)
+        private void BtnSaveCollectionClick(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTitle.Text))
             {
@@ -119,7 +123,7 @@ namespace NewsEditorCore.Forms
             this.Close();
         }
 
-        private void btnCollectionCancel_Click(object sender, EventArgs e)
+        private void BtnCollectionCancelClick(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             this.Close();

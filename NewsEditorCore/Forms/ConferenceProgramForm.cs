@@ -15,7 +15,7 @@ namespace NewsEditorCore.Forms
 {
     public partial class ConferenceProgramForm : Form
     {
-        private ConferenceProgram _program;
+        private readonly ConferenceProgram _program;
         public ConferenceProgram ConferenceProgram
         {
             get => _program;
@@ -45,14 +45,16 @@ namespace NewsEditorCore.Forms
             txtDocument.Text = program.DocumentUrl;
         }
 
-        private void btnDocumentUpload_Click(object sender, EventArgs e)
+        private void BtnDocumentUploadClick(object sender, EventArgs e)
         {
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "Documents|*.pdf;*.doc;*.docx|All files|*.*";
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Documents|*.pdf;*.doc;*.docx|All files|*.*"
+            };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 var extension = Path.GetExtension(dialog.FileName);
-                var filePath = $"{_ftpPath}/conferences/{DateTime.Now.ToString("yyyy")}/{DateTime.Now.ToString("yyyyMMdd_HHmmss")}{extension}";
+                var filePath = $"{_ftpPath}/conferences/{DateTime.Now:yyyy}/{DateTime.Now:yyyyMMdd_HHmmss}{extension}";
                 var ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + $"{_ftpHost}/{filePath}");
 
                 ftpRequest.Credentials = new NetworkCredential(_ftpLogin, _ftpPass);
@@ -74,7 +76,7 @@ namespace NewsEditorCore.Forms
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSaveClick(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTitle.Text))
             {
@@ -89,7 +91,7 @@ namespace NewsEditorCore.Forms
             this.Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancelClick(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             this.Close();
