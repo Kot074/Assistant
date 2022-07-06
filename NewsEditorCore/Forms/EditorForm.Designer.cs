@@ -182,6 +182,7 @@ namespace NewsEditor.Forms
             this.listBox.TabIndex = 12;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
             this.listBox.DoubleClick += new System.EventHandler(this.ListBoxEnter);
+            this.listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox_KeyDown);
             // 
             // btnDelete
             // 

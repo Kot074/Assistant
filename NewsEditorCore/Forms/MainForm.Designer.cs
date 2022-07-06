@@ -104,7 +104,6 @@ namespace NewsEditor
             this.newsDataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.NewsDataGridCellFormatting);
             this.newsDataGrid.DoubleClick += new System.EventHandler(this.BtnEditClick);
             this.newsDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NewsDataGridKeyDown);
-            this.newsDataGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NewsDataGridKeyUp);
             // 
             // Title
             // 
@@ -481,6 +480,7 @@ namespace NewsEditor
             this.listBox.TabIndex = 7;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
             this.listBox.DoubleClick += new System.EventHandler(this.ListBoxEnter);
+            this.listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox_KeyDown);
             // 
             // btnDelete
             // 
