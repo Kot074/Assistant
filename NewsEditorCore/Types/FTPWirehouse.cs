@@ -8,23 +8,22 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FluentFTP;
 using NewsEditorCore.Types;
 
 namespace NewsEditorCore
 {
-    class FTPWirehouse : IWarehouse
+    class FTPWirehouse : IWarehouse, IDisposable
     {
-        private readonly string _password;
-        private readonly string _userName;
-        private readonly string _host;
         private readonly string _path;
+        private readonly FtpClient _ftpClient;
 
         public FTPWirehouse(string username, string password, string host, string path)
         {
-            _userName = username;
-            _password = password;
-            _host = host;
             _path = path;
+
+            _ftpClient = new FtpClient(host, username, password);
+            _ftpClient.Connect();
         }
 
         public DirectoryItem[] GetList(string path)
@@ -43,20 +42,16 @@ namespace NewsEditorCore
                 }
             }
 
-            var request = CreateRequest(Path.Combine(_host, validPath).Replace('\\', '/'), WebRequestMethods.Ftp.ListDirectory);
-            using (var response = (FtpWebResponse)request.GetResponse())
-            {
-                using var stream = response.GetResponseStream();
-                using var reader = new StreamReader(stream, true);
-                while (!reader.EndOfStream)
+            if (_ftpClient.IsConnected){
+                var filesList = _ftpClient.GetListing(validPath);
+                foreach (var file in filesList)
                 {
-                    var info = reader.ReadLine();
-                    var name = Path.GetFileName(info);
+                    var name = file.Name;
                     if (name == "." || name == "..")
                     {
                         continue;
                     }
-                    var extension = Path.GetExtension(info);
+                    var extension = Path.GetExtension(file.FullName);
                     var node = new DirectoryItem(name, Path.Combine(validPath, name).Replace('\\', '/'), false);
                     if (string.IsNullOrEmpty(extension))
                     {
@@ -64,67 +59,77 @@ namespace NewsEditorCore
                     }
                     result.Add(node);
                 }
+
+                result.Sort((a, b) =>
+                {
+                    if (a.IsDirectory && b.IsDirectory)
+                    {
+                        return string.Compare(a.Label, b.Label);
+                    } else if (!a.IsDirectory && !b.IsDirectory)
+                    {
+                        return string.Compare(a.Label, b.Label);
+                    } else if (!a.IsDirectory && b.IsDirectory)
+                    {
+                        return 1;
+                    } else if (a.IsDirectory && !b.IsDirectory)
+                    {
+                        return -1;
+                    }
+
+                    return 0;
+                });
+
+                return result.ToArray();
             }
-
-            result.Sort((a, b) =>
+            else
             {
-                if (a.IsDirectory && b.IsDirectory)
-                {
-                    return string.Compare(a.Label, b.Label);
-                } else if (!a.IsDirectory && !b.IsDirectory)
-                {
-                    return string.Compare(a.Label, b.Label);
-                } else if (!a.IsDirectory && b.IsDirectory)
-                {
-                    return 1;
-                } else if (a.IsDirectory && !b.IsDirectory)
-                {
-                    return -1;
-                }
-
-                return 0;
-            });
-            return result.ToArray();
+                throw new FtpException("FTP соединение разорвано.");
+            }
         }
 
         public DirectoryItem CreateDirectory(string path)
         {
-            var request = CreateRequest(Path.Combine(_host, path).Replace('\\', '/'), WebRequestMethods.Ftp.MakeDirectory);
-            request.GetResponse();
-            return new DirectoryItem(Path.GetFileName(path), path, true);
+            if (_ftpClient.IsConnected)
+            {
+                _ftpClient.CreateDirectory(path);
+                return new DirectoryItem(Path.GetFileName(path), path, true);
+            }
+            else
+            {
+                throw new FtpException("FTP соединение разорвано.");
+            }
         }
 
         public void Remove(DirectoryItem node)
         {
-            if (node.IsDirectory)
+            if (_ftpClient.IsConnected)
             {
-                var list = GetList(node.FullPath).Where(n => !n.Label.Equals(".."));
-                foreach (var item in list)
+                if (node.IsDirectory)
                 {
-                    Remove(item);
+                    _ftpClient.DeleteDirectory(node.FullPath, FtpListOption.Recursive);
+                }
+                else
+                {
+                    _ftpClient.DeleteFile(node.FullPath);
                 }
             }
-            var request = CreateRequest(
-                Path.Combine(_host, node.FullPath).Replace('\\', '/'),
-                node.IsDirectory ? WebRequestMethods.Ftp.RemoveDirectory : WebRequestMethods.Ftp.DeleteFile);
-            request.GetResponse();
+            else
+            {
+                throw new FtpException("FTP соединение разорвано.");
+            }
         }
 
         public DirectoryItem UploadFile(string sourcePath, string targetPath)
         {
             var fileName = Path.GetFileName(sourcePath);
             var filePath = Path.Combine(targetPath, fileName).Replace('\\', '/');
-            var request = CreateRequest(
-                Path.Combine(_host, filePath).Replace('\\', '/'),
-                WebRequestMethods.Ftp.UploadFile);
-
-
+            
             byte[] fileContents = File.ReadAllBytes(sourcePath);
 
-            request.ContentLength = fileContents.Length;
-            var requestStream = request.GetRequestStream();
-            requestStream.Write(fileContents, 0, fileContents.Length);
-            requestStream.Close();
+            if (_ftpClient.IsConnected)
+            {
+                _ftpClient.UploadFile(sourcePath, filePath);
+            }
 
             return new DirectoryItem(fileName, filePath, false);
         }
@@ -139,17 +144,9 @@ namespace NewsEditorCore
             return _path;
         }
 
-        private FtpWebRequest CreateRequest(string uri, string method)
+        public void Dispose()
         {
-            var r = (FtpWebRequest) WebRequest.Create("ftp://" + uri);
-
-            r.Credentials = new NetworkCredential(_userName, _password);
-            r.Method = method;
-            r.EnableSsl = false;
-            r.UsePassive = true;
-            r.UseBinary = true;
-
-            return r;
+            _ftpClient.Disconnect();
         }
     }
 }

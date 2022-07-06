@@ -310,7 +310,7 @@ namespace NewsEditor
 
         private void BtnCreateCollectionClick(object sender, EventArgs e)
         {
-            var collectionToSaleForm = new CollectionToSaleForm();
+            var collectionToSaleForm = new CollectionToSaleForm(_warehouse);
 
             if (collectionToSaleForm.ShowDialog() == DialogResult.OK)
             {
@@ -337,7 +337,7 @@ namespace NewsEditor
                 var selectedCollectionIndex = listOfCollections.SelectedIndex;
                 if (selectedCollectionIndex >= 0)
                 {
-                    var collectionToSaleForm = new CollectionToSaleForm(items[selectedCollectionIndex]);
+                    var collectionToSaleForm = new CollectionToSaleForm(_warehouse, items[selectedCollectionIndex]);
 
                     if (collectionToSaleForm.ShowDialog() == DialogResult.OK)
                     {
@@ -484,7 +484,7 @@ namespace NewsEditor
 
         private void BtnAddConferenceProgramClick(object sender, EventArgs e)
         {
-            var conferenceProgramForm = new ConferenceProgramForm();
+            var conferenceProgramForm = new ConferenceProgramForm(_warehouse);
 
             if (conferenceProgramForm.ShowDialog() == DialogResult.OK)
             {
@@ -508,10 +508,10 @@ namespace NewsEditor
             if (selectedTheme is not null)
             {
                 var items = ConferenceProgram.Parse(selectedTheme.Introtext).ToArray();
-                var selectedIndex = listOfCollections.SelectedIndex;
+                var selectedIndex = listOfConferencePrograms.SelectedIndex;
                 if (selectedIndex >= 0)
                 {
-                    var conferenceProgramForm = new ConferenceProgramForm(items[selectedIndex]);
+                    var conferenceProgramForm = new ConferenceProgramForm(_warehouse, items[selectedIndex]);
 
                     if (conferenceProgramForm.ShowDialog() == DialogResult.OK)
                     {
@@ -535,7 +535,7 @@ namespace NewsEditor
             if (selectedTheme is not null)
             {
                 var items = ConferenceProgram.Parse(selectedTheme.Introtext).ToList();
-                var selectedIndex = listOfCollections.SelectedIndex;
+                var selectedIndex = listOfConferencePrograms.SelectedIndex;
                 if (selectedIndex >= 0)
                 {
                     if (MessageBox.Show($"Вы действительно хотите удалить {items[selectedIndex].Title}?", "",
@@ -602,7 +602,7 @@ namespace NewsEditor
             }
         }
 
-        private void newsDataGrid_KeyUp(object sender, KeyEventArgs e)
+        private void NewsDataGridKeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -615,7 +615,7 @@ namespace NewsEditor
             }
         }
 
-        private void newsDataGrid_KeyDown(object sender, KeyEventArgs e)
+        private void NewsDataGridKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {

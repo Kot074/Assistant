@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using NewsEditorCore.Types;
 
@@ -16,29 +17,20 @@ namespace NewsEditorCore.Forms
     public partial class ConferenceProgramForm : Form
     {
         private readonly ConferenceProgram _program;
+        private readonly IWarehouse _warehouse;
         public ConferenceProgram ConferenceProgram
         {
             get => _program;
         }
 
-        private readonly string _ftpHost;
-        private readonly string _ftpPath;
-        private readonly string _ftpLogin;
-        private readonly string _ftpPass;
-
-        public ConferenceProgramForm()
+        public ConferenceProgramForm(IWarehouse warehouse)
         {
             InitializeComponent();
             _program = new ConferenceProgram();
-
-            var config = ConfigurationManager.Instance;
-            _ftpHost = config.Ftp.Host;
-            _ftpPath = config.Ftp.Path;
-            _ftpLogin = config.Ftp.Login;
-            _ftpPass = config.Ftp.Password;
+            _warehouse = warehouse;
         }
 
-        public ConferenceProgramForm(ConferenceProgram program) : this()
+        public ConferenceProgramForm(IWarehouse warehouse, ConferenceProgram program) : this(warehouse)
         {
             _program = program;
             txtTitle.Text = program.Title;
@@ -53,26 +45,11 @@ namespace NewsEditorCore.Forms
             };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                var extension = Path.GetExtension(dialog.FileName);
-                var filePath = $"{_ftpPath}/conferences/{DateTime.Now:yyyy}/{DateTime.Now:yyyyMMdd_HHmmss}{extension}";
-                var ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + $"{_ftpHost}/{filePath}");
+                var filePath = $"{_warehouse.GetPath()}/conferences/{DateTime.Now:yyyy}/";
+                _warehouse.UploadFile(dialog.FileName, filePath);
 
-                ftpRequest.Credentials = new NetworkCredential(_ftpLogin, _ftpPass);
-                ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
-                ftpRequest.EnableSsl = false;
-                ftpRequest.UsePassive = true;
-                ftpRequest.UseBinary = true;
-
-                byte[] fileContents = File.ReadAllBytes(dialog.FileName);
-
-                ftpRequest.ContentLength = fileContents.Length;
-                var requestStream = ftpRequest.GetRequestStream();
-                requestStream.Write(fileContents, 0, fileContents.Length);
-                requestStream.Close();
-
-                ftpRequest.GetResponse();
-
-                txtDocument.Text = "http://" + filePath.Replace("docs/", "");
+                var url = HttpUtility.UrlPathEncode("http://" + filePath.Replace("docs/", "") + Path.GetFileName(dialog.FileName));
+                txtDocument.Text = url;
             }
         }
 

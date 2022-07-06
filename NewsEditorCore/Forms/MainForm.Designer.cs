@@ -103,8 +103,8 @@ namespace NewsEditor
             this.newsDataGrid.TabIndex = 0;
             this.newsDataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.NewsDataGridCellFormatting);
             this.newsDataGrid.DoubleClick += new System.EventHandler(this.BtnEditClick);
-            this.newsDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.newsDataGrid_KeyDown);
-            this.newsDataGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.newsDataGrid_KeyUp);
+            this.newsDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NewsDataGridKeyDown);
+            this.newsDataGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NewsDataGridKeyUp);
             // 
             // Title
             // 

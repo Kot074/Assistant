@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using NewsEditorCore.Types;
 
@@ -16,28 +10,19 @@ namespace NewsEditorCore.Forms
     public partial class CollectionToSaleForm : Form
     {
         private readonly CollectionToSale _collection;
+        private readonly IWarehouse _warehouse;
         public CollectionToSale CollectionToSale {
             get => _collection;
         }
 
-        private readonly string _ftpHost;
-        private readonly string _ftpPath;
-        private readonly string _ftpLogin;
-        private readonly string _ftpPass;
-
-        public CollectionToSaleForm()
+        public CollectionToSaleForm(IWarehouse warehouse)
         {
             InitializeComponent();
             _collection = new CollectionToSale();
-
-            var config = ConfigurationManager.Instance;
-            _ftpHost = config.Ftp.Host;
-            _ftpPath = config.Ftp.Path;
-            _ftpLogin = config.Ftp.Login;
-            _ftpPass = config.Ftp.Password;
+            _warehouse = warehouse;
         }
 
-        public CollectionToSaleForm(CollectionToSale collection) : this()
+        public CollectionToSaleForm(IWarehouse warehouse, CollectionToSale collection) : this(warehouse)
         {
             _collection = collection;
             txtTitle.Text = collection.Text;
@@ -53,26 +38,11 @@ namespace NewsEditorCore.Forms
             };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                var extension = Path.GetExtension(dialog.FileName);
-                var filePath = $"{_ftpPath}/sborniki{DateTime.Now:yyyy}/{DateTime.Now:yyyyMMdd_HHmmss}{extension}";
-                var ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + $"{_ftpHost}/{filePath}");
+                var filePath = $"{_warehouse.GetPath()}/sborniki{DateTime.Now:yyyy}/";
+                _warehouse.UploadFile(dialog.FileName, filePath);
 
-                ftpRequest.Credentials = new NetworkCredential(_ftpLogin, _ftpPass);
-                ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
-                ftpRequest.EnableSsl = false;
-                ftpRequest.UsePassive = true;
-                ftpRequest.UseBinary = true;
-
-                byte[] fileContents = File.ReadAllBytes(dialog.FileName);
-
-                ftpRequest.ContentLength = fileContents.Length;
-                var requestStream = ftpRequest.GetRequestStream();
-                requestStream.Write(fileContents, 0, fileContents.Length);
-                requestStream.Close();
-
-                ftpRequest.GetResponse();
-
-                txtImageLink.Text = "http://" + filePath.Replace("docs/", "");
+                var url = HttpUtility.UrlPathEncode("http://" + filePath.Replace("docs/", "") + Path.GetFileName(dialog.FileName));
+                txtImageLink.Text = url;
             }
         }
 
@@ -84,26 +54,11 @@ namespace NewsEditorCore.Forms
             };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                var extension = Path.GetExtension(dialog.FileName);
-                var filePath = $"{_ftpPath}/sborniki{DateTime.Now:yyyy}/{DateTime.Now:yyyyMMdd_HHmmss}{extension}";
-                var ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + $"{_ftpHost}/{filePath}");
+                var filePath = $"{_warehouse.GetPath()}/sborniki{DateTime.Now:yyyy}/";
+                _warehouse.UploadFile(dialog.FileName, filePath);
 
-                ftpRequest.Credentials = new NetworkCredential(_ftpLogin, _ftpPass);
-                ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
-                ftpRequest.EnableSsl = false;
-                ftpRequest.UsePassive = true;
-                ftpRequest.UseBinary = true;
-
-                byte[] fileContents = File.ReadAllBytes(dialog.FileName);
-
-                ftpRequest.ContentLength = fileContents.Length;
-                var requestStream = ftpRequest.GetRequestStream();
-                requestStream.Write(fileContents, 0, fileContents.Length);
-                requestStream.Close();
-
-                ftpRequest.GetResponse();
-
-                txtDocumentLink.Text = "http://" + filePath.Replace("docs/", "");
+                var url = HttpUtility.UrlPathEncode("http://" + filePath.Replace("docs/", "") + Path.GetFileName(dialog.FileName));
+                txtDocumentLink.Text = url;
             }
         }
 
