@@ -602,7 +602,8 @@ namespace NewsEditor
             {
                 case "tabFiles":
                     listBox.DisplayMember = "Label";
-                    var list = _warehouse.GetList(null);
+                    var list = _warehouse.GetList(_currentPath);
+                    listBox.Items.Clear();
                     listBox.Items.AddRange(list);
                     break;
                 case "tabProgramsOfConferences":

@@ -31,17 +31,6 @@ namespace NewsEditorCore
             var result = new List<DirectoryItem>();
             var validPath = path ?? _path;
 
-            if (!string.IsNullOrEmpty(path))
-            {
-                var parentLink =
-                    new DirectoryItem("..", Path.GetDirectoryName(path).Replace("\\", "/"), true);
-
-                if (!path.Equals(_path, StringComparison.OrdinalIgnoreCase))
-                {
-                    result.Add(parentLink);
-                }
-            }
-
             if (_ftpClient.IsConnected){
                 var filesList = _ftpClient.GetListing(validPath);
                 foreach (var file in filesList)
@@ -78,6 +67,17 @@ namespace NewsEditorCore
 
                     return 0;
                 });
+
+                if (!string.IsNullOrEmpty(path))
+                {
+                    var parentLink =
+                        new DirectoryItem("..", Path.GetDirectoryName(path).Replace("\\", "/"), true);
+
+                    if (!path.Equals(_path, StringComparison.OrdinalIgnoreCase))
+                    {
+                        result.Insert(0, parentLink);
+                    }
+                }
 
                 return result.ToArray();
             }
