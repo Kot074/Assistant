@@ -182,6 +182,7 @@ namespace NewsEditor.Forms
                 var newItem = _warehouse.UploadFile(fileDialog.FileName, _currentPath);
                 listBox.Items.Add(newItem);
                 listBox.Refresh();
+                listBox.SelectedItem = newItem;
             }
         }
 
@@ -193,6 +194,7 @@ namespace NewsEditor.Forms
                 var newItem = _warehouse.CreateDirectory($"{_currentPath}/{input.Value}");
                 listBox.Items.Add(newItem);
                 listBox.Refresh();
+                listBox.SelectedItem = newItem;
             }
         }
 

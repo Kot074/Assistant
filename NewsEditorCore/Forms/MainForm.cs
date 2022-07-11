@@ -170,6 +170,7 @@ namespace NewsEditor
                 var newItem = _warehouse.UploadFile(fileDialog.FileName, _currentPath);
                 listBox.Items.Add(newItem);
                 listBox.Refresh();
+                listBox.SelectedItem = newItem;
             }
         }
 
@@ -181,6 +182,7 @@ namespace NewsEditor
                 var newItem = _warehouse.CreateDirectory($"{_currentPath}/{input.Value}");
                 listBox.Items.Add(newItem);
                 listBox.Refresh();
+                listBox.SelectedItem = newItem;
             }
         }
 
@@ -641,7 +643,7 @@ namespace NewsEditor
             }
         }
 
-        private void listBox_KeyDown(object sender, KeyEventArgs e)
+        private void ListBoxKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {

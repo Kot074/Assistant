@@ -480,7 +480,7 @@ namespace NewsEditor
             this.listBox.TabIndex = 7;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
             this.listBox.DoubleClick += new System.EventHandler(this.ListBoxEnter);
-            this.listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox_KeyDown);
+            this.listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListBoxKeyDown);
             // 
             // btnDelete
             // 
