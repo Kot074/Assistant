@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -89,8 +90,13 @@ namespace NewsEditor.Forms
         {
             _content.Title = txtTitle.Text;
             _content.Introtext = 
-                tinyMceEditor.HtmlContent
-                    .Replace("<p>", "<p style=\"text-indent: 1.25cm; font-family:Times New Roman, Times, serif; font-size: 12pt; margin-top: 0.5em; margin-bottom: 0.5em; line-height: 150%;\">");
+                Regex.Replace(
+                    tinyMceEditor.HtmlContent, 
+                    @"< *?p.*?>", 
+                    "<p style=\"text-indent: 1.25cm; margin-top: 0.5em; margin-bottom: 0.5em; line-height: 150%;\">");
+
+            _content.Introtext = Regex.Replace(_content.Introtext, @"< *?img", "<img  onclick=\"scaleBehaviourOnImage(this);\"");
+
             _content.PublishUp = dtpDate.Value.ToUniversalTime();
             _content.PublishDown = DateTime.MaxValue;
             _content.Created = dtpDate.Value.ToUniversalTime();
