@@ -541,7 +541,7 @@ namespace NewsEditor
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Помощник";
+            this.Text = "Помощник (v.1.2)";
             this.Load += new System.EventHandler(this.MainFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.newsDataGrid)).EndInit();
             this.newsPanel.ResumeLayout(false);

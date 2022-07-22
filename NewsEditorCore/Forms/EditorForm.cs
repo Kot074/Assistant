@@ -89,11 +89,16 @@ namespace NewsEditor.Forms
         private void Button1Click(object sender, EventArgs e)
         {
             _content.Title = txtTitle.Text;
-            _content.Introtext = 
-                Regex.Replace(
-                    tinyMceEditor.HtmlContent, 
-                    @"< *?p.*?>", 
-                    "<p style=\"text-indent: 1.25cm; margin-top: 0.5em; margin-bottom: 0.5em; line-height: 150%;\">");
+
+            var text = tinyMceEditor.HtmlContent;
+            text = AddStyleAttributeToTag(text);
+            text = EditStyleValue(text, "text-indent", "0", "li");
+            text = EditStyleValue(text, "text-indent", "0", "div");
+            text = EditStyleValue(text, "text-indent", "1.25cm");
+            text = EditStyleValue(text, "margin-top", "0.5em");
+            text = EditStyleValue(text, "margin-bottom", "0.5em");
+            text = EditStyleValue(text, "line-height", "24px");
+            _content.Introtext = text;
 
             _content.Introtext = Regex.Replace(_content.Introtext, @"< *?img", "<img  onclick=\"scaleBehaviourOnImage(this);\"");
 
@@ -242,6 +247,48 @@ namespace NewsEditor.Forms
             {
                 Clipboard.SetText(_warehouse.GetUrl(selected.FullPath));
             }
+        }
+
+        private string AddStyleAttributeToTag(string input, string tag = "p")
+        {
+            var basePatternWithoutStyle = @$"(< *{tag})(.*?)(>)";
+            var str = input;
+
+            if (Regex.Matches(str, basePatternWithoutStyle).Count > 0)
+            {
+                str = Regex.Replace(str, basePatternWithoutStyle, m =>
+                {
+                    if (!m.Groups[2].Value.Contains("style"))
+                    {
+                        return m.Groups[1].Value + m.Groups[2].Value + " style=''" + m.Groups[3].Value;
+                    }
+
+                    return m.Value;
+                });
+            }
+            return str;
+        }
+
+        private string EditStyleValue(string input, string styleName, string value, string tag = "p")
+        {
+            var basePattern = @$"(< *{tag}.*?style *?=['""])(.*?)(['""]>)";
+            var textIndentPattern = @$"({styleName}: )(.*?)(;)";
+            var text = Regex.Replace(input, basePattern, m =>
+            {
+                var textIndent = "";
+                if (Regex.Matches(m.Groups[2].Value, textIndentPattern).Count() > 0)
+                {
+                    textIndent = Regex.Replace(m.Groups[2].Value, textIndentPattern, im => im.Groups[1].Value + value + im.Groups[3].Value);
+                }
+                else
+                {
+                    textIndent = m.Groups[2].Value + $"{styleName}: {value};";
+                }
+
+                return m.Groups[1].Value + textIndent + m.Groups[3].Value;
+            });
+
+            return text;
         }
     }
 }
