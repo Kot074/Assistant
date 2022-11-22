@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using FluentFTP;
+﻿using FluentFTP;
 using NewsEditorCore.Types;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace NewsEditorCore
 {
@@ -31,7 +24,8 @@ namespace NewsEditorCore
             var result = new List<DirectoryItem>();
             var validPath = path ?? _path;
 
-            if (_ftpClient.IsConnected){
+            if (_ftpClient.IsConnected)
+            {
                 var filesList = _ftpClient.GetListing(validPath);
                 foreach (var file in filesList)
                 {
@@ -54,13 +48,16 @@ namespace NewsEditorCore
                     if (a.IsDirectory && b.IsDirectory)
                     {
                         return string.Compare(a.Label, b.Label);
-                    } else if (!a.IsDirectory && !b.IsDirectory)
+                    }
+                    else if (!a.IsDirectory && !b.IsDirectory)
                     {
                         return string.Compare(a.Label, b.Label);
-                    } else if (!a.IsDirectory && b.IsDirectory)
+                    }
+                    else if (!a.IsDirectory && b.IsDirectory)
                     {
                         return 1;
-                    } else if (a.IsDirectory && !b.IsDirectory)
+                    }
+                    else if (a.IsDirectory && !b.IsDirectory)
                     {
                         return -1;
                     }
@@ -123,7 +120,7 @@ namespace NewsEditorCore
         {
             var fileName = Path.GetFileName(sourcePath);
             var filePath = Path.Combine(targetPath, fileName).Replace('\\', '/');
-            
+
             byte[] fileContents = File.ReadAllBytes(sourcePath);
 
             if (_ftpClient.IsConnected)
