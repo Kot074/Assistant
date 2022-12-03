@@ -1,10 +1,5 @@
-﻿using System;
+﻿using Atom.VectorSiteLibrary.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Atom.VectorSiteLibrary.Models;
-using Newtonsoft.Json;
-using System.IO;
-using System.Collections.Generic;
 
 #nullable disable
 
@@ -28,6 +23,7 @@ namespace Atom.VectorSiteLibrary.Data
         public virtual DbSet<JosContent> JosContents { get; set; }
         public virtual DbSet<JosSection> JosSections { get; set; }
         public virtual DbSet<JosContentFrontpage> JosContentFrontpages { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,6 +37,12 @@ namespace Atom.VectorSiteLibrary.Data
         {
             modelBuilder.HasCharSet("utf8mb4")
                 .UseCollation("utf8mb4_0900_ai_ci");
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasKey(e => e.Date);
+            });
 
             modelBuilder.Entity<JosContentFrontpage>(entity =>
             {

@@ -64,6 +64,7 @@ namespace NewsEditor
             this.btnLoadFile = new System.Windows.Forms.Button();
             this.btnCreateDirectory = new System.Windows.Forms.Button();
             this.btnCopyAddress = new System.Windows.Forms.Button();
+            this.tabOrdersReestr = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.newsDataGrid)).BeginInit();
             this.newsPanel.SuspendLayout();
             this.tabsControl.SuspendLayout();
@@ -162,6 +163,7 @@ namespace NewsEditor
             this.tabsControl.Controls.Add(this.tabSaleCollections);
             this.tabsControl.Controls.Add(this.tabProgramsOfConferences);
             this.tabsControl.Controls.Add(this.tabFiles);
+            this.tabsControl.Controls.Add(this.tabOrdersReestr);
             this.tabsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabsControl.Location = new System.Drawing.Point(0, 0);
             this.tabsControl.Name = "tabsControl";
@@ -532,6 +534,15 @@ namespace NewsEditor
             this.btnCopyAddress.UseVisualStyleBackColor = true;
             this.btnCopyAddress.Click += new System.EventHandler(this.BtnCopyAddressClick);
             // 
+            // tabOrdersReestr
+            // 
+            this.tabOrdersReestr.Location = new System.Drawing.Point(4, 24);
+            this.tabOrdersReestr.Name = "tabOrdersReestr";
+            this.tabOrdersReestr.Size = new System.Drawing.Size(1086, 592);
+            this.tabOrdersReestr.TabIndex = 4;
+            this.tabOrdersReestr.Text = "Реестр приказов";
+            this.tabOrdersReestr.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -598,6 +609,7 @@ namespace NewsEditor
         private System.Windows.Forms.Button btnAddConferenceProgram;
         private System.Windows.Forms.ListBox listOfConferencePrograms;
         private System.Windows.Forms.SplitContainer splitContainerCollections;
+        private System.Windows.Forms.TabPage tabOrdersReestr;
     }
 }
 

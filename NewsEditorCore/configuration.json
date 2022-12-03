@@ -6,7 +6,6 @@
     "Password": "U0U9W-K5IY"
   },
   "MySql": {
-    //"ConnectionString": "datasource=192.168.1.116;initial catalog=soft123_vn;user id=kot074;password=12345;Allow Zero DateTime=true;Convert Zero Datetime=true;"
     "ConnectionString": "datasource=mysql.hosting.nic.ru;initial catalog=soft123_vn;user id=soft123_cms6;password=A2V-wCcT;Allow Zero DateTime=true;Convert Zero Datetime=true;"
   } 
 }

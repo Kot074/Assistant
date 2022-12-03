@@ -1,28 +1,28 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using AssistantCore.Forms;
-using Atom.VectorSiteLibrary.Data;
-using Atom.VectorSiteLibrary.Storage;
+﻿using AssistantCore.Forms;
 using Atom.VectorSiteLibrary.Enums;
 using Atom.VectorSiteLibrary.Models;
+using Atom.VectorSiteLibrary.Storage;
 using NewsEditor.Forms;
 using NewsEditorCore;
 using NewsEditorCore.Forms;
 using NewsEditorCore.Types;
+using System;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace NewsEditor
 {
     public partial class MainForm : Form
     {
         private readonly IStorage<JosContent> _content;
+        private readonly IStorage<Order> _orders;
         private readonly IStorage<JosContentFrontpage> _contentFrontpage;
         private readonly IWarehouse _warehouse;
         private string _currentPath;
         private readonly SplashScreenForm _splashScreen;
 
-        public MainForm(IWarehouse warehouse, IStorage<JosContent> content, IStorage<JosContentFrontpage> contentFrontpage, SplashScreenForm splashScreen)
+        public MainForm(IWarehouse warehouse, IStorage<JosContent> content, IStorage<JosContentFrontpage> contentFrontpage, IStorage<Order> orders, SplashScreenForm splashScreen)
         {
             var startInitialization = DateTime.UtcNow;
 
@@ -31,6 +31,7 @@ namespace NewsEditor
             _warehouse = warehouse;
             _currentPath = warehouse.GetPath();
             _content = content;
+            _orders = orders;
             _contentFrontpage = contentFrontpage;
 
             InitializeComponent();
@@ -111,7 +112,7 @@ namespace NewsEditor
             try
             {
                 var news = _content.GetAll().Where(c =>
-                        c.Catid == (uint) CategoriesEnum.NEWS && c.Sectionid == (uint) SectionsEnum.NEWS)
+                        c.Catid == (uint)CategoriesEnum.NEWS && c.Sectionid == (uint)SectionsEnum.NEWS)
                     .OrderByDescending(n => n.PublishUp);
                 newsDataGrid.DataSource = news.ToArray();
                 newsDataGrid.Refresh();
@@ -411,7 +412,7 @@ namespace NewsEditor
 
         private void ListOfConferenceProgramsThemeSelectedIndexChanged(object sender, EventArgs e)
         {
-            var selected = (JosContent) listOfConferenceProgramsTheme.SelectedItem;
+            var selected = (JosContent)listOfConferenceProgramsTheme.SelectedItem;
 
             if (selected is not null)
             {
@@ -621,6 +622,10 @@ namespace NewsEditor
                     listOfCollectionsTheme.DisplayMember = "Title";
                     listOfCollections.DisplayMember = "Text";
                     listOfCollectionsTheme.DataSource = collectionsTheme.ToArray();
+                    break;
+                case "tabOrdersReestr":
+                    var orders = _orders.GetAll().ToList();
+
                     break;
                 case "tabNews":
                     break;
