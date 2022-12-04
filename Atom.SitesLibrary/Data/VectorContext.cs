@@ -40,8 +40,7 @@ namespace Atom.VectorSiteLibrary.Data
 
             modelBuilder.Entity<Order>(entity =>
             {
-                entity.HasKey(e => e.Id);
-                entity.HasKey(e => e.Date);
+                entity.HasKey(e => new { e.Id, e.Date });
             });
 
             modelBuilder.Entity<JosContentFrontpage>(entity =>

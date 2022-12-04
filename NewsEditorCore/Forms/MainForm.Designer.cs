@@ -65,6 +65,13 @@ namespace NewsEditor
             this.btnCreateDirectory = new System.Windows.Forms.Button();
             this.btnCopyAddress = new System.Windows.Forms.Button();
             this.tabOrdersReestr = new System.Windows.Forms.TabPage();
+            this.btnRemoveOrderRecord = new System.Windows.Forms.Button();
+            this.btnEditOrderRecord = new System.Windows.Forms.Button();
+            this.btnCreateOrderRecord = new System.Windows.Forms.Button();
+            this.gridOrdersReestr = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.newsDataGrid)).BeginInit();
             this.newsPanel.SuspendLayout();
             this.tabsControl.SuspendLayout();
@@ -80,6 +87,8 @@ namespace NewsEditor
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             this.tabFiles.SuspendLayout();
+            this.tabOrdersReestr.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridOrdersReestr)).BeginInit();
             this.SuspendLayout();
             // 
             // newsDataGrid
@@ -536,12 +545,101 @@ namespace NewsEditor
             // 
             // tabOrdersReestr
             // 
+            this.tabOrdersReestr.Controls.Add(this.btnRemoveOrderRecord);
+            this.tabOrdersReestr.Controls.Add(this.btnEditOrderRecord);
+            this.tabOrdersReestr.Controls.Add(this.btnCreateOrderRecord);
+            this.tabOrdersReestr.Controls.Add(this.gridOrdersReestr);
             this.tabOrdersReestr.Location = new System.Drawing.Point(4, 24);
             this.tabOrdersReestr.Name = "tabOrdersReestr";
             this.tabOrdersReestr.Size = new System.Drawing.Size(1086, 592);
             this.tabOrdersReestr.TabIndex = 4;
             this.tabOrdersReestr.Text = "Реестр приказов";
             this.tabOrdersReestr.UseVisualStyleBackColor = true;
+            // 
+            // btnRemoveOrderRecord
+            // 
+            this.btnRemoveOrderRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveOrderRecord.Location = new System.Drawing.Point(927, 75);
+            this.btnRemoveOrderRecord.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnRemoveOrderRecord.Name = "btnRemoveOrderRecord";
+            this.btnRemoveOrderRecord.Size = new System.Drawing.Size(150, 30);
+            this.btnRemoveOrderRecord.TabIndex = 1;
+            this.btnRemoveOrderRecord.Text = "Удалить";
+            this.btnRemoveOrderRecord.UseVisualStyleBackColor = true;
+            this.btnRemoveOrderRecord.Click += new System.EventHandler(this.btnRemoveOrderRecord_Click);
+            // 
+            // btnEditOrderRecord
+            // 
+            this.btnEditOrderRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditOrderRecord.Location = new System.Drawing.Point(927, 39);
+            this.btnEditOrderRecord.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnEditOrderRecord.Name = "btnEditOrderRecord";
+            this.btnEditOrderRecord.Size = new System.Drawing.Size(150, 30);
+            this.btnEditOrderRecord.TabIndex = 1;
+            this.btnEditOrderRecord.Text = "Редактировать";
+            this.btnEditOrderRecord.UseVisualStyleBackColor = true;
+            this.btnEditOrderRecord.Click += new System.EventHandler(this.btnEditOrderRecord_Click);
+            // 
+            // btnCreateOrderRecord
+            // 
+            this.btnCreateOrderRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateOrderRecord.Location = new System.Drawing.Point(927, 3);
+            this.btnCreateOrderRecord.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnCreateOrderRecord.Name = "btnCreateOrderRecord";
+            this.btnCreateOrderRecord.Size = new System.Drawing.Size(150, 30);
+            this.btnCreateOrderRecord.TabIndex = 1;
+            this.btnCreateOrderRecord.Text = "Создать";
+            this.btnCreateOrderRecord.UseVisualStyleBackColor = true;
+            this.btnCreateOrderRecord.Click += new System.EventHandler(this.btnCreateOrderRecord_Click);
+            // 
+            // gridOrdersReestr
+            // 
+            this.gridOrdersReestr.AllowUserToAddRows = false;
+            this.gridOrdersReestr.AllowUserToDeleteRows = false;
+            this.gridOrdersReestr.AllowUserToResizeColumns = false;
+            this.gridOrdersReestr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridOrdersReestr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridOrdersReestr.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Date,
+            this.Label});
+            this.gridOrdersReestr.Location = new System.Drawing.Point(3, 3);
+            this.gridOrdersReestr.Name = "gridOrdersReestr";
+            this.gridOrdersReestr.ReadOnly = true;
+            this.gridOrdersReestr.RowHeadersVisible = false;
+            this.gridOrdersReestr.RowTemplate.Height = 25;
+            this.gridOrdersReestr.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridOrdersReestr.Size = new System.Drawing.Size(917, 586);
+            this.gridOrdersReestr.TabIndex = 0;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.FillWeight = 75F;
+            this.Id.HeaderText = "Номер";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Width = 50;
+            // 
+            // Date
+            // 
+            this.Date.DataPropertyName = "Date";
+            this.Date.FillWeight = 75F;
+            this.Date.HeaderText = "Дата";
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            this.Date.Width = 75;
+            // 
+            // Label
+            // 
+            this.Label.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Label.DataPropertyName = "Label";
+            this.Label.HeaderText = "Название";
+            this.Label.Name = "Label";
+            this.Label.ReadOnly = true;
+            this.Label.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // MainForm
             // 
@@ -569,6 +667,8 @@ namespace NewsEditor
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.tabFiles.ResumeLayout(false);
+            this.tabOrdersReestr.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridOrdersReestr)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -610,6 +710,13 @@ namespace NewsEditor
         private System.Windows.Forms.ListBox listOfConferencePrograms;
         private System.Windows.Forms.SplitContainer splitContainerCollections;
         private System.Windows.Forms.TabPage tabOrdersReestr;
+        private System.Windows.Forms.Button btnCreateOrderRecord;
+        private System.Windows.Forms.DataGridView gridOrdersReestr;
+        private System.Windows.Forms.Button btnRemoveOrderRecord;
+        private System.Windows.Forms.Button btnEditOrderRecord;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Label;
     }
 }
 

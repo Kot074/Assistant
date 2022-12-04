@@ -46,6 +46,10 @@ namespace NewsEditor
                 }
             }
 
+            // Делаем в реестре приказов поле с текстом многострочным и автоматически расширяемым по высоте.
+            gridOrdersReestr.Columns["Label"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            gridOrdersReestr.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
             var endInitialization = DateTime.UtcNow;
 #if (DEBUG)
             File.AppendAllText(
@@ -624,8 +628,11 @@ namespace NewsEditor
                     listOfCollectionsTheme.DataSource = collectionsTheme.ToArray();
                     break;
                 case "tabOrdersReestr":
-                    var orders = _orders.GetAll().ToList();
-
+                    var orders = _orders.GetAll()
+                        .OrderByDescending(_ => _.Date)
+                        .ThenByDescending(_ => _.Id)
+                        .ToArray();
+                    gridOrdersReestr.DataSource = orders;
                     break;
                 case "tabNews":
                     break;
@@ -676,6 +683,94 @@ namespace NewsEditor
                         UploadFile();
                     }
                     break;
+            }
+        }
+
+        private void btnCreateOrderRecord_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var baseOrder = new Order() { Date = DateTime.Now };
+                var lastOrder = _orders.GetAll().Where(_ => _.Date.Year == DateTime.Now.Year)?.OrderBy(_ => _.Id).LastOrDefault();
+
+                if (lastOrder is null || lastOrder.Date.Year < DateTime.Now.Year)
+                {
+                    baseOrder.Id = 1;
+                }
+                else
+                {
+                    baseOrder.Id = lastOrder.Id + 1;
+                }
+
+                var orderRecordForm = new OrderRecordForm(baseOrder);
+
+                if (orderRecordForm.ShowDialog() == DialogResult.OK)
+                {
+                    var orderRecord = orderRecordForm.Order;
+                    _orders.Save(orderRecord);
+
+                    var orders = _orders.GetAll()
+                        .OrderByDescending(_ => _.Date)
+                        .ThenByDescending(_ => _.Id)
+                        .ToArray();
+                    gridOrdersReestr.DataSource = orders;
+                    gridOrdersReestr.Refresh();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnRemoveOrderRecord_Click(object sender, EventArgs e)
+        {
+            var selected = gridOrdersReestr.SelectedRows[0];
+
+            var selectedOrderRecord = new Order
+            {
+                Id = long.Parse(selected.Cells["Id"].Value.ToString()),
+                Date = DateTime.Parse(selected.Cells["Date"].Value.ToString()),
+                Label = selected.Cells["Label"].Value.ToString()
+            };
+
+            if (MessageBox.Show($"Вы уверены что хотите удалить приказ: {selectedOrderRecord.Label} ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                _orders.Remove(selectedOrderRecord);
+
+                var orders = _orders.GetAll()
+                    .OrderByDescending(_ => _.Date)
+                    .ThenByDescending(_ => _.Id)
+                    .ToArray();
+                gridOrdersReestr.DataSource = orders;
+                gridOrdersReestr.Refresh();
+            }
+        }
+
+        private void btnEditOrderRecord_Click(object sender, EventArgs e)
+        {
+            var selected = gridOrdersReestr.SelectedRows[0];
+
+            var selectedOrderRecord = new Order
+            {
+                Id = long.Parse(selected.Cells["Id"].Value.ToString()),
+                Date = DateTime.Parse(selected.Cells["Date"].Value.ToString()),
+                Label = selected.Cells["Label"].Value.ToString()
+            };
+
+            var orderRecordForm = new OrderRecordForm(selectedOrderRecord, true);
+
+            if (orderRecordForm.ShowDialog() == DialogResult.OK)
+            {
+                var orderRecord = orderRecordForm.Order;
+                _orders.Save(orderRecord);
+
+                var orders = _orders.GetAll()
+                    .OrderByDescending(_ => _.Date)
+                    .ThenByDescending(_ => _.Id)
+                    .ToArray();
+                gridOrdersReestr.DataSource = orders;
+                gridOrdersReestr.Refresh();
             }
         }
     }

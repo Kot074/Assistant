@@ -20,29 +20,27 @@ namespace Atom.VectorSiteLibrary.Storage.MySql
             {
                 return _context.Orders.AsNoTracking();
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
-                throw new InvalidOperationException("Произошла ошибка при попытке получения списка приказов из базы.");
+                throw new InvalidOperationException("Произошла ошибка при попытке получения списка приказов из базы.", ex);
             }
         }
 
         public Order Get(int id)
         {
-            try
-            {
-                return _context.Orders.AsNoTracking().FirstOrDefault(s => s.Id == id);
-            }
-            catch (InvalidOperationException)
-            {
-                throw new InvalidOperationException($"Произошла ошибка при попытке получения приказа {id}-ОД из базы.");
-            }
+            throw new InvalidOperationException($"В реестре приказов нельзя извлечь одну запись.");
         }
 
         public Order Save(Order entity)
         {
-            var currentContent = _context.Orders.AsNoTracking().FirstOrDefault(s => s.Id == entity.Id);
+            var currentContent = _context.Orders.AsNoTracking().SingleOrDefault(s => s.Id == entity.Id && s.Date.Year == entity.Date.Year);
             try
             {
+                if (string.IsNullOrEmpty(entity.Label.Trim()))
+                {
+                    throw new Exception("Заголовок приказа не может быть пустым.");
+                }
+
                 if (currentContent is null)
                 {
                     _context.Orders.Add(entity);
@@ -56,22 +54,23 @@ namespace Atom.VectorSiteLibrary.Storage.MySql
                 _context.Entry(entity).State = EntityState.Detached;
                 return _context.Entry(entity).Entity;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Возникла ошибка при попытке сохранения приказа в базу данных.");
+                throw new Exception($"Возникла ошибка при попытке сохранения приказа в базу данных: {ex.InnerException?.Message ?? ex.Message}", ex);
             }
         }
 
         public void Remove(Order entity)
         {
-            var currentSection = _context.Orders.AsNoTracking().FirstOrDefault(s => s.Id == entity.Id);
-            if (currentSection is null)
+            var currentOrderRecord = _context.Orders.AsNoTracking().SingleOrDefault(s => s.Id == entity.Id && s.Date.Year == entity.Date.Year);
+            if (currentOrderRecord is null)
             {
                 throw new ArgumentException("ОШИБКА! Такого приказа не существует!");
             }
             else
             {
-                _context.Entry(entity).State = EntityState.Deleted;
+                var dbEntity = _context.Entry<Order>(entity);
+                dbEntity.State = EntityState.Deleted;
             }
             _context.SaveChanges();
         }
