@@ -65,6 +65,11 @@ namespace NewsEditor
             this.btnCreateDirectory = new System.Windows.Forms.Button();
             this.btnCopyAddress = new System.Windows.Forms.Button();
             this.tabOrdersReestr = new System.Windows.Forms.TabPage();
+            this.lblFilterEnd = new System.Windows.Forms.Label();
+            this.lblFilterStart = new System.Windows.Forms.Label();
+            this.dtpFilterStart = new System.Windows.Forms.DateTimePicker();
+            this.dtpFilterEnd = new System.Windows.Forms.DateTimePicker();
+            this.btnFilterReset = new System.Windows.Forms.Button();
             this.btnRemoveOrderRecord = new System.Windows.Forms.Button();
             this.btnEditOrderRecord = new System.Windows.Forms.Button();
             this.btnCreateOrderRecord = new System.Windows.Forms.Button();
@@ -545,6 +550,11 @@ namespace NewsEditor
             // 
             // tabOrdersReestr
             // 
+            this.tabOrdersReestr.Controls.Add(this.lblFilterEnd);
+            this.tabOrdersReestr.Controls.Add(this.lblFilterStart);
+            this.tabOrdersReestr.Controls.Add(this.dtpFilterStart);
+            this.tabOrdersReestr.Controls.Add(this.dtpFilterEnd);
+            this.tabOrdersReestr.Controls.Add(this.btnFilterReset);
             this.tabOrdersReestr.Controls.Add(this.btnRemoveOrderRecord);
             this.tabOrdersReestr.Controls.Add(this.btnEditOrderRecord);
             this.tabOrdersReestr.Controls.Add(this.btnCreateOrderRecord);
@@ -555,6 +565,56 @@ namespace NewsEditor
             this.tabOrdersReestr.TabIndex = 4;
             this.tabOrdersReestr.Text = "Реестр приказов";
             this.tabOrdersReestr.UseVisualStyleBackColor = true;
+            // 
+            // lblFilterEnd
+            // 
+            this.lblFilterEnd.AutoSize = true;
+            this.lblFilterEnd.Location = new System.Drawing.Point(929, 507);
+            this.lblFilterEnd.Name = "lblFilterEnd";
+            this.lblFilterEnd.Size = new System.Drawing.Size(21, 15);
+            this.lblFilterEnd.TabIndex = 3;
+            this.lblFilterEnd.Text = "по";
+            // 
+            // lblFilterStart
+            // 
+            this.lblFilterStart.AutoSize = true;
+            this.lblFilterStart.Location = new System.Drawing.Point(929, 463);
+            this.lblFilterStart.Name = "lblFilterStart";
+            this.lblFilterStart.Size = new System.Drawing.Size(63, 15);
+            this.lblFilterStart.TabIndex = 3;
+            this.lblFilterStart.Text = "Выбрать с";
+            // 
+            // dtpFilterStart
+            // 
+            this.dtpFilterStart.CustomFormat = "dd:MM:yyyy";
+            this.dtpFilterStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFilterStart.Location = new System.Drawing.Point(929, 481);
+            this.dtpFilterStart.Name = "dtpFilterStart";
+            this.dtpFilterStart.Size = new System.Drawing.Size(150, 23);
+            this.dtpFilterStart.TabIndex = 2;
+            this.dtpFilterStart.ValueChanged += new System.EventHandler(this.dtpFilter_ValueChanged);
+            // 
+            // dtpFilterEnd
+            // 
+            this.dtpFilterEnd.CustomFormat = "dd:MM:yyyy";
+            this.dtpFilterEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFilterEnd.Location = new System.Drawing.Point(929, 525);
+            this.dtpFilterEnd.Name = "dtpFilterEnd";
+            this.dtpFilterEnd.Size = new System.Drawing.Size(148, 23);
+            this.dtpFilterEnd.TabIndex = 2;
+            this.dtpFilterEnd.ValueChanged += new System.EventHandler(this.dtpFilter_ValueChanged);
+            // 
+            // btnFilterReset
+            // 
+            this.btnFilterReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilterReset.Location = new System.Drawing.Point(927, 554);
+            this.btnFilterReset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnFilterReset.Name = "btnFilterReset";
+            this.btnFilterReset.Size = new System.Drawing.Size(150, 30);
+            this.btnFilterReset.TabIndex = 1;
+            this.btnFilterReset.Text = "Сбросить";
+            this.btnFilterReset.UseVisualStyleBackColor = true;
+            this.btnFilterReset.Click += new System.EventHandler(this.btnFilterReset_Click);
             // 
             // btnRemoveOrderRecord
             // 
@@ -650,7 +710,7 @@ namespace NewsEditor
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Помощник (v.1.2)";
+            this.Text = "Помощник (v.1.3.0)";
             this.Load += new System.EventHandler(this.MainFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.newsDataGrid)).EndInit();
             this.newsPanel.ResumeLayout(false);
@@ -668,6 +728,7 @@ namespace NewsEditor
             this.splitContainer.ResumeLayout(false);
             this.tabFiles.ResumeLayout(false);
             this.tabOrdersReestr.ResumeLayout(false);
+            this.tabOrdersReestr.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridOrdersReestr)).EndInit();
             this.ResumeLayout(false);
 
@@ -717,6 +778,11 @@ namespace NewsEditor
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Label;
+        private System.Windows.Forms.Label lblFilterEnd;
+        private System.Windows.Forms.Label lblFilterStart;
+        private System.Windows.Forms.DateTimePicker dtpFilterStart;
+        private System.Windows.Forms.DateTimePicker dtpFilterEnd;
+        private System.Windows.Forms.Button btnFilterReset;
     }
 }
 

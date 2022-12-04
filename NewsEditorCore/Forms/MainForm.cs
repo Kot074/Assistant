@@ -628,11 +628,14 @@ namespace NewsEditor
                     listOfCollectionsTheme.DataSource = collectionsTheme.ToArray();
                     break;
                 case "tabOrdersReestr":
-                    var orders = _orders.GetAll()
-                        .OrderByDescending(_ => _.Date)
-                        .ThenByDescending(_ => _.Id)
-                        .ToArray();
-                    gridOrdersReestr.DataSource = orders;
+                    var orders = _orders.GetAll().OrderBy(_ => _.Date);
+
+                    var startDate = orders.First().Date;
+                    var endDate = orders.Last().Date;
+
+                    dtpFilterStart.Value = startDate;
+                    dtpFilterEnd.Value = endDate;
+
                     break;
                 case "tabNews":
                     break;
@@ -772,6 +775,30 @@ namespace NewsEditor
                 gridOrdersReestr.DataSource = orders;
                 gridOrdersReestr.Refresh();
             }
+        }
+
+        private void dtpFilter_ValueChanged(object sender, EventArgs e)
+        {
+            var startDate = dtpFilterStart.Value;
+            var endDate = dtpFilterEnd.Value;
+            var orders = _orders.GetAll()
+                .Where(_ => _.Date.Date >= startDate.Date && _.Date.Date <= endDate.Date)
+                .OrderByDescending(_ => _.Date)
+                .ThenByDescending(_ => _.Id)
+                .ToArray();
+            gridOrdersReestr.DataSource = orders;
+            gridOrdersReestr.Refresh();
+        }
+
+        private void btnFilterReset_Click(object sender, EventArgs e)
+        {
+            var orders = _orders.GetAll().OrderBy(_ => _.Date);
+
+            var startDate = orders.First().Date;
+            var endDate = orders.Last().Date;
+
+            dtpFilterStart.Value = startDate;
+            dtpFilterEnd.Value = endDate;
         }
     }
 }
