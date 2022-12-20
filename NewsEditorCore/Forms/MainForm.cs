@@ -814,13 +814,18 @@ namespace NewsEditor
 
         private void btnFilterReset_Click(object sender, EventArgs e)
         {
-            var orders = _orders.GetAll().Select(_ => _.Date).OrderBy(_ => _.Date);
+            if (_orders.GetAll().Any())
+            {
+                var ordersDates = _orders.GetAll().OrderBy(_ => _.Date).Select(_ => _.Date);
 
-            var startDate = orders.First();
-            var endDate = orders.Last();
-
-            dtpFilterStart.Value = startDate;
-            dtpFilterEnd.Value = endDate;
+                dtpFilterStart.Value = ordersDates.First();
+                dtpFilterEnd.Value = ordersDates.Last();
+            }
+            else
+            {
+                dtpFilterStart.Value = DateTime.Now;
+                dtpFilterEnd.Value = DateTime.Now;
+            }
         }
 
         private void btnPrintOrderReestr_Click(object sender, EventArgs e)
@@ -855,7 +860,7 @@ namespace NewsEditor
             {
                 // Добавление заголовка
                 var title = "НОУ \"Вектор Науки\"";
-                var titleFont = new Font("Times New Roman", 16);
+                var titleFont = new Font("Times New Roman", 16, FontStyle.Bold);
                 var titleSize = TextRenderer.MeasureText(title, titleFont);
 
                 e.Graphics.DrawString(title, titleFont, Brushes.Black, width / 2 - titleSize.Width / 2, yIndent);
@@ -876,7 +881,37 @@ namespace NewsEditor
                 yIndent += 25;
             }
 
+
             var xIndent = e.MarginBounds.Left;
+
+            var headerIndent = xIndent;
+            var idWidth = 90;
+            var dateWidth = 100;
+            var labelWidth = e.MarginBounds.Width - idWidth - dateWidth;
+            var baseLineHeight = font.Height;
+
+            // Заполнение заголовка таблицы
+            var headerFont = new Font("Times New Roman",
+                ConfigurationManager.Instance.PrintConfiguration.FontSize,
+                FontStyle.Bold);
+
+            var idHeaderRectangle = new Rectangle(headerIndent, yIndent, idWidth, headerFont.Height + 5);
+            e.Graphics.DrawRectangle(Pens.Black, idHeaderRectangle);
+            e.Graphics.DrawString("Номер", headerFont, Brushes.Black, idWidth / 2 + headerIndent - 20, yIndent + 2);
+            headerIndent += idWidth;
+
+            var dateHeaderRectangle = new Rectangle(headerIndent, yIndent, dateWidth, headerFont.Height + 5);
+            e.Graphics.DrawRectangle(Pens.Black, dateHeaderRectangle);
+            e.Graphics.DrawString("Дата", headerFont, Brushes.Black, dateWidth / 2 + headerIndent - 20, yIndent + 2);
+            headerIndent += dateWidth;
+
+            var labelHeaderRectangle = new Rectangle(headerIndent, yIndent, labelWidth, headerFont.Height + 5);
+            e.Graphics.DrawRectangle(Pens.Black, labelHeaderRectangle);
+            e.Graphics.DrawString("Название", headerFont, Brushes.Black, labelWidth / 2 + headerIndent - 20, yIndent + 2);
+
+            yIndent += headerFont.Height + 5;
+
+
             var ordersForPrint = OrdersList.OrderBy(_ => _.Date).ThenBy(_ => _.Id).ToArray();
             // Добавление записей в таблицу
             for (; PrintLinesCounter < ordersForPrint.Count(); PrintLinesCounter++)
@@ -885,24 +920,20 @@ namespace NewsEditor
 
                 // Данные ячейки с номером приказа
                 var id = $"{ordersForPrint[PrintLinesCounter].Id}-ОД";
-                var idIndent = 88;
 
                 // Данные ячейки с датой приказа
                 var date = ordersForPrint[PrintLinesCounter].Date.ToString("dd/MM/yyyy");
-                var dateIndent = 100;
 
                 // Данные ячейки с заголовком приказа
                 var label = ordersForPrint[PrintLinesCounter].Label;
-                var labelIndent = e.MarginBounds.Width - idIndent - dateIndent;
 
                 // Вычисляем высоту строки
                 var heightCoefficient = 0;
-                var baseLineHeight = font.Height;
                 var labelLines = label.Split('\n');
                 foreach (var line in labelLines)
                 {
                     var lineSize = TextRenderer.MeasureText(line, font);
-                    var lineQuotient = (double)lineSize.Width / labelIndent;
+                    var lineQuotient = (double)lineSize.Width / labelWidth;
                     if (Math.Round(lineQuotient) > lineQuotient)
                     {
                         heightCoefficient += 1;
@@ -921,17 +952,17 @@ namespace NewsEditor
                 }
 
                 // Отрисовка данных
-                var idRectangle = new Rectangle(rowIndent, yIndent, idIndent, lineHeight);
+                var idRectangle = new Rectangle(rowIndent, yIndent, idWidth, lineHeight);
                 e.Graphics.DrawRectangle(Pens.Black, idRectangle);
                 e.Graphics.DrawString(id, font, Brushes.Black, idRectangle);
-                rowIndent += idIndent;
+                rowIndent += idWidth;
 
-                var dateRectangle = new Rectangle(rowIndent, yIndent, dateIndent, lineHeight);
+                var dateRectangle = new Rectangle(rowIndent, yIndent, dateWidth, lineHeight);
                 e.Graphics.DrawRectangle(Pens.Black, dateRectangle);
                 e.Graphics.DrawString(date, font, Brushes.Black, dateRectangle);
-                rowIndent += dateIndent;
+                rowIndent += dateWidth;
 
-                var labelRectangle = new Rectangle(rowIndent, yIndent, labelIndent, lineHeight);
+                var labelRectangle = new Rectangle(rowIndent, yIndent, labelWidth, lineHeight);
                 e.Graphics.DrawRectangle(Pens.Black, labelRectangle);
                 e.Graphics.DrawString(label, font, Brushes.Black, labelRectangle);
 
