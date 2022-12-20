@@ -859,7 +859,7 @@ namespace NewsEditor
             if (PrintLinesCounter == 0)
             {
                 // Добавление заголовка
-                var title = "НОУ \"Вектор Науки\"";
+                var title = "НОУ \"Вектор науки\"";
                 var titleFont = new Font("Times New Roman", 16, FontStyle.Bold);
                 var titleSize = TextRenderer.MeasureText(title, titleFont);
 
@@ -907,7 +907,7 @@ namespace NewsEditor
 
             var labelHeaderRectangle = new Rectangle(headerIndent, yIndent, labelWidth, headerFont.Height + 5);
             e.Graphics.DrawRectangle(Pens.Black, labelHeaderRectangle);
-            e.Graphics.DrawString("Название", headerFont, Brushes.Black, labelWidth / 2 + headerIndent - 20, yIndent + 2);
+            e.Graphics.DrawString("Название приказа", headerFont, Brushes.Black, labelWidth / 2 + headerIndent - 40, yIndent + 2);
 
             yIndent += headerFont.Height + 5;
 
