@@ -897,7 +897,7 @@ namespace NewsEditor
 
             var idHeaderRectangle = new Rectangle(headerIndent, yIndent, idWidth, headerFont.Height + 5);
             e.Graphics.DrawRectangle(Pens.Black, idHeaderRectangle);
-            e.Graphics.DrawString("Номер", headerFont, Brushes.Black, idWidth / 2 + headerIndent - 20, yIndent + 2);
+            e.Graphics.DrawString("Номер", headerFont, Brushes.Black, idWidth / 2 + headerIndent - 25, yIndent + 2);
             headerIndent += idWidth;
 
             var dateHeaderRectangle = new Rectangle(headerIndent, yIndent, dateWidth, headerFont.Height + 5);
