@@ -633,14 +633,18 @@ namespace NewsEditor
                     listOfCollectionsTheme.DataSource = collectionsTheme.ToArray();
                     break;
                 case "tabOrdersReestr":
-                    var orders = _orders.GetAll().OrderBy(_ => _.Date);
+                    if (_orders.GetAll().Any())
+                    {
+                        var ordersDates = _orders.GetAll().OrderBy(_ => _.Date).Select(_ => _.Date);
 
-                    var startDate = orders.First().Date;
-                    var endDate = orders.Last().Date;
-
-                    dtpFilterStart.Value = startDate;
-                    dtpFilterEnd.Value = endDate;
-
+                        dtpFilterStart.Value = ordersDates.First();
+                        dtpFilterEnd.Value = ordersDates.Last();
+                    }
+                    else
+                    {
+                        dtpFilterStart.Value = DateTime.Now;
+                        dtpFilterEnd.Value = DateTime.Now;
+                    }
                     break;
                 case "tabNews":
                     break;
@@ -734,6 +738,11 @@ namespace NewsEditor
 
         private void btnRemoveOrderRecord_Click(object sender, EventArgs e)
         {
+            if (gridOrdersReestr.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
             var selected = gridOrdersReestr.SelectedRows[0];
 
             var selectedOrderRecord = new Order
@@ -759,6 +768,11 @@ namespace NewsEditor
 
         private void btnEditOrderRecord_Click(object sender, EventArgs e)
         {
+            if (gridOrdersReestr.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
             var selected = gridOrdersReestr.SelectedRows[0];
 
             var selectedOrderRecord = new Order

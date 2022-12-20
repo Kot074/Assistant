@@ -11,6 +11,6 @@
   "PrintConfiguration": {
     "Landscape": true,
     "Margin": [20, 20, 20, 80], // Измеряется в пикселях (примерно 4px на 1мм)
-    "FontSize": 14
+    "FontSize": 12
   }
 }
