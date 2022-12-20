@@ -70,6 +70,7 @@ namespace NewsEditor
             this.dtpFilterStart = new System.Windows.Forms.DateTimePicker();
             this.dtpFilterEnd = new System.Windows.Forms.DateTimePicker();
             this.btnFilterReset = new System.Windows.Forms.Button();
+            this.btnPrintOrderReestr = new System.Windows.Forms.Button();
             this.btnRemoveOrderRecord = new System.Windows.Forms.Button();
             this.btnEditOrderRecord = new System.Windows.Forms.Button();
             this.btnCreateOrderRecord = new System.Windows.Forms.Button();
@@ -77,6 +78,7 @@ namespace NewsEditor
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ordersReestrPrintDocument = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.newsDataGrid)).BeginInit();
             this.newsPanel.SuspendLayout();
             this.tabsControl.SuspendLayout();
@@ -555,6 +557,7 @@ namespace NewsEditor
             this.tabOrdersReestr.Controls.Add(this.dtpFilterStart);
             this.tabOrdersReestr.Controls.Add(this.dtpFilterEnd);
             this.tabOrdersReestr.Controls.Add(this.btnFilterReset);
+            this.tabOrdersReestr.Controls.Add(this.btnPrintOrderReestr);
             this.tabOrdersReestr.Controls.Add(this.btnRemoveOrderRecord);
             this.tabOrdersReestr.Controls.Add(this.btnEditOrderRecord);
             this.tabOrdersReestr.Controls.Add(this.btnCreateOrderRecord);
@@ -568,6 +571,7 @@ namespace NewsEditor
             // 
             // lblFilterEnd
             // 
+            this.lblFilterEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFilterEnd.AutoSize = true;
             this.lblFilterEnd.Location = new System.Drawing.Point(929, 507);
             this.lblFilterEnd.Name = "lblFilterEnd";
@@ -577,6 +581,7 @@ namespace NewsEditor
             // 
             // lblFilterStart
             // 
+            this.lblFilterStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFilterStart.AutoSize = true;
             this.lblFilterStart.Location = new System.Drawing.Point(929, 463);
             this.lblFilterStart.Name = "lblFilterStart";
@@ -586,6 +591,7 @@ namespace NewsEditor
             // 
             // dtpFilterStart
             // 
+            this.dtpFilterStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpFilterStart.CustomFormat = "dd:MM:yyyy";
             this.dtpFilterStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFilterStart.Location = new System.Drawing.Point(929, 481);
@@ -596,6 +602,7 @@ namespace NewsEditor
             // 
             // dtpFilterEnd
             // 
+            this.dtpFilterEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpFilterEnd.CustomFormat = "dd:MM:yyyy";
             this.dtpFilterEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFilterEnd.Location = new System.Drawing.Point(929, 525);
@@ -606,7 +613,7 @@ namespace NewsEditor
             // 
             // btnFilterReset
             // 
-            this.btnFilterReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilterReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFilterReset.Location = new System.Drawing.Point(927, 554);
             this.btnFilterReset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnFilterReset.Name = "btnFilterReset";
@@ -615,6 +622,18 @@ namespace NewsEditor
             this.btnFilterReset.Text = "Сбросить";
             this.btnFilterReset.UseVisualStyleBackColor = true;
             this.btnFilterReset.Click += new System.EventHandler(this.btnFilterReset_Click);
+            // 
+            // btnPrintOrderReestr
+            // 
+            this.btnPrintOrderReestr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrintOrderReestr.Location = new System.Drawing.Point(927, 150);
+            this.btnPrintOrderReestr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnPrintOrderReestr.Name = "btnPrintOrderReestr";
+            this.btnPrintOrderReestr.Size = new System.Drawing.Size(150, 30);
+            this.btnPrintOrderReestr.TabIndex = 1;
+            this.btnPrintOrderReestr.Text = "Печать";
+            this.btnPrintOrderReestr.UseVisualStyleBackColor = true;
+            this.btnPrintOrderReestr.Click += new System.EventHandler(this.btnPrintOrderReestr_Click);
             // 
             // btnRemoveOrderRecord
             // 
@@ -666,6 +685,7 @@ namespace NewsEditor
             this.Date,
             this.Label});
             this.gridOrdersReestr.Location = new System.Drawing.Point(3, 3);
+            this.gridOrdersReestr.MultiSelect = false;
             this.gridOrdersReestr.Name = "gridOrdersReestr";
             this.gridOrdersReestr.ReadOnly = true;
             this.gridOrdersReestr.RowHeadersVisible = false;
@@ -676,21 +696,23 @@ namespace NewsEditor
             // 
             // Id
             // 
+            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Id.DataPropertyName = "Id";
             this.Id.FillWeight = 75F;
             this.Id.HeaderText = "Номер";
             this.Id.Name = "Id";
             this.Id.ReadOnly = true;
-            this.Id.Width = 50;
+            this.Id.Width = 70;
             // 
             // Date
             // 
+            this.Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Date.DataPropertyName = "Date";
             this.Date.FillWeight = 75F;
             this.Date.HeaderText = "Дата";
             this.Date.Name = "Date";
             this.Date.ReadOnly = true;
-            this.Date.Width = 75;
+            this.Date.Width = 57;
             // 
             // Label
             // 
@@ -700,6 +722,10 @@ namespace NewsEditor
             this.Label.Name = "Label";
             this.Label.ReadOnly = true;
             this.Label.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // ordersReestrPrintDocument
+            // 
+            this.ordersReestrPrintDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.ordersReestrPrintDocument_PrintPage);
             // 
             // MainForm
             // 
@@ -775,14 +801,16 @@ namespace NewsEditor
         private System.Windows.Forms.DataGridView gridOrdersReestr;
         private System.Windows.Forms.Button btnRemoveOrderRecord;
         private System.Windows.Forms.Button btnEditOrderRecord;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Label;
         private System.Windows.Forms.Label lblFilterEnd;
         private System.Windows.Forms.Label lblFilterStart;
         private System.Windows.Forms.DateTimePicker dtpFilterStart;
         private System.Windows.Forms.DateTimePicker dtpFilterEnd;
         private System.Windows.Forms.Button btnFilterReset;
+        private System.Windows.Forms.Button btnPrintOrderReestr;
+        private System.Drawing.Printing.PrintDocument ordersReestrPrintDocument;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Label;
     }
 }
 

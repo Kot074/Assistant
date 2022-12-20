@@ -80,6 +80,7 @@
             this.txtTitle.Location = new System.Drawing.Point(12, 56);
             this.txtTitle.Multiline = true;
             this.txtTitle.Name = "txtTitle";
+            this.txtTitle.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtTitle.Size = new System.Drawing.Size(333, 124);
             this.txtTitle.TabIndex = 3;
             // 
@@ -144,7 +145,7 @@
             this.MinimizeBox = false;
             this.Name = "OrderRecordForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "OrderRecordForm";
+            this.Text = "Редактор записи о приказе";
             this.ResumeLayout(false);
             this.PerformLayout();
 

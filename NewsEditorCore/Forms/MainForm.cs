@@ -7,6 +7,8 @@ using NewsEditorCore;
 using NewsEditorCore.Forms;
 using NewsEditorCore.Types;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -21,6 +23,9 @@ namespace NewsEditor
         private readonly IWarehouse _warehouse;
         private string _currentPath;
         private readonly SplashScreenForm _splashScreen;
+
+        private List<Order> OrdersList { get; set; } = new List<Order>();
+        private int PrintLinesCounter { get; set; }
 
         public MainForm(IWarehouse warehouse, IStorage<JosContent> content, IStorage<JosContentFrontpage> contentFrontpage, IStorage<Order> orders, SplashScreenForm splashScreen)
         {
@@ -712,7 +717,8 @@ namespace NewsEditor
                     var orderRecord = orderRecordForm.Order;
                     _orders.Save(orderRecord);
 
-                    var orders = _orders.GetAll()
+                    OrdersList = _orders.GetAll().ToList();
+                    var orders = OrdersList
                         .OrderByDescending(_ => _.Date)
                         .ThenByDescending(_ => _.Id)
                         .ToArray();
@@ -741,7 +747,8 @@ namespace NewsEditor
             {
                 _orders.Remove(selectedOrderRecord);
 
-                var orders = _orders.GetAll()
+                OrdersList = _orders.GetAll().ToList();
+                var orders = OrdersList
                     .OrderByDescending(_ => _.Date)
                     .ThenByDescending(_ => _.Id)
                     .ToArray();
@@ -768,7 +775,8 @@ namespace NewsEditor
                 var orderRecord = orderRecordForm.Order;
                 _orders.Save(orderRecord);
 
-                var orders = _orders.GetAll()
+                OrdersList = _orders.GetAll().ToList();
+                var orders = OrdersList
                     .OrderByDescending(_ => _.Date)
                     .ThenByDescending(_ => _.Id)
                     .ToArray();
@@ -781,8 +789,8 @@ namespace NewsEditor
         {
             var startDate = dtpFilterStart.Value;
             var endDate = dtpFilterEnd.Value;
-            var orders = _orders.GetAll()
-                .Where(_ => _.Date.Date >= startDate.Date && _.Date.Date <= endDate.Date)
+            OrdersList = _orders.GetAll().Where(_ => _.Date.Date >= startDate.Date && _.Date.Date <= endDate.Date).ToList();
+            var orders = OrdersList
                 .OrderByDescending(_ => _.Date)
                 .ThenByDescending(_ => _.Id)
                 .ToArray();
@@ -792,13 +800,131 @@ namespace NewsEditor
 
         private void btnFilterReset_Click(object sender, EventArgs e)
         {
-            var orders = _orders.GetAll().OrderBy(_ => _.Date);
+            var orders = _orders.GetAll().Select(_ => _.Date).OrderBy(_ => _.Date);
 
-            var startDate = orders.First().Date;
-            var endDate = orders.Last().Date;
+            var startDate = orders.First();
+            var endDate = orders.Last();
 
             dtpFilterStart.Value = startDate;
             dtpFilterEnd.Value = endDate;
+        }
+
+        private void btnPrintOrderReestr_Click(object sender, EventArgs e)
+        {
+            var printDialog = new PrintDialog();
+            printDialog.Document = ordersReestrPrintDocument;
+
+            PrintLinesCounter = 0;
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Порядок в котором заполнен массив отступов соответствует порядку в таблицах стилей CSS.
+                ordersReestrPrintDocument.DefaultPageSettings.Margins =
+                    new(
+                        left: ConfigurationManager.Instance.PrintConfiguration.Margin[3],
+                        right: ConfigurationManager.Instance.PrintConfiguration.Margin[1],
+                        top: ConfigurationManager.Instance.PrintConfiguration.Margin[0],
+                        bottom: ConfigurationManager.Instance.PrintConfiguration.Margin[2]);
+                ordersReestrPrintDocument.DefaultPageSettings.Landscape = ConfigurationManager.Instance.PrintConfiguration.Landscape;
+                ordersReestrPrintDocument.Print();
+            }
+        }
+
+        private void ordersReestrPrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            var width = e.PageBounds.Width;
+
+            var yIndent = e.MarginBounds.Top;
+
+            var font = new Font("Times New Roman", ConfigurationManager.Instance.PrintConfiguration.FontSize);
+
+            if (PrintLinesCounter == 0)
+            {
+                // Добавление заголовка
+                var title = "НОУ \"Вектор Науки\"";
+                var titleFont = new Font("Times New Roman", 16);
+                var titleSize = TextRenderer.MeasureText(title, titleFont);
+
+                e.Graphics.DrawString(title, titleFont, Brushes.Black, width / 2 - titleSize.Width / 2, yIndent);
+                yIndent += (int)(titleSize.Height * 1.5);
+
+                // Добавление подзаголовка
+                var subtitle = "Реестр зарегистрированных приказов";
+                var subtitleSize = TextRenderer.MeasureText(subtitle, font);
+
+                e.Graphics.DrawString(subtitle, font, Brushes.Black, width / 2 - subtitleSize.Width / 2, yIndent);
+                yIndent += 25;
+
+                // Добавление периода
+                var period = $"за период с {dtpFilterStart.Value:dd/MM/yyyy}г. по {dtpFilterEnd.Value:dd/MM/yyyy}г.";
+                var periodSize = TextRenderer.MeasureText(period, font);
+
+                e.Graphics.DrawString(period, font, Brushes.Black, width / 2 - periodSize.Width / 2, yIndent);
+                yIndent += 25;
+            }
+
+            var xIndent = e.MarginBounds.Left;
+            var ordersForPrint = OrdersList.OrderBy(_ => _.Date).ThenBy(_ => _.Id).ToArray();
+            // Добавление записей в таблицу
+            for (; PrintLinesCounter < ordersForPrint.Count(); PrintLinesCounter++)
+            {
+                var rowIndent = xIndent;
+
+                // Данные ячейки с номером приказа
+                var id = $"{ordersForPrint[PrintLinesCounter].Id}-ОД";
+                var idIndent = 88;
+
+                // Данные ячейки с датой приказа
+                var date = ordersForPrint[PrintLinesCounter].Date.ToString("dd/MM/yyyy");
+                var dateIndent = 100;
+
+                // Данные ячейки с заголовком приказа
+                var label = ordersForPrint[PrintLinesCounter].Label;
+                var labelIndent = e.MarginBounds.Width - idIndent - dateIndent;
+
+                // Вычисляем высоту строки
+                var heightCoefficient = 0;
+                var baseLineHeight = font.Height;
+                var labelLines = label.Split('\n');
+                foreach (var line in labelLines)
+                {
+                    var lineSize = TextRenderer.MeasureText(line, font);
+                    var lineQuotient = (double)lineSize.Width / labelIndent;
+                    if (Math.Round(lineQuotient) > lineQuotient)
+                    {
+                        heightCoefficient += 1;
+                    }
+                    heightCoefficient += (int)Math.Ceiling(lineQuotient);
+                }
+
+                heightCoefficient += heightCoefficient / 5;
+                var lineHeight = baseLineHeight * heightCoefficient;
+
+                // Переход на следующую страницу, если нужно
+                if (yIndent + lineHeight >= e.MarginBounds.Bottom)
+                {
+                    e.HasMorePages = true;
+                    return;
+                }
+
+                // Отрисовка данных
+                var idRectangle = new Rectangle(rowIndent, yIndent, idIndent, lineHeight);
+                e.Graphics.DrawRectangle(Pens.Black, idRectangle);
+                e.Graphics.DrawString(id, font, Brushes.Black, idRectangle);
+                rowIndent += idIndent;
+
+                var dateRectangle = new Rectangle(rowIndent, yIndent, dateIndent, lineHeight);
+                e.Graphics.DrawRectangle(Pens.Black, dateRectangle);
+                e.Graphics.DrawString(date, font, Brushes.Black, dateRectangle);
+                rowIndent += dateIndent;
+
+                var labelRectangle = new Rectangle(rowIndent, yIndent, labelIndent, lineHeight);
+                e.Graphics.DrawRectangle(Pens.Black, labelRectangle);
+                e.Graphics.DrawString(label, font, Brushes.Black, labelRectangle);
+
+                yIndent += lineHeight;
+            }
+
+            e.HasMorePages = false;
         }
     }
 }
