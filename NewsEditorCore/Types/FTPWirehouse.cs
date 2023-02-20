@@ -125,6 +125,10 @@ namespace NewsEditorCore
 
             if (_ftpClient.IsConnected)
             {
+                if (!_ftpClient.DirectoryExists(targetPath))
+                {
+                    CreateDirectory(targetPath);
+                }
                 _ftpClient.UploadFile(sourcePath, filePath);
             }
 
