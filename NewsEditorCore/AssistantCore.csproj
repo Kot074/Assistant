@@ -9,6 +9,7 @@
     <Authors>Шарыгин К.В.</Authors>
     <PackageIcon>bot.png</PackageIcon>
     <PackageIconUrl />
+    <Version>1.3.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
