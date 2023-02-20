@@ -1,28 +1,33 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using AssistantCore.Forms;
-using Atom.VectorSiteLibrary.Data;
-using Atom.VectorSiteLibrary.Storage;
+﻿using AssistantCore.Forms;
 using Atom.VectorSiteLibrary.Enums;
 using Atom.VectorSiteLibrary.Models;
+using Atom.VectorSiteLibrary.Storage;
 using NewsEditor.Forms;
 using NewsEditorCore;
 using NewsEditorCore.Forms;
 using NewsEditorCore.Types;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace NewsEditor
 {
     public partial class MainForm : Form
     {
         private readonly IStorage<JosContent> _content;
+        private readonly IStorage<Order> _orders;
         private readonly IStorage<JosContentFrontpage> _contentFrontpage;
         private readonly IWarehouse _warehouse;
         private string _currentPath;
         private readonly SplashScreenForm _splashScreen;
 
-        public MainForm(IWarehouse warehouse, IStorage<JosContent> content, IStorage<JosContentFrontpage> contentFrontpage, SplashScreenForm splashScreen)
+        private List<Order> OrdersList { get; set; } = new List<Order>();
+        private int PrintLinesCounter { get; set; }
+
+        public MainForm(IWarehouse warehouse, IStorage<JosContent> content, IStorage<JosContentFrontpage> contentFrontpage, IStorage<Order> orders, SplashScreenForm splashScreen)
         {
             var startInitialization = DateTime.UtcNow;
 
@@ -31,6 +36,7 @@ namespace NewsEditor
             _warehouse = warehouse;
             _currentPath = warehouse.GetPath();
             _content = content;
+            _orders = orders;
             _contentFrontpage = contentFrontpage;
 
             InitializeComponent();
@@ -44,6 +50,10 @@ namespace NewsEditor
                     column.Visible = false;
                 }
             }
+
+            // Делаем в реестре приказов поле с текстом многострочным и автоматически расширяемым по высоте.
+            gridOrdersReestr.Columns["Label"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            gridOrdersReestr.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
             var endInitialization = DateTime.UtcNow;
 #if (DEBUG)
@@ -111,7 +121,7 @@ namespace NewsEditor
             try
             {
                 var news = _content.GetAll().Where(c =>
-                        c.Catid == (uint) CategoriesEnum.NEWS && c.Sectionid == (uint) SectionsEnum.NEWS)
+                        c.Catid == (uint)CategoriesEnum.NEWS && c.Sectionid == (uint)SectionsEnum.NEWS)
                     .OrderByDescending(n => n.PublishUp);
                 newsDataGrid.DataSource = news.ToArray();
                 newsDataGrid.Refresh();
@@ -411,7 +421,7 @@ namespace NewsEditor
 
         private void ListOfConferenceProgramsThemeSelectedIndexChanged(object sender, EventArgs e)
         {
-            var selected = (JosContent) listOfConferenceProgramsTheme.SelectedItem;
+            var selected = (JosContent)listOfConferenceProgramsTheme.SelectedItem;
 
             if (selected is not null)
             {
@@ -622,6 +632,20 @@ namespace NewsEditor
                     listOfCollections.DisplayMember = "Text";
                     listOfCollectionsTheme.DataSource = collectionsTheme.ToArray();
                     break;
+                case "tabOrdersReestr":
+                    if (_orders.GetAll().Any())
+                    {
+                        var ordersDates = _orders.GetAll().OrderBy(_ => _.Date).Select(_ => _.Date);
+
+                        dtpFilterStart.Value = ordersDates.First();
+                        dtpFilterEnd.Value = ordersDates.Last();
+                    }
+                    else
+                    {
+                        dtpFilterStart.Value = DateTime.Now;
+                        dtpFilterEnd.Value = DateTime.Now;
+                    }
+                    break;
                 case "tabNews":
                     break;
                 default:
@@ -672,6 +696,280 @@ namespace NewsEditor
                     }
                     break;
             }
+        }
+
+        private void btnCreateOrderRecord_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var baseOrder = new Order() { Date = DateTime.Now };
+                var lastOrder = _orders.GetAll().Where(_ => _.Date.Year == DateTime.Now.Year)?.OrderBy(_ => _.Id).LastOrDefault();
+
+                if (lastOrder is null || lastOrder.Date.Year < DateTime.Now.Year)
+                {
+                    baseOrder.Id = 1;
+                }
+                else
+                {
+                    baseOrder.Id = lastOrder.Id + 1;
+                }
+
+                var orderRecordForm = new OrderRecordForm(baseOrder);
+
+                if (orderRecordForm.ShowDialog() == DialogResult.OK)
+                {
+                    var orderRecord = orderRecordForm.Order;
+                    _orders.Save(orderRecord);
+
+                    OrdersList = _orders.GetAll().ToList();
+                    var orders = OrdersList
+                        .OrderByDescending(_ => _.Date)
+                        .ThenByDescending(_ => _.Id)
+                        .ToArray();
+                    gridOrdersReestr.DataSource = orders;
+                    gridOrdersReestr.Refresh();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnRemoveOrderRecord_Click(object sender, EventArgs e)
+        {
+            if (gridOrdersReestr.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            var selected = gridOrdersReestr.SelectedRows[0];
+
+            var selectedOrderRecord = new Order
+            {
+                Id = long.Parse(selected.Cells["Id"].Value.ToString()),
+                Date = DateTime.Parse(selected.Cells["Date"].Value.ToString()),
+                Label = selected.Cells["Label"].Value.ToString()
+            };
+
+            if (MessageBox.Show($"Вы уверены что хотите удалить приказ: {selectedOrderRecord.Label} ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                _orders.Remove(selectedOrderRecord);
+
+                OrdersList = _orders.GetAll().ToList();
+                var orders = OrdersList
+                    .OrderByDescending(_ => _.Date)
+                    .ThenByDescending(_ => _.Id)
+                    .ToArray();
+                gridOrdersReestr.DataSource = orders;
+                gridOrdersReestr.Refresh();
+            }
+        }
+
+        private void btnEditOrderRecord_Click(object sender, EventArgs e)
+        {
+            if (gridOrdersReestr.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            var selected = gridOrdersReestr.SelectedRows[0];
+
+            var selectedOrderRecord = new Order
+            {
+                Id = long.Parse(selected.Cells["Id"].Value.ToString()),
+                Date = DateTime.Parse(selected.Cells["Date"].Value.ToString()),
+                Label = selected.Cells["Label"].Value.ToString()
+            };
+
+            var orderRecordForm = new OrderRecordForm(selectedOrderRecord, true);
+
+            if (orderRecordForm.ShowDialog() == DialogResult.OK)
+            {
+                var orderRecord = orderRecordForm.Order;
+                _orders.Save(orderRecord);
+
+                OrdersList = _orders.GetAll().ToList();
+                var orders = OrdersList
+                    .OrderByDescending(_ => _.Date)
+                    .ThenByDescending(_ => _.Id)
+                    .ToArray();
+                gridOrdersReestr.DataSource = orders;
+                gridOrdersReestr.Refresh();
+            }
+        }
+
+        private void dtpFilter_ValueChanged(object sender, EventArgs e)
+        {
+            var startDate = dtpFilterStart.Value;
+            var endDate = dtpFilterEnd.Value;
+            OrdersList = _orders.GetAll().Where(_ => _.Date.Date >= startDate.Date && _.Date.Date <= endDate.Date).ToList();
+            var orders = OrdersList
+                .OrderByDescending(_ => _.Date)
+                .ThenByDescending(_ => _.Id)
+                .ToArray();
+            gridOrdersReestr.DataSource = orders;
+            gridOrdersReestr.Refresh();
+        }
+
+        private void btnFilterReset_Click(object sender, EventArgs e)
+        {
+            if (_orders.GetAll().Any())
+            {
+                var ordersDates = _orders.GetAll().OrderBy(_ => _.Date).Select(_ => _.Date);
+
+                dtpFilterStart.Value = ordersDates.First();
+                dtpFilterEnd.Value = ordersDates.Last();
+            }
+            else
+            {
+                dtpFilterStart.Value = DateTime.Now;
+                dtpFilterEnd.Value = DateTime.Now;
+            }
+        }
+
+        private void btnPrintOrderReestr_Click(object sender, EventArgs e)
+        {
+            var printDialog = new PrintDialog();
+            printDialog.Document = ordersReestrPrintDocument;
+
+            PrintLinesCounter = 0;
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Порядок в котором заполнен массив отступов соответствует порядку в таблицах стилей CSS.
+                ordersReestrPrintDocument.DefaultPageSettings.Margins =
+                    new(
+                        left: ConfigurationManager.Instance.PrintConfiguration.Margin[3],
+                        right: ConfigurationManager.Instance.PrintConfiguration.Margin[1],
+                        top: ConfigurationManager.Instance.PrintConfiguration.Margin[0],
+                        bottom: ConfigurationManager.Instance.PrintConfiguration.Margin[2]);
+                ordersReestrPrintDocument.DefaultPageSettings.Landscape = ConfigurationManager.Instance.PrintConfiguration.Landscape;
+                ordersReestrPrintDocument.Print();
+            }
+        }
+
+        private void ordersReestrPrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            var width = e.PageBounds.Width;
+
+            var yIndent = e.MarginBounds.Top;
+
+            var font = new Font("Times New Roman", ConfigurationManager.Instance.PrintConfiguration.FontSize);
+
+            if (PrintLinesCounter == 0)
+            {
+                // Добавление заголовка
+                var title = "НОУ \"Вектор науки\"";
+                var titleFont = new Font("Times New Roman", 16, FontStyle.Bold);
+                var titleSize = TextRenderer.MeasureText(title, titleFont);
+
+                e.Graphics.DrawString(title, titleFont, Brushes.Black, width / 2 - titleSize.Width / 2, yIndent);
+                yIndent += (int)(titleSize.Height * 1.5);
+
+                // Добавление подзаголовка
+                var subtitle = "Реестр зарегистрированных приказов";
+                var subtitleSize = TextRenderer.MeasureText(subtitle, font);
+
+                e.Graphics.DrawString(subtitle, font, Brushes.Black, width / 2 - subtitleSize.Width / 2, yIndent);
+                yIndent += 25;
+
+                // Добавление периода
+                var period = $"за период с {dtpFilterStart.Value:dd/MM/yyyy}г. по {dtpFilterEnd.Value:dd/MM/yyyy}г.";
+                var periodSize = TextRenderer.MeasureText(period, font);
+
+                e.Graphics.DrawString(period, font, Brushes.Black, width / 2 - periodSize.Width / 2, yIndent);
+                yIndent += 25;
+            }
+
+
+            var xIndent = e.MarginBounds.Left;
+
+            var headerIndent = xIndent;
+            var idWidth = 90;
+            var dateWidth = 100;
+            var labelWidth = e.MarginBounds.Width - idWidth - dateWidth;
+            var baseLineHeight = font.Height;
+
+            // Заполнение заголовка таблицы
+            var headerFont = new Font("Times New Roman",
+                ConfigurationManager.Instance.PrintConfiguration.FontSize,
+                FontStyle.Bold);
+
+            var idHeaderRectangle = new Rectangle(headerIndent, yIndent, idWidth, headerFont.Height + 5);
+            e.Graphics.DrawRectangle(Pens.Black, idHeaderRectangle);
+            e.Graphics.DrawString("Номер", headerFont, Brushes.Black, idWidth / 2 + headerIndent - 25, yIndent + 2);
+            headerIndent += idWidth;
+
+            var dateHeaderRectangle = new Rectangle(headerIndent, yIndent, dateWidth, headerFont.Height + 5);
+            e.Graphics.DrawRectangle(Pens.Black, dateHeaderRectangle);
+            e.Graphics.DrawString("Дата", headerFont, Brushes.Black, dateWidth / 2 + headerIndent - 20, yIndent + 2);
+            headerIndent += dateWidth;
+
+            var labelHeaderRectangle = new Rectangle(headerIndent, yIndent, labelWidth, headerFont.Height + 5);
+            e.Graphics.DrawRectangle(Pens.Black, labelHeaderRectangle);
+            e.Graphics.DrawString("Название приказа", headerFont, Brushes.Black, labelWidth / 2 + headerIndent - 40, yIndent + 2);
+
+            yIndent += headerFont.Height + 5;
+
+
+            var ordersForPrint = OrdersList.OrderBy(_ => _.Date).ThenBy(_ => _.Id).ToArray();
+            // Добавление записей в таблицу
+            for (; PrintLinesCounter < ordersForPrint.Count(); PrintLinesCounter++)
+            {
+                var rowIndent = xIndent;
+
+                // Данные ячейки с номером приказа
+                var id = $"{ordersForPrint[PrintLinesCounter].Id}-ОД";
+
+                // Данные ячейки с датой приказа
+                var date = ordersForPrint[PrintLinesCounter].Date.ToString("dd/MM/yyyy");
+
+                // Данные ячейки с заголовком приказа
+                var label = ordersForPrint[PrintLinesCounter].Label;
+
+                // Вычисляем высоту строки
+                var heightCoefficient = 0;
+                var labelLines = label.Split('\n');
+                foreach (var line in labelLines)
+                {
+                    var lineSize = TextRenderer.MeasureText(line, font);
+                    var lineQuotient = (double)lineSize.Width / labelWidth;
+                    if (Math.Round(lineQuotient) > lineQuotient)
+                    {
+                        heightCoefficient += 1;
+                    }
+                    heightCoefficient += (int)Math.Ceiling(lineQuotient);
+                }
+
+                heightCoefficient += heightCoefficient / 5;
+                var lineHeight = baseLineHeight * heightCoefficient;
+
+                // Переход на следующую страницу, если нужно
+                if (yIndent + lineHeight >= e.MarginBounds.Bottom)
+                {
+                    e.HasMorePages = true;
+                    return;
+                }
+
+                // Отрисовка данных
+                var idRectangle = new Rectangle(rowIndent, yIndent, idWidth, lineHeight);
+                e.Graphics.DrawRectangle(Pens.Black, idRectangle);
+                e.Graphics.DrawString(id, font, Brushes.Black, idRectangle);
+                rowIndent += idWidth;
+
+                var dateRectangle = new Rectangle(rowIndent, yIndent, dateWidth, lineHeight);
+                e.Graphics.DrawRectangle(Pens.Black, dateRectangle);
+                e.Graphics.DrawString(date, font, Brushes.Black, dateRectangle);
+                rowIndent += dateWidth;
+
+                var labelRectangle = new Rectangle(rowIndent, yIndent, labelWidth, lineHeight);
+                e.Graphics.DrawRectangle(Pens.Black, labelRectangle);
+                e.Graphics.DrawString(label, font, Brushes.Black, labelRectangle);
+
+                yIndent += lineHeight;
+            }
+
+            e.HasMorePages = false;
         }
     }
 }

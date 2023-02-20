@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace NewsEditorCore
@@ -20,6 +16,7 @@ namespace NewsEditorCore
 
         public FTPConfiguration Ftp { get; }
         public MySqlConfiguration MySql { get; }
+        public PrintConfiguration PrintConfiguration { get; }
 
         private ConfigurationManager()
         {
@@ -29,6 +26,7 @@ namespace NewsEditorCore
 
             Ftp = JsonConvert.DeserializeObject<FTPConfiguration>(jsonObj["Ftp"].ToString());
             MySql = JsonConvert.DeserializeObject<MySqlConfiguration>(jsonObj["MySql"].ToString());
+            PrintConfiguration = JsonConvert.DeserializeObject<PrintConfiguration>(jsonObj["PrintConfiguration"].ToString());
         }
     }
 
@@ -55,6 +53,19 @@ namespace NewsEditorCore
         public MySqlConfiguration(string connectionString)
         {
             ConnectionString = connectionString;
+        }
+    }
+
+    public class PrintConfiguration
+    {
+        public bool Landscape { get; }
+        public int[] Margin { get; }
+        public int FontSize { get; }
+        public PrintConfiguration(bool landscape, int[] margin, int fontSize)
+        {
+            Landscape = landscape;
+            Margin = margin;
+            FontSize = fontSize;
         }
     }
 }

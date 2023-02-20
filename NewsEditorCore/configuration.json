@@ -1,12 +1,16 @@
 {
   "Ftp": {
-    "Host": "ftp.soft123.nichost.ru",
-    "Path": "xn--80adjnibthssp.xn--p1ai/docs/images",
-    "Login": "soft123_vn",
-    "Password": "U0U9W-K5IY"
+    "Host": "",
+    "Path": "",
+    "Login": "",
+    "Password": ""
   },
   "MySql": {
-    //"ConnectionString": "datasource=192.168.1.116;initial catalog=soft123_vn;user id=kot074;password=12345;Allow Zero DateTime=true;Convert Zero Datetime=true;"
-    "ConnectionString": "datasource=mysql.hosting.nic.ru;initial catalog=soft123_vn;user id=soft123_cms6;password=A2V-wCcT;Allow Zero DateTime=true;Convert Zero Datetime=true;"
-  } 
+    "ConnectionString": ""
+  },
+  "PrintConfiguration": {
+    "Landscape": true,
+    "Margin": [20, 20, 20, 80], // Измеряется в пикселях (примерно 4px на 1мм)
+    "FontSize": 12
+  }
 }

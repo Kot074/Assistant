@@ -1,7 +1,7 @@
-﻿using Atom.VectorSiteLibrary.Enums;
+﻿using Atom.VectorSiteLibrary.Data;
+using Atom.VectorSiteLibrary.Enums;
 using Atom.VectorSiteLibrary.Models;
 using System;
-using Atom.VectorSiteLibrary.Data;
 
 namespace Atom.VectorSiteLibrary.Storage
 {
@@ -74,6 +74,21 @@ namespace Atom.VectorSiteLibrary.Storage
             }
 
             return contentFrontpageStorage;
+        }
+
+        public IStorage<Order> GetOrderStorage()
+        {
+            IStorage<Order> orderStorage = null;
+            switch (_storageType)
+            {
+                case StorageTypes.MYSQL:
+                    orderStorage = new MySql.MySqlOrderStorage(_context);
+                    break;
+                default:
+                    throw new ArgumentException("ОШИБКА! Данный хранилище для приказов отсутствует!");
+            }
+
+            return orderStorage;
         }
     }
 }
