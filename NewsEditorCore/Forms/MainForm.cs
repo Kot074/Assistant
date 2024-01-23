@@ -6,6 +6,7 @@ using NewsEditor.Forms;
 using NewsEditorCore;
 using NewsEditorCore.Forms;
 using NewsEditorCore.Types;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -159,17 +160,43 @@ namespace NewsEditor
 
         private void ListBoxSelectedIndexChanged(object sender, EventArgs e)
         {
-            var selected = listBox.SelectedItem;
-            if (selected is not null)
+            var selected = (DirectoryItem)listBox.SelectedItem;
+            if (selected is not null && !selected.IsDirectory)
             {
                 btnCopyAddress.Enabled = true;
                 btnDelete.Enabled = true;
+
+                try
+                {
+                    var qrGenerator = new QRCodeGenerator();
+                    var url = _warehouse.GetUrl(selected.FullPath);
+                    var qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
+                    var qrCode = new QRCode(qrCodeData);
+
+                    var img = qrCode.GetGraphic(5);
+                    qrCodeBox.Image = img;
+                }
+                catch
+                {
+                    var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+                    qrCodeBox.Image = ((Image)(resources.GetObject("qrCodeBox.Image")));
+                }
             }
             else
             {
+                var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+                qrCodeBox.Image = ((Image)(resources.GetObject("qrCodeBox.Image")));
+
                 btnCopyAddress.Enabled = false;
                 btnDelete.Enabled = false;
             }
+        }
+
+        private void qrCodeBox_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetImage(qrCodeBox.Image);
+
+            MessageBox.Show("QR код скопирован.");
         }
 
         private void UploadFile()
@@ -637,7 +664,7 @@ namespace NewsEditor
                     {
                         var ordersDates = _orders.GetAll().OrderBy(_ => _.Date).Select(_ => _.Date);
 
-                        dtpFilterStart.Value = ordersDates.First();
+                        dtpFilterStart.Value = new DateTime(DateTime.Today.Year, 1, 1);
                         dtpFilterEnd.Value = ordersDates.Last();
                     }
                     else

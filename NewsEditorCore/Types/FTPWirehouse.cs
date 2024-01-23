@@ -137,7 +137,8 @@ namespace NewsEditorCore
 
         public string GetUrl(string path)
         {
-            return "http://" + path.Replace("docs/", "");
+            var encodedPath = path.Replace("docs/", "").Replace(" ", "%20");
+            return $"http://{encodedPath}";
         }
 
         public string GetPath()

@@ -29,735 +29,735 @@ namespace NewsEditor
         /// </summary>
         private void InitializeComponent()
         {
-            this.newsDataGrid = new System.Windows.Forms.DataGridView();
-            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PublishUp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.newsPanel = new System.Windows.Forms.Panel();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.tabsControl = new System.Windows.Forms.TabControl();
-            this.tabNews = new System.Windows.Forms.TabPage();
-            this.btnCreate = new System.Windows.Forms.Button();
-            this.tabSaleCollections = new System.Windows.Forms.TabPage();
-            this.splitContainerCollections = new System.Windows.Forms.SplitContainer();
-            this.listOfCollectionsTheme = new System.Windows.Forms.ListBox();
-            this.btnCreateTheme = new System.Windows.Forms.Button();
-            this.btnEditTheme = new System.Windows.Forms.Button();
-            this.btnRemoveTheme = new System.Windows.Forms.Button();
-            this.listOfCollections = new System.Windows.Forms.ListBox();
-            this.btnRemoveCollection = new System.Windows.Forms.Button();
-            this.btnEditCollection = new System.Windows.Forms.Button();
-            this.btnCreateCollection = new System.Windows.Forms.Button();
-            this.tabProgramsOfConferences = new System.Windows.Forms.TabPage();
-            this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.btnRemoveConferenceProgramsTheme = new System.Windows.Forms.Button();
-            this.btnEditConferenceProgramsTheme = new System.Windows.Forms.Button();
-            this.btnCreateConferenceProgramsTheme = new System.Windows.Forms.Button();
-            this.listOfConferenceProgramsTheme = new System.Windows.Forms.ListBox();
-            this.btnDeleteConferenceProgram = new System.Windows.Forms.Button();
-            this.btnEditConferenceProgram = new System.Windows.Forms.Button();
-            this.btnAddConferenceProgram = new System.Windows.Forms.Button();
-            this.listOfConferencePrograms = new System.Windows.Forms.ListBox();
-            this.tabFiles = new System.Windows.Forms.TabPage();
-            this.listBox = new System.Windows.Forms.ListBox();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnLoadFile = new System.Windows.Forms.Button();
-            this.btnCreateDirectory = new System.Windows.Forms.Button();
-            this.btnCopyAddress = new System.Windows.Forms.Button();
-            this.tabOrdersReestr = new System.Windows.Forms.TabPage();
-            this.lblFilterEnd = new System.Windows.Forms.Label();
-            this.lblFilterStart = new System.Windows.Forms.Label();
-            this.dtpFilterStart = new System.Windows.Forms.DateTimePicker();
-            this.dtpFilterEnd = new System.Windows.Forms.DateTimePicker();
-            this.btnFilterReset = new System.Windows.Forms.Button();
-            this.btnPrintOrderReestr = new System.Windows.Forms.Button();
-            this.btnRemoveOrderRecord = new System.Windows.Forms.Button();
-            this.btnEditOrderRecord = new System.Windows.Forms.Button();
-            this.btnCreateOrderRecord = new System.Windows.Forms.Button();
-            this.gridOrdersReestr = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ordersReestrPrintDocument = new System.Drawing.Printing.PrintDocument();
-            ((System.ComponentModel.ISupportInitialize)(this.newsDataGrid)).BeginInit();
-            this.newsPanel.SuspendLayout();
-            this.tabsControl.SuspendLayout();
-            this.tabNews.SuspendLayout();
-            this.tabSaleCollections.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerCollections)).BeginInit();
-            this.splitContainerCollections.Panel1.SuspendLayout();
-            this.splitContainerCollections.Panel2.SuspendLayout();
-            this.splitContainerCollections.SuspendLayout();
-            this.tabProgramsOfConferences.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
-            this.splitContainer.Panel1.SuspendLayout();
-            this.splitContainer.Panel2.SuspendLayout();
-            this.splitContainer.SuspendLayout();
-            this.tabFiles.SuspendLayout();
-            this.tabOrdersReestr.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridOrdersReestr)).BeginInit();
-            this.SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            newsDataGrid = new System.Windows.Forms.DataGridView();
+            Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            PublishUp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            newsPanel = new System.Windows.Forms.Panel();
+            btnEdit = new System.Windows.Forms.Button();
+            btnRemove = new System.Windows.Forms.Button();
+            tabsControl = new System.Windows.Forms.TabControl();
+            tabNews = new System.Windows.Forms.TabPage();
+            btnCreate = new System.Windows.Forms.Button();
+            tabSaleCollections = new System.Windows.Forms.TabPage();
+            splitContainerCollections = new System.Windows.Forms.SplitContainer();
+            listOfCollectionsTheme = new System.Windows.Forms.ListBox();
+            btnCreateTheme = new System.Windows.Forms.Button();
+            btnEditTheme = new System.Windows.Forms.Button();
+            btnRemoveTheme = new System.Windows.Forms.Button();
+            listOfCollections = new System.Windows.Forms.ListBox();
+            btnRemoveCollection = new System.Windows.Forms.Button();
+            btnEditCollection = new System.Windows.Forms.Button();
+            btnCreateCollection = new System.Windows.Forms.Button();
+            tabProgramsOfConferences = new System.Windows.Forms.TabPage();
+            splitContainer = new System.Windows.Forms.SplitContainer();
+            btnRemoveConferenceProgramsTheme = new System.Windows.Forms.Button();
+            btnEditConferenceProgramsTheme = new System.Windows.Forms.Button();
+            btnCreateConferenceProgramsTheme = new System.Windows.Forms.Button();
+            listOfConferenceProgramsTheme = new System.Windows.Forms.ListBox();
+            btnDeleteConferenceProgram = new System.Windows.Forms.Button();
+            btnEditConferenceProgram = new System.Windows.Forms.Button();
+            btnAddConferenceProgram = new System.Windows.Forms.Button();
+            listOfConferencePrograms = new System.Windows.Forms.ListBox();
+            tabFiles = new System.Windows.Forms.TabPage();
+            qrCodeBox = new System.Windows.Forms.PictureBox();
+            listBox = new System.Windows.Forms.ListBox();
+            btnDelete = new System.Windows.Forms.Button();
+            btnLoadFile = new System.Windows.Forms.Button();
+            btnCreateDirectory = new System.Windows.Forms.Button();
+            btnCopyAddress = new System.Windows.Forms.Button();
+            tabOrdersReestr = new System.Windows.Forms.TabPage();
+            lblFilterEnd = new System.Windows.Forms.Label();
+            lblFilterStart = new System.Windows.Forms.Label();
+            dtpFilterStart = new System.Windows.Forms.DateTimePicker();
+            dtpFilterEnd = new System.Windows.Forms.DateTimePicker();
+            btnFilterReset = new System.Windows.Forms.Button();
+            btnPrintOrderReestr = new System.Windows.Forms.Button();
+            btnRemoveOrderRecord = new System.Windows.Forms.Button();
+            btnEditOrderRecord = new System.Windows.Forms.Button();
+            btnCreateOrderRecord = new System.Windows.Forms.Button();
+            gridOrdersReestr = new System.Windows.Forms.DataGridView();
+            Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ordersReestrPrintDocument = new System.Drawing.Printing.PrintDocument();
+            ((System.ComponentModel.ISupportInitialize)newsDataGrid).BeginInit();
+            newsPanel.SuspendLayout();
+            tabsControl.SuspendLayout();
+            tabNews.SuspendLayout();
+            tabSaleCollections.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainerCollections).BeginInit();
+            splitContainerCollections.Panel1.SuspendLayout();
+            splitContainerCollections.Panel2.SuspendLayout();
+            splitContainerCollections.SuspendLayout();
+            tabProgramsOfConferences.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer).BeginInit();
+            splitContainer.Panel1.SuspendLayout();
+            splitContainer.Panel2.SuspendLayout();
+            splitContainer.SuspendLayout();
+            tabFiles.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)qrCodeBox).BeginInit();
+            tabOrdersReestr.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridOrdersReestr).BeginInit();
+            SuspendLayout();
             // 
             // newsDataGrid
             // 
-            this.newsDataGrid.AllowUserToAddRows = false;
-            this.newsDataGrid.AllowUserToDeleteRows = false;
-            this.newsDataGrid.AllowUserToResizeColumns = false;
-            this.newsDataGrid.AllowUserToResizeRows = false;
-            this.newsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.newsDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Title,
-            this.PublishUp});
-            this.newsDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.newsDataGrid.Location = new System.Drawing.Point(0, 0);
-            this.newsDataGrid.MultiSelect = false;
-            this.newsDataGrid.Name = "newsDataGrid";
-            this.newsDataGrid.ReadOnly = true;
-            this.newsDataGrid.RowHeadersVisible = false;
-            this.newsDataGrid.RowTemplate.Height = 25;
-            this.newsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.newsDataGrid.Size = new System.Drawing.Size(914, 578);
-            this.newsDataGrid.TabIndex = 0;
-            this.newsDataGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.NewsDataGridCellFormatting);
-            this.newsDataGrid.DoubleClick += new System.EventHandler(this.BtnEditClick);
-            this.newsDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NewsDataGridKeyDown);
+            newsDataGrid.AllowUserToAddRows = false;
+            newsDataGrid.AllowUserToDeleteRows = false;
+            newsDataGrid.AllowUserToResizeColumns = false;
+            newsDataGrid.AllowUserToResizeRows = false;
+            newsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            newsDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Title, PublishUp });
+            newsDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            newsDataGrid.Location = new System.Drawing.Point(0, 0);
+            newsDataGrid.MultiSelect = false;
+            newsDataGrid.Name = "newsDataGrid";
+            newsDataGrid.ReadOnly = true;
+            newsDataGrid.RowHeadersVisible = false;
+            newsDataGrid.RowTemplate.Height = 25;
+            newsDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            newsDataGrid.Size = new System.Drawing.Size(914, 578);
+            newsDataGrid.TabIndex = 0;
+            newsDataGrid.CellFormatting += NewsDataGridCellFormatting;
+            newsDataGrid.DoubleClick += BtnEditClick;
+            newsDataGrid.KeyDown += NewsDataGridKeyDown;
             // 
             // Title
             // 
-            this.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Title.DataPropertyName = "Title";
-            this.Title.HeaderText = "Заголовок";
-            this.Title.Name = "Title";
-            this.Title.ReadOnly = true;
+            Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            Title.DataPropertyName = "Title";
+            Title.HeaderText = "Заголовок";
+            Title.Name = "Title";
+            Title.ReadOnly = true;
             // 
             // PublishUp
             // 
-            this.PublishUp.DataPropertyName = "PublishUp";
-            this.PublishUp.HeaderText = "Дата публикации";
-            this.PublishUp.Name = "PublishUp";
-            this.PublishUp.ReadOnly = true;
-            this.PublishUp.Width = 150;
+            PublishUp.DataPropertyName = "PublishUp";
+            PublishUp.HeaderText = "Дата публикации";
+            PublishUp.Name = "PublishUp";
+            PublishUp.ReadOnly = true;
+            PublishUp.Width = 150;
             // 
             // newsPanel
             // 
-            this.newsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.newsPanel.Controls.Add(this.newsDataGrid);
-            this.newsPanel.Location = new System.Drawing.Point(6, 6);
-            this.newsPanel.Name = "newsPanel";
-            this.newsPanel.Size = new System.Drawing.Size(914, 578);
-            this.newsPanel.TabIndex = 1;
+            newsPanel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            newsPanel.Controls.Add(newsDataGrid);
+            newsPanel.Location = new System.Drawing.Point(6, 6);
+            newsPanel.Name = "newsPanel";
+            newsPanel.Size = new System.Drawing.Size(914, 578);
+            newsPanel.TabIndex = 1;
             // 
             // btnEdit
             // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Location = new System.Drawing.Point(927, 42);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(150, 30);
-            this.btnEdit.TabIndex = 2;
-            this.btnEdit.Text = "Редактировать";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.BtnEditClick);
+            btnEdit.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnEdit.Location = new System.Drawing.Point(927, 42);
+            btnEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new System.Drawing.Size(150, 30);
+            btnEdit.TabIndex = 2;
+            btnEdit.Text = "Редактировать";
+            btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += BtnEditClick;
             // 
             // btnRemove
             // 
-            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemove.Location = new System.Drawing.Point(927, 78);
-            this.btnRemove.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(150, 30);
-            this.btnRemove.TabIndex = 2;
-            this.btnRemove.Text = "Удалить";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.BtnRemoveClick);
+            btnRemove.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnRemove.Location = new System.Drawing.Point(927, 78);
+            btnRemove.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new System.Drawing.Size(150, 30);
+            btnRemove.TabIndex = 2;
+            btnRemove.Text = "Удалить";
+            btnRemove.UseVisualStyleBackColor = true;
+            btnRemove.Click += BtnRemoveClick;
             // 
             // tabsControl
             // 
-            this.tabsControl.Controls.Add(this.tabNews);
-            this.tabsControl.Controls.Add(this.tabSaleCollections);
-            this.tabsControl.Controls.Add(this.tabProgramsOfConferences);
-            this.tabsControl.Controls.Add(this.tabFiles);
-            this.tabsControl.Controls.Add(this.tabOrdersReestr);
-            this.tabsControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabsControl.Location = new System.Drawing.Point(0, 0);
-            this.tabsControl.Name = "tabsControl";
-            this.tabsControl.SelectedIndex = 0;
-            this.tabsControl.Size = new System.Drawing.Size(1094, 620);
-            this.tabsControl.TabIndex = 3;
-            this.tabsControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.TabsControlSelecting);
+            tabsControl.Controls.Add(tabNews);
+            tabsControl.Controls.Add(tabSaleCollections);
+            tabsControl.Controls.Add(tabProgramsOfConferences);
+            tabsControl.Controls.Add(tabFiles);
+            tabsControl.Controls.Add(tabOrdersReestr);
+            tabsControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabsControl.Location = new System.Drawing.Point(0, 0);
+            tabsControl.Name = "tabsControl";
+            tabsControl.SelectedIndex = 0;
+            tabsControl.Size = new System.Drawing.Size(1094, 620);
+            tabsControl.TabIndex = 3;
+            tabsControl.Selecting += TabsControlSelecting;
             // 
             // tabNews
             // 
-            this.tabNews.Controls.Add(this.newsPanel);
-            this.tabNews.Controls.Add(this.btnRemove);
-            this.tabNews.Controls.Add(this.btnCreate);
-            this.tabNews.Controls.Add(this.btnEdit);
-            this.tabNews.Location = new System.Drawing.Point(4, 24);
-            this.tabNews.Name = "tabNews";
-            this.tabNews.Padding = new System.Windows.Forms.Padding(3);
-            this.tabNews.Size = new System.Drawing.Size(1086, 592);
-            this.tabNews.TabIndex = 0;
-            this.tabNews.Text = "Новости";
-            this.tabNews.UseVisualStyleBackColor = true;
+            tabNews.Controls.Add(newsPanel);
+            tabNews.Controls.Add(btnRemove);
+            tabNews.Controls.Add(btnCreate);
+            tabNews.Controls.Add(btnEdit);
+            tabNews.Location = new System.Drawing.Point(4, 24);
+            tabNews.Name = "tabNews";
+            tabNews.Padding = new System.Windows.Forms.Padding(3);
+            tabNews.Size = new System.Drawing.Size(1086, 592);
+            tabNews.TabIndex = 0;
+            tabNews.Text = "Новости";
+            tabNews.UseVisualStyleBackColor = true;
             // 
             // btnCreate
             // 
-            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreate.Location = new System.Drawing.Point(927, 6);
-            this.btnCreate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(150, 30);
-            this.btnCreate.TabIndex = 0;
-            this.btnCreate.Text = "Создать";
-            this.btnCreate.UseVisualStyleBackColor = true;
-            this.btnCreate.Click += new System.EventHandler(this.BtnCreateClick);
+            btnCreate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnCreate.Location = new System.Drawing.Point(927, 6);
+            btnCreate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCreate.Name = "btnCreate";
+            btnCreate.Size = new System.Drawing.Size(150, 30);
+            btnCreate.TabIndex = 0;
+            btnCreate.Text = "Создать";
+            btnCreate.UseVisualStyleBackColor = true;
+            btnCreate.Click += BtnCreateClick;
             // 
             // tabSaleCollections
             // 
-            this.tabSaleCollections.Controls.Add(this.splitContainerCollections);
-            this.tabSaleCollections.Location = new System.Drawing.Point(4, 24);
-            this.tabSaleCollections.Name = "tabSaleCollections";
-            this.tabSaleCollections.Size = new System.Drawing.Size(1086, 592);
-            this.tabSaleCollections.TabIndex = 2;
-            this.tabSaleCollections.Text = "Продажа сборников";
-            this.tabSaleCollections.UseVisualStyleBackColor = true;
+            tabSaleCollections.Controls.Add(splitContainerCollections);
+            tabSaleCollections.Location = new System.Drawing.Point(4, 24);
+            tabSaleCollections.Name = "tabSaleCollections";
+            tabSaleCollections.Size = new System.Drawing.Size(1086, 592);
+            tabSaleCollections.TabIndex = 2;
+            tabSaleCollections.Text = "Продажа сборников";
+            tabSaleCollections.UseVisualStyleBackColor = true;
             // 
             // splitContainerCollections
             // 
-            this.splitContainerCollections.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerCollections.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerCollections.Name = "splitContainerCollections";
+            splitContainerCollections.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainerCollections.Location = new System.Drawing.Point(0, 0);
+            splitContainerCollections.Name = "splitContainerCollections";
             // 
             // splitContainerCollections.Panel1
             // 
-            this.splitContainerCollections.Panel1.Controls.Add(this.listOfCollectionsTheme);
-            this.splitContainerCollections.Panel1.Controls.Add(this.btnCreateTheme);
-            this.splitContainerCollections.Panel1.Controls.Add(this.btnEditTheme);
-            this.splitContainerCollections.Panel1.Controls.Add(this.btnRemoveTheme);
+            splitContainerCollections.Panel1.Controls.Add(listOfCollectionsTheme);
+            splitContainerCollections.Panel1.Controls.Add(btnCreateTheme);
+            splitContainerCollections.Panel1.Controls.Add(btnEditTheme);
+            splitContainerCollections.Panel1.Controls.Add(btnRemoveTheme);
             // 
             // splitContainerCollections.Panel2
             // 
-            this.splitContainerCollections.Panel2.Controls.Add(this.listOfCollections);
-            this.splitContainerCollections.Panel2.Controls.Add(this.btnRemoveCollection);
-            this.splitContainerCollections.Panel2.Controls.Add(this.btnEditCollection);
-            this.splitContainerCollections.Panel2.Controls.Add(this.btnCreateCollection);
-            this.splitContainerCollections.Size = new System.Drawing.Size(1086, 592);
-            this.splitContainerCollections.SplitterDistance = 483;
-            this.splitContainerCollections.TabIndex = 7;
+            splitContainerCollections.Panel2.Controls.Add(listOfCollections);
+            splitContainerCollections.Panel2.Controls.Add(btnRemoveCollection);
+            splitContainerCollections.Panel2.Controls.Add(btnEditCollection);
+            splitContainerCollections.Panel2.Controls.Add(btnCreateCollection);
+            splitContainerCollections.Size = new System.Drawing.Size(1086, 592);
+            splitContainerCollections.SplitterDistance = 483;
+            splitContainerCollections.TabIndex = 7;
             // 
             // listOfCollectionsTheme
             // 
-            this.listOfCollectionsTheme.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listOfCollectionsTheme.FormattingEnabled = true;
-            this.listOfCollectionsTheme.ItemHeight = 15;
-            this.listOfCollectionsTheme.Location = new System.Drawing.Point(0, 0);
-            this.listOfCollectionsTheme.Name = "listOfCollectionsTheme";
-            this.listOfCollectionsTheme.Size = new System.Drawing.Size(483, 544);
-            this.listOfCollectionsTheme.TabIndex = 0;
-            this.listOfCollectionsTheme.SelectedIndexChanged += new System.EventHandler(this.ListOfCollectionsThemeSelectedIndexChanged);
+            listOfCollectionsTheme.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listOfCollectionsTheme.FormattingEnabled = true;
+            listOfCollectionsTheme.ItemHeight = 15;
+            listOfCollectionsTheme.Location = new System.Drawing.Point(0, 0);
+            listOfCollectionsTheme.Name = "listOfCollectionsTheme";
+            listOfCollectionsTheme.Size = new System.Drawing.Size(483, 544);
+            listOfCollectionsTheme.TabIndex = 0;
+            listOfCollectionsTheme.SelectedIndexChanged += ListOfCollectionsThemeSelectedIndexChanged;
             // 
             // btnCreateTheme
             // 
-            this.btnCreateTheme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCreateTheme.Location = new System.Drawing.Point(9, 554);
-            this.btnCreateTheme.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnCreateTheme.Name = "btnCreateTheme";
-            this.btnCreateTheme.Size = new System.Drawing.Size(150, 30);
-            this.btnCreateTheme.TabIndex = 2;
-            this.btnCreateTheme.Text = "Новая тема";
-            this.btnCreateTheme.UseVisualStyleBackColor = true;
-            this.btnCreateTheme.Click += new System.EventHandler(this.BtnCreateThemeClick);
+            btnCreateTheme.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            btnCreateTheme.Location = new System.Drawing.Point(9, 554);
+            btnCreateTheme.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCreateTheme.Name = "btnCreateTheme";
+            btnCreateTheme.Size = new System.Drawing.Size(150, 30);
+            btnCreateTheme.TabIndex = 2;
+            btnCreateTheme.Text = "Новая тема";
+            btnCreateTheme.UseVisualStyleBackColor = true;
+            btnCreateTheme.Click += BtnCreateThemeClick;
             // 
             // btnEditTheme
             // 
-            this.btnEditTheme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnEditTheme.Enabled = false;
-            this.btnEditTheme.Location = new System.Drawing.Point(167, 554);
-            this.btnEditTheme.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnEditTheme.Name = "btnEditTheme";
-            this.btnEditTheme.Size = new System.Drawing.Size(150, 30);
-            this.btnEditTheme.TabIndex = 3;
-            this.btnEditTheme.Text = "Переименовать тему";
-            this.btnEditTheme.UseVisualStyleBackColor = true;
-            this.btnEditTheme.Click += new System.EventHandler(this.BtnEditThemeClick);
+            btnEditTheme.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            btnEditTheme.Enabled = false;
+            btnEditTheme.Location = new System.Drawing.Point(167, 554);
+            btnEditTheme.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnEditTheme.Name = "btnEditTheme";
+            btnEditTheme.Size = new System.Drawing.Size(150, 30);
+            btnEditTheme.TabIndex = 3;
+            btnEditTheme.Text = "Переименовать тему";
+            btnEditTheme.UseVisualStyleBackColor = true;
+            btnEditTheme.Click += BtnEditThemeClick;
             // 
             // btnRemoveTheme
             // 
-            this.btnRemoveTheme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemoveTheme.Enabled = false;
-            this.btnRemoveTheme.Location = new System.Drawing.Point(325, 554);
-            this.btnRemoveTheme.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnRemoveTheme.Name = "btnRemoveTheme";
-            this.btnRemoveTheme.Size = new System.Drawing.Size(150, 30);
-            this.btnRemoveTheme.TabIndex = 4;
-            this.btnRemoveTheme.Text = "Удалить тему";
-            this.btnRemoveTheme.UseVisualStyleBackColor = true;
-            this.btnRemoveTheme.Click += new System.EventHandler(this.BtnRemoveThemeClick);
+            btnRemoveTheme.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            btnRemoveTheme.Enabled = false;
+            btnRemoveTheme.Location = new System.Drawing.Point(325, 554);
+            btnRemoveTheme.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnRemoveTheme.Name = "btnRemoveTheme";
+            btnRemoveTheme.Size = new System.Drawing.Size(150, 30);
+            btnRemoveTheme.TabIndex = 4;
+            btnRemoveTheme.Text = "Удалить тему";
+            btnRemoveTheme.UseVisualStyleBackColor = true;
+            btnRemoveTheme.Click += BtnRemoveThemeClick;
             // 
             // listOfCollections
             // 
-            this.listOfCollections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listOfCollections.FormattingEnabled = true;
-            this.listOfCollections.ItemHeight = 15;
-            this.listOfCollections.Location = new System.Drawing.Point(0, 0);
-            this.listOfCollections.Name = "listOfCollections";
-            this.listOfCollections.Size = new System.Drawing.Size(599, 544);
-            this.listOfCollections.TabIndex = 1;
+            listOfCollections.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listOfCollections.FormattingEnabled = true;
+            listOfCollections.ItemHeight = 15;
+            listOfCollections.Location = new System.Drawing.Point(0, 0);
+            listOfCollections.Name = "listOfCollections";
+            listOfCollections.Size = new System.Drawing.Size(599, 544);
+            listOfCollections.TabIndex = 1;
             // 
             // btnRemoveCollection
             // 
-            this.btnRemoveCollection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemoveCollection.Location = new System.Drawing.Point(440, 554);
-            this.btnRemoveCollection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnRemoveCollection.Name = "btnRemoveCollection";
-            this.btnRemoveCollection.Size = new System.Drawing.Size(150, 30);
-            this.btnRemoveCollection.TabIndex = 1;
-            this.btnRemoveCollection.Text = "Удалить сборник";
-            this.btnRemoveCollection.UseVisualStyleBackColor = true;
-            this.btnRemoveCollection.Click += new System.EventHandler(this.BtnRemoveCollectionClick);
+            btnRemoveCollection.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnRemoveCollection.Location = new System.Drawing.Point(440, 554);
+            btnRemoveCollection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnRemoveCollection.Name = "btnRemoveCollection";
+            btnRemoveCollection.Size = new System.Drawing.Size(150, 30);
+            btnRemoveCollection.TabIndex = 1;
+            btnRemoveCollection.Text = "Удалить сборник";
+            btnRemoveCollection.UseVisualStyleBackColor = true;
+            btnRemoveCollection.Click += BtnRemoveCollectionClick;
             // 
             // btnEditCollection
             // 
-            this.btnEditCollection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditCollection.Location = new System.Drawing.Point(282, 554);
-            this.btnEditCollection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnEditCollection.Name = "btnEditCollection";
-            this.btnEditCollection.Size = new System.Drawing.Size(150, 30);
-            this.btnEditCollection.TabIndex = 5;
-            this.btnEditCollection.Text = "Редактировать сборник";
-            this.btnEditCollection.UseVisualStyleBackColor = true;
-            this.btnEditCollection.Click += new System.EventHandler(this.BtnEditCollectionClick);
+            btnEditCollection.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnEditCollection.Location = new System.Drawing.Point(282, 554);
+            btnEditCollection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnEditCollection.Name = "btnEditCollection";
+            btnEditCollection.Size = new System.Drawing.Size(150, 30);
+            btnEditCollection.TabIndex = 5;
+            btnEditCollection.Text = "Редактировать сборник";
+            btnEditCollection.UseVisualStyleBackColor = true;
+            btnEditCollection.Click += BtnEditCollectionClick;
             // 
             // btnCreateCollection
             // 
-            this.btnCreateCollection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreateCollection.Location = new System.Drawing.Point(124, 554);
-            this.btnCreateCollection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnCreateCollection.Name = "btnCreateCollection";
-            this.btnCreateCollection.Size = new System.Drawing.Size(150, 30);
-            this.btnCreateCollection.TabIndex = 6;
-            this.btnCreateCollection.Text = "Добавить сборник";
-            this.btnCreateCollection.UseVisualStyleBackColor = true;
-            this.btnCreateCollection.Click += new System.EventHandler(this.BtnCreateCollectionClick);
+            btnCreateCollection.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnCreateCollection.Location = new System.Drawing.Point(124, 554);
+            btnCreateCollection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCreateCollection.Name = "btnCreateCollection";
+            btnCreateCollection.Size = new System.Drawing.Size(150, 30);
+            btnCreateCollection.TabIndex = 6;
+            btnCreateCollection.Text = "Добавить сборник";
+            btnCreateCollection.UseVisualStyleBackColor = true;
+            btnCreateCollection.Click += BtnCreateCollectionClick;
             // 
             // tabProgramsOfConferences
             // 
-            this.tabProgramsOfConferences.Controls.Add(this.splitContainer);
-            this.tabProgramsOfConferences.Location = new System.Drawing.Point(4, 24);
-            this.tabProgramsOfConferences.Name = "tabProgramsOfConferences";
-            this.tabProgramsOfConferences.Size = new System.Drawing.Size(1086, 592);
-            this.tabProgramsOfConferences.TabIndex = 3;
-            this.tabProgramsOfConferences.Text = "Программы конференций";
-            this.tabProgramsOfConferences.UseVisualStyleBackColor = true;
+            tabProgramsOfConferences.Controls.Add(splitContainer);
+            tabProgramsOfConferences.Location = new System.Drawing.Point(4, 24);
+            tabProgramsOfConferences.Name = "tabProgramsOfConferences";
+            tabProgramsOfConferences.Size = new System.Drawing.Size(1086, 592);
+            tabProgramsOfConferences.TabIndex = 3;
+            tabProgramsOfConferences.Text = "Программы конференций";
+            tabProgramsOfConferences.UseVisualStyleBackColor = true;
             // 
             // splitContainer
             // 
-            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer.Name = "splitContainer";
+            splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer.Location = new System.Drawing.Point(0, 0);
+            splitContainer.Name = "splitContainer";
             // 
             // splitContainer.Panel1
             // 
-            this.splitContainer.Panel1.Controls.Add(this.btnRemoveConferenceProgramsTheme);
-            this.splitContainer.Panel1.Controls.Add(this.btnEditConferenceProgramsTheme);
-            this.splitContainer.Panel1.Controls.Add(this.btnCreateConferenceProgramsTheme);
-            this.splitContainer.Panel1.Controls.Add(this.listOfConferenceProgramsTheme);
+            splitContainer.Panel1.Controls.Add(btnRemoveConferenceProgramsTheme);
+            splitContainer.Panel1.Controls.Add(btnEditConferenceProgramsTheme);
+            splitContainer.Panel1.Controls.Add(btnCreateConferenceProgramsTheme);
+            splitContainer.Panel1.Controls.Add(listOfConferenceProgramsTheme);
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.btnDeleteConferenceProgram);
-            this.splitContainer.Panel2.Controls.Add(this.btnEditConferenceProgram);
-            this.splitContainer.Panel2.Controls.Add(this.btnAddConferenceProgram);
-            this.splitContainer.Panel2.Controls.Add(this.listOfConferencePrograms);
-            this.splitContainer.Size = new System.Drawing.Size(1086, 592);
-            this.splitContainer.SplitterDistance = 481;
-            this.splitContainer.TabIndex = 0;
+            splitContainer.Panel2.Controls.Add(btnDeleteConferenceProgram);
+            splitContainer.Panel2.Controls.Add(btnEditConferenceProgram);
+            splitContainer.Panel2.Controls.Add(btnAddConferenceProgram);
+            splitContainer.Panel2.Controls.Add(listOfConferencePrograms);
+            splitContainer.Size = new System.Drawing.Size(1086, 592);
+            splitContainer.SplitterDistance = 481;
+            splitContainer.TabIndex = 0;
             // 
             // btnRemoveConferenceProgramsTheme
             // 
-            this.btnRemoveConferenceProgramsTheme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemoveConferenceProgramsTheme.Location = new System.Drawing.Point(320, 554);
-            this.btnRemoveConferenceProgramsTheme.Name = "btnRemoveConferenceProgramsTheme";
-            this.btnRemoveConferenceProgramsTheme.Size = new System.Drawing.Size(150, 30);
-            this.btnRemoveConferenceProgramsTheme.TabIndex = 3;
-            this.btnRemoveConferenceProgramsTheme.Text = "Удалить тему";
-            this.btnRemoveConferenceProgramsTheme.UseVisualStyleBackColor = true;
-            this.btnRemoveConferenceProgramsTheme.Click += new System.EventHandler(this.BtnRemoveConferenceProgramsThemeClick);
+            btnRemoveConferenceProgramsTheme.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            btnRemoveConferenceProgramsTheme.Location = new System.Drawing.Point(320, 554);
+            btnRemoveConferenceProgramsTheme.Name = "btnRemoveConferenceProgramsTheme";
+            btnRemoveConferenceProgramsTheme.Size = new System.Drawing.Size(150, 30);
+            btnRemoveConferenceProgramsTheme.TabIndex = 3;
+            btnRemoveConferenceProgramsTheme.Text = "Удалить тему";
+            btnRemoveConferenceProgramsTheme.UseVisualStyleBackColor = true;
+            btnRemoveConferenceProgramsTheme.Click += BtnRemoveConferenceProgramsThemeClick;
             // 
             // btnEditConferenceProgramsTheme
             // 
-            this.btnEditConferenceProgramsTheme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnEditConferenceProgramsTheme.Location = new System.Drawing.Point(164, 554);
-            this.btnEditConferenceProgramsTheme.Name = "btnEditConferenceProgramsTheme";
-            this.btnEditConferenceProgramsTheme.Size = new System.Drawing.Size(150, 30);
-            this.btnEditConferenceProgramsTheme.TabIndex = 2;
-            this.btnEditConferenceProgramsTheme.Text = "Переименовать тему";
-            this.btnEditConferenceProgramsTheme.UseVisualStyleBackColor = true;
-            this.btnEditConferenceProgramsTheme.Click += new System.EventHandler(this.BtnEditConferenceProgramsThemeClick);
+            btnEditConferenceProgramsTheme.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            btnEditConferenceProgramsTheme.Location = new System.Drawing.Point(164, 554);
+            btnEditConferenceProgramsTheme.Name = "btnEditConferenceProgramsTheme";
+            btnEditConferenceProgramsTheme.Size = new System.Drawing.Size(150, 30);
+            btnEditConferenceProgramsTheme.TabIndex = 2;
+            btnEditConferenceProgramsTheme.Text = "Переименовать тему";
+            btnEditConferenceProgramsTheme.UseVisualStyleBackColor = true;
+            btnEditConferenceProgramsTheme.Click += BtnEditConferenceProgramsThemeClick;
             // 
             // btnCreateConferenceProgramsTheme
             // 
-            this.btnCreateConferenceProgramsTheme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCreateConferenceProgramsTheme.Location = new System.Drawing.Point(8, 554);
-            this.btnCreateConferenceProgramsTheme.Name = "btnCreateConferenceProgramsTheme";
-            this.btnCreateConferenceProgramsTheme.Size = new System.Drawing.Size(150, 30);
-            this.btnCreateConferenceProgramsTheme.TabIndex = 1;
-            this.btnCreateConferenceProgramsTheme.Text = "Создать тему";
-            this.btnCreateConferenceProgramsTheme.UseVisualStyleBackColor = true;
-            this.btnCreateConferenceProgramsTheme.Click += new System.EventHandler(this.BtnCreateConferenceProgramsThemeClick);
+            btnCreateConferenceProgramsTheme.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            btnCreateConferenceProgramsTheme.Location = new System.Drawing.Point(8, 554);
+            btnCreateConferenceProgramsTheme.Name = "btnCreateConferenceProgramsTheme";
+            btnCreateConferenceProgramsTheme.Size = new System.Drawing.Size(150, 30);
+            btnCreateConferenceProgramsTheme.TabIndex = 1;
+            btnCreateConferenceProgramsTheme.Text = "Создать тему";
+            btnCreateConferenceProgramsTheme.UseVisualStyleBackColor = true;
+            btnCreateConferenceProgramsTheme.Click += BtnCreateConferenceProgramsThemeClick;
             // 
             // listOfConferenceProgramsTheme
             // 
-            this.listOfConferenceProgramsTheme.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listOfConferenceProgramsTheme.FormattingEnabled = true;
-            this.listOfConferenceProgramsTheme.ItemHeight = 15;
-            this.listOfConferenceProgramsTheme.Location = new System.Drawing.Point(0, 0);
-            this.listOfConferenceProgramsTheme.Name = "listOfConferenceProgramsTheme";
-            this.listOfConferenceProgramsTheme.Size = new System.Drawing.Size(481, 544);
-            this.listOfConferenceProgramsTheme.TabIndex = 0;
-            this.listOfConferenceProgramsTheme.SelectedIndexChanged += new System.EventHandler(this.ListOfConferenceProgramsThemeSelectedIndexChanged);
+            listOfConferenceProgramsTheme.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listOfConferenceProgramsTheme.FormattingEnabled = true;
+            listOfConferenceProgramsTheme.ItemHeight = 15;
+            listOfConferenceProgramsTheme.Location = new System.Drawing.Point(0, 0);
+            listOfConferenceProgramsTheme.Name = "listOfConferenceProgramsTheme";
+            listOfConferenceProgramsTheme.Size = new System.Drawing.Size(481, 544);
+            listOfConferenceProgramsTheme.TabIndex = 0;
+            listOfConferenceProgramsTheme.SelectedIndexChanged += ListOfConferenceProgramsThemeSelectedIndexChanged;
             // 
             // btnDeleteConferenceProgram
             // 
-            this.btnDeleteConferenceProgram.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteConferenceProgram.Location = new System.Drawing.Point(443, 554);
-            this.btnDeleteConferenceProgram.Name = "btnDeleteConferenceProgram";
-            this.btnDeleteConferenceProgram.Size = new System.Drawing.Size(150, 30);
-            this.btnDeleteConferenceProgram.TabIndex = 4;
-            this.btnDeleteConferenceProgram.Text = "Удалить программу";
-            this.btnDeleteConferenceProgram.UseVisualStyleBackColor = true;
-            this.btnDeleteConferenceProgram.Click += new System.EventHandler(this.BtnDeleteConferenceProgramClick);
+            btnDeleteConferenceProgram.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnDeleteConferenceProgram.Location = new System.Drawing.Point(443, 554);
+            btnDeleteConferenceProgram.Name = "btnDeleteConferenceProgram";
+            btnDeleteConferenceProgram.Size = new System.Drawing.Size(150, 30);
+            btnDeleteConferenceProgram.TabIndex = 4;
+            btnDeleteConferenceProgram.Text = "Удалить программу";
+            btnDeleteConferenceProgram.UseVisualStyleBackColor = true;
+            btnDeleteConferenceProgram.Click += BtnDeleteConferenceProgramClick;
             // 
             // btnEditConferenceProgram
             // 
-            this.btnEditConferenceProgram.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditConferenceProgram.Location = new System.Drawing.Point(287, 554);
-            this.btnEditConferenceProgram.Name = "btnEditConferenceProgram";
-            this.btnEditConferenceProgram.Size = new System.Drawing.Size(150, 30);
-            this.btnEditConferenceProgram.TabIndex = 3;
-            this.btnEditConferenceProgram.Text = "Изменить программу";
-            this.btnEditConferenceProgram.UseVisualStyleBackColor = true;
-            this.btnEditConferenceProgram.Click += new System.EventHandler(this.BtnEditConferenceProgramClick);
+            btnEditConferenceProgram.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnEditConferenceProgram.Location = new System.Drawing.Point(287, 554);
+            btnEditConferenceProgram.Name = "btnEditConferenceProgram";
+            btnEditConferenceProgram.Size = new System.Drawing.Size(150, 30);
+            btnEditConferenceProgram.TabIndex = 3;
+            btnEditConferenceProgram.Text = "Изменить программу";
+            btnEditConferenceProgram.UseVisualStyleBackColor = true;
+            btnEditConferenceProgram.Click += BtnEditConferenceProgramClick;
             // 
             // btnAddConferenceProgram
             // 
-            this.btnAddConferenceProgram.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddConferenceProgram.Location = new System.Drawing.Point(131, 554);
-            this.btnAddConferenceProgram.Name = "btnAddConferenceProgram";
-            this.btnAddConferenceProgram.Size = new System.Drawing.Size(150, 30);
-            this.btnAddConferenceProgram.TabIndex = 2;
-            this.btnAddConferenceProgram.Text = "Добавить программу";
-            this.btnAddConferenceProgram.UseVisualStyleBackColor = true;
-            this.btnAddConferenceProgram.Click += new System.EventHandler(this.BtnAddConferenceProgramClick);
+            btnAddConferenceProgram.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnAddConferenceProgram.Location = new System.Drawing.Point(131, 554);
+            btnAddConferenceProgram.Name = "btnAddConferenceProgram";
+            btnAddConferenceProgram.Size = new System.Drawing.Size(150, 30);
+            btnAddConferenceProgram.TabIndex = 2;
+            btnAddConferenceProgram.Text = "Добавить программу";
+            btnAddConferenceProgram.UseVisualStyleBackColor = true;
+            btnAddConferenceProgram.Click += BtnAddConferenceProgramClick;
             // 
             // listOfConferencePrograms
             // 
-            this.listOfConferencePrograms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listOfConferencePrograms.FormattingEnabled = true;
-            this.listOfConferencePrograms.ItemHeight = 15;
-            this.listOfConferencePrograms.Location = new System.Drawing.Point(0, 0);
-            this.listOfConferencePrograms.Name = "listOfConferencePrograms";
-            this.listOfConferencePrograms.Size = new System.Drawing.Size(601, 544);
-            this.listOfConferencePrograms.TabIndex = 0;
+            listOfConferencePrograms.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listOfConferencePrograms.FormattingEnabled = true;
+            listOfConferencePrograms.ItemHeight = 15;
+            listOfConferencePrograms.Location = new System.Drawing.Point(0, 0);
+            listOfConferencePrograms.Name = "listOfConferencePrograms";
+            listOfConferencePrograms.Size = new System.Drawing.Size(601, 544);
+            listOfConferencePrograms.TabIndex = 0;
             // 
             // tabFiles
             // 
-            this.tabFiles.Controls.Add(this.listBox);
-            this.tabFiles.Controls.Add(this.btnDelete);
-            this.tabFiles.Controls.Add(this.btnLoadFile);
-            this.tabFiles.Controls.Add(this.btnCreateDirectory);
-            this.tabFiles.Controls.Add(this.btnCopyAddress);
-            this.tabFiles.Location = new System.Drawing.Point(4, 24);
-            this.tabFiles.Name = "tabFiles";
-            this.tabFiles.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFiles.Size = new System.Drawing.Size(1086, 592);
-            this.tabFiles.TabIndex = 1;
-            this.tabFiles.Text = "Файлы";
-            this.tabFiles.UseVisualStyleBackColor = true;
+            tabFiles.Controls.Add(qrCodeBox);
+            tabFiles.Controls.Add(listBox);
+            tabFiles.Controls.Add(btnDelete);
+            tabFiles.Controls.Add(btnLoadFile);
+            tabFiles.Controls.Add(btnCreateDirectory);
+            tabFiles.Controls.Add(btnCopyAddress);
+            tabFiles.Location = new System.Drawing.Point(4, 24);
+            tabFiles.Name = "tabFiles";
+            tabFiles.Padding = new System.Windows.Forms.Padding(3);
+            tabFiles.Size = new System.Drawing.Size(1086, 592);
+            tabFiles.TabIndex = 1;
+            tabFiles.Text = "Файлы";
+            tabFiles.UseVisualStyleBackColor = true;
+            // 
+            // qrCodeBox
+            // 
+            qrCodeBox.BackColor = System.Drawing.Color.White;
+            qrCodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            qrCodeBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            qrCodeBox.Image = (System.Drawing.Image)resources.GetObject("qrCodeBox.Image");
+            qrCodeBox.Location = new System.Drawing.Point(927, 358);
+            qrCodeBox.Name = "qrCodeBox";
+            qrCodeBox.Padding = new System.Windows.Forms.Padding(5);
+            qrCodeBox.Size = new System.Drawing.Size(150, 150);
+            qrCodeBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            qrCodeBox.TabIndex = 8;
+            qrCodeBox.TabStop = false;
+            qrCodeBox.Click += qrCodeBox_Click;
             // 
             // listBox
             // 
-            this.listBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox.FormattingEnabled = true;
-            this.listBox.ItemHeight = 15;
-            this.listBox.Location = new System.Drawing.Point(6, 6);
-            this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(914, 574);
-            this.listBox.TabIndex = 7;
-            this.listBox.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
-            this.listBox.DoubleClick += new System.EventHandler(this.ListBoxEnter);
-            this.listBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListBoxKeyDown);
+            listBox.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listBox.FormattingEnabled = true;
+            listBox.ItemHeight = 15;
+            listBox.Location = new System.Drawing.Point(6, 6);
+            listBox.Name = "listBox";
+            listBox.Size = new System.Drawing.Size(914, 574);
+            listBox.TabIndex = 7;
+            listBox.SelectedIndexChanged += ListBoxSelectedIndexChanged;
+            listBox.DoubleClick += ListBoxEnter;
+            listBox.KeyDown += ListBoxKeyDown;
             // 
             // btnDelete
             // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(927, 550);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(150, 30);
-            this.btnDelete.TabIndex = 6;
-            this.btnDelete.Text = "Удалить";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.BtnDeleteClick);
+            btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnDelete.Enabled = false;
+            btnDelete.Location = new System.Drawing.Point(927, 550);
+            btnDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(150, 30);
+            btnDelete.TabIndex = 6;
+            btnDelete.Text = "Удалить";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += BtnDeleteClick;
             // 
             // btnLoadFile
             // 
-            this.btnLoadFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadFile.Location = new System.Drawing.Point(927, 42);
-            this.btnLoadFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(150, 30);
-            this.btnLoadFile.TabIndex = 4;
-            this.btnLoadFile.Text = "Загрузить файл";
-            this.btnLoadFile.UseVisualStyleBackColor = true;
-            this.btnLoadFile.Click += new System.EventHandler(this.BtnLoadFileClick);
+            btnLoadFile.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnLoadFile.Location = new System.Drawing.Point(927, 42);
+            btnLoadFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnLoadFile.Name = "btnLoadFile";
+            btnLoadFile.Size = new System.Drawing.Size(150, 30);
+            btnLoadFile.TabIndex = 4;
+            btnLoadFile.Text = "Загрузить файл";
+            btnLoadFile.UseVisualStyleBackColor = true;
+            btnLoadFile.Click += BtnLoadFileClick;
             // 
             // btnCreateDirectory
             // 
-            this.btnCreateDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreateDirectory.Location = new System.Drawing.Point(927, 6);
-            this.btnCreateDirectory.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnCreateDirectory.Name = "btnCreateDirectory";
-            this.btnCreateDirectory.Size = new System.Drawing.Size(150, 30);
-            this.btnCreateDirectory.TabIndex = 2;
-            this.btnCreateDirectory.Text = "Создать папку";
-            this.btnCreateDirectory.UseVisualStyleBackColor = true;
-            this.btnCreateDirectory.Click += new System.EventHandler(this.BtnCreateDirectoryClick);
+            btnCreateDirectory.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnCreateDirectory.Location = new System.Drawing.Point(927, 6);
+            btnCreateDirectory.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCreateDirectory.Name = "btnCreateDirectory";
+            btnCreateDirectory.Size = new System.Drawing.Size(150, 30);
+            btnCreateDirectory.TabIndex = 2;
+            btnCreateDirectory.Text = "Создать папку";
+            btnCreateDirectory.UseVisualStyleBackColor = true;
+            btnCreateDirectory.Click += BtnCreateDirectoryClick;
             // 
             // btnCopyAddress
             // 
-            this.btnCopyAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCopyAddress.Enabled = false;
-            this.btnCopyAddress.Location = new System.Drawing.Point(927, 514);
-            this.btnCopyAddress.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnCopyAddress.Name = "btnCopyAddress";
-            this.btnCopyAddress.Size = new System.Drawing.Size(150, 30);
-            this.btnCopyAddress.TabIndex = 1;
-            this.btnCopyAddress.Text = "Скопировать адрес";
-            this.btnCopyAddress.UseVisualStyleBackColor = true;
-            this.btnCopyAddress.Click += new System.EventHandler(this.BtnCopyAddressClick);
+            btnCopyAddress.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnCopyAddress.Enabled = false;
+            btnCopyAddress.Location = new System.Drawing.Point(927, 514);
+            btnCopyAddress.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCopyAddress.Name = "btnCopyAddress";
+            btnCopyAddress.Size = new System.Drawing.Size(150, 30);
+            btnCopyAddress.TabIndex = 1;
+            btnCopyAddress.Text = "Скопировать адрес";
+            btnCopyAddress.UseVisualStyleBackColor = true;
+            btnCopyAddress.Click += BtnCopyAddressClick;
             // 
             // tabOrdersReestr
             // 
-            this.tabOrdersReestr.Controls.Add(this.lblFilterEnd);
-            this.tabOrdersReestr.Controls.Add(this.lblFilterStart);
-            this.tabOrdersReestr.Controls.Add(this.dtpFilterStart);
-            this.tabOrdersReestr.Controls.Add(this.dtpFilterEnd);
-            this.tabOrdersReestr.Controls.Add(this.btnFilterReset);
-            this.tabOrdersReestr.Controls.Add(this.btnPrintOrderReestr);
-            this.tabOrdersReestr.Controls.Add(this.btnRemoveOrderRecord);
-            this.tabOrdersReestr.Controls.Add(this.btnEditOrderRecord);
-            this.tabOrdersReestr.Controls.Add(this.btnCreateOrderRecord);
-            this.tabOrdersReestr.Controls.Add(this.gridOrdersReestr);
-            this.tabOrdersReestr.Location = new System.Drawing.Point(4, 24);
-            this.tabOrdersReestr.Name = "tabOrdersReestr";
-            this.tabOrdersReestr.Size = new System.Drawing.Size(1086, 592);
-            this.tabOrdersReestr.TabIndex = 4;
-            this.tabOrdersReestr.Text = "Реестр приказов";
-            this.tabOrdersReestr.UseVisualStyleBackColor = true;
+            tabOrdersReestr.Controls.Add(lblFilterEnd);
+            tabOrdersReestr.Controls.Add(lblFilterStart);
+            tabOrdersReestr.Controls.Add(dtpFilterStart);
+            tabOrdersReestr.Controls.Add(dtpFilterEnd);
+            tabOrdersReestr.Controls.Add(btnFilterReset);
+            tabOrdersReestr.Controls.Add(btnPrintOrderReestr);
+            tabOrdersReestr.Controls.Add(btnRemoveOrderRecord);
+            tabOrdersReestr.Controls.Add(btnEditOrderRecord);
+            tabOrdersReestr.Controls.Add(btnCreateOrderRecord);
+            tabOrdersReestr.Controls.Add(gridOrdersReestr);
+            tabOrdersReestr.Location = new System.Drawing.Point(4, 24);
+            tabOrdersReestr.Name = "tabOrdersReestr";
+            tabOrdersReestr.Size = new System.Drawing.Size(1086, 592);
+            tabOrdersReestr.TabIndex = 4;
+            tabOrdersReestr.Text = "Реестр приказов";
+            tabOrdersReestr.UseVisualStyleBackColor = true;
             // 
             // lblFilterEnd
             // 
-            this.lblFilterEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFilterEnd.AutoSize = true;
-            this.lblFilterEnd.Location = new System.Drawing.Point(929, 507);
-            this.lblFilterEnd.Name = "lblFilterEnd";
-            this.lblFilterEnd.Size = new System.Drawing.Size(21, 15);
-            this.lblFilterEnd.TabIndex = 3;
-            this.lblFilterEnd.Text = "по";
+            lblFilterEnd.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            lblFilterEnd.AutoSize = true;
+            lblFilterEnd.Location = new System.Drawing.Point(929, 507);
+            lblFilterEnd.Name = "lblFilterEnd";
+            lblFilterEnd.Size = new System.Drawing.Size(21, 15);
+            lblFilterEnd.TabIndex = 3;
+            lblFilterEnd.Text = "по";
             // 
             // lblFilterStart
             // 
-            this.lblFilterStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFilterStart.AutoSize = true;
-            this.lblFilterStart.Location = new System.Drawing.Point(929, 463);
-            this.lblFilterStart.Name = "lblFilterStart";
-            this.lblFilterStart.Size = new System.Drawing.Size(63, 15);
-            this.lblFilterStart.TabIndex = 3;
-            this.lblFilterStart.Text = "Выбрать с";
+            lblFilterStart.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            lblFilterStart.AutoSize = true;
+            lblFilterStart.Location = new System.Drawing.Point(929, 463);
+            lblFilterStart.Name = "lblFilterStart";
+            lblFilterStart.Size = new System.Drawing.Size(63, 15);
+            lblFilterStart.TabIndex = 3;
+            lblFilterStart.Text = "Выбрать с";
             // 
             // dtpFilterStart
             // 
-            this.dtpFilterStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpFilterStart.CustomFormat = "dd:MM:yyyy";
-            this.dtpFilterStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFilterStart.Location = new System.Drawing.Point(929, 481);
-            this.dtpFilterStart.Name = "dtpFilterStart";
-            this.dtpFilterStart.Size = new System.Drawing.Size(150, 23);
-            this.dtpFilterStart.TabIndex = 2;
-            this.dtpFilterStart.ValueChanged += new System.EventHandler(this.dtpFilter_ValueChanged);
+            dtpFilterStart.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            dtpFilterStart.CustomFormat = "dd:MM:yyyy";
+            dtpFilterStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpFilterStart.Location = new System.Drawing.Point(929, 481);
+            dtpFilterStart.Name = "dtpFilterStart";
+            dtpFilterStart.Size = new System.Drawing.Size(150, 23);
+            dtpFilterStart.TabIndex = 2;
+            dtpFilterStart.ValueChanged += dtpFilter_ValueChanged;
             // 
             // dtpFilterEnd
             // 
-            this.dtpFilterEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpFilterEnd.CustomFormat = "dd:MM:yyyy";
-            this.dtpFilterEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFilterEnd.Location = new System.Drawing.Point(929, 525);
-            this.dtpFilterEnd.Name = "dtpFilterEnd";
-            this.dtpFilterEnd.Size = new System.Drawing.Size(148, 23);
-            this.dtpFilterEnd.TabIndex = 2;
-            this.dtpFilterEnd.ValueChanged += new System.EventHandler(this.dtpFilter_ValueChanged);
+            dtpFilterEnd.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            dtpFilterEnd.CustomFormat = "dd:MM:yyyy";
+            dtpFilterEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dtpFilterEnd.Location = new System.Drawing.Point(929, 525);
+            dtpFilterEnd.Name = "dtpFilterEnd";
+            dtpFilterEnd.Size = new System.Drawing.Size(148, 23);
+            dtpFilterEnd.TabIndex = 2;
+            dtpFilterEnd.ValueChanged += dtpFilter_ValueChanged;
             // 
             // btnFilterReset
             // 
-            this.btnFilterReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFilterReset.Location = new System.Drawing.Point(927, 554);
-            this.btnFilterReset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnFilterReset.Name = "btnFilterReset";
-            this.btnFilterReset.Size = new System.Drawing.Size(150, 30);
-            this.btnFilterReset.TabIndex = 1;
-            this.btnFilterReset.Text = "Сбросить";
-            this.btnFilterReset.UseVisualStyleBackColor = true;
-            this.btnFilterReset.Click += new System.EventHandler(this.btnFilterReset_Click);
+            btnFilterReset.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnFilterReset.Location = new System.Drawing.Point(927, 554);
+            btnFilterReset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnFilterReset.Name = "btnFilterReset";
+            btnFilterReset.Size = new System.Drawing.Size(150, 30);
+            btnFilterReset.TabIndex = 1;
+            btnFilterReset.Text = "Сбросить";
+            btnFilterReset.UseVisualStyleBackColor = true;
+            btnFilterReset.Click += btnFilterReset_Click;
             // 
             // btnPrintOrderReestr
             // 
-            this.btnPrintOrderReestr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrintOrderReestr.Location = new System.Drawing.Point(927, 150);
-            this.btnPrintOrderReestr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnPrintOrderReestr.Name = "btnPrintOrderReestr";
-            this.btnPrintOrderReestr.Size = new System.Drawing.Size(150, 30);
-            this.btnPrintOrderReestr.TabIndex = 1;
-            this.btnPrintOrderReestr.Text = "Печать";
-            this.btnPrintOrderReestr.UseVisualStyleBackColor = true;
-            this.btnPrintOrderReestr.Click += new System.EventHandler(this.btnPrintOrderReestr_Click);
+            btnPrintOrderReestr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnPrintOrderReestr.Location = new System.Drawing.Point(927, 150);
+            btnPrintOrderReestr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnPrintOrderReestr.Name = "btnPrintOrderReestr";
+            btnPrintOrderReestr.Size = new System.Drawing.Size(150, 30);
+            btnPrintOrderReestr.TabIndex = 1;
+            btnPrintOrderReestr.Text = "Печать";
+            btnPrintOrderReestr.UseVisualStyleBackColor = true;
+            btnPrintOrderReestr.Click += btnPrintOrderReestr_Click;
             // 
             // btnRemoveOrderRecord
             // 
-            this.btnRemoveOrderRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemoveOrderRecord.Location = new System.Drawing.Point(927, 75);
-            this.btnRemoveOrderRecord.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnRemoveOrderRecord.Name = "btnRemoveOrderRecord";
-            this.btnRemoveOrderRecord.Size = new System.Drawing.Size(150, 30);
-            this.btnRemoveOrderRecord.TabIndex = 1;
-            this.btnRemoveOrderRecord.Text = "Удалить";
-            this.btnRemoveOrderRecord.UseVisualStyleBackColor = true;
-            this.btnRemoveOrderRecord.Click += new System.EventHandler(this.btnRemoveOrderRecord_Click);
+            btnRemoveOrderRecord.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnRemoveOrderRecord.Location = new System.Drawing.Point(927, 75);
+            btnRemoveOrderRecord.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnRemoveOrderRecord.Name = "btnRemoveOrderRecord";
+            btnRemoveOrderRecord.Size = new System.Drawing.Size(150, 30);
+            btnRemoveOrderRecord.TabIndex = 1;
+            btnRemoveOrderRecord.Text = "Удалить";
+            btnRemoveOrderRecord.UseVisualStyleBackColor = true;
+            btnRemoveOrderRecord.Click += btnRemoveOrderRecord_Click;
             // 
             // btnEditOrderRecord
             // 
-            this.btnEditOrderRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditOrderRecord.Location = new System.Drawing.Point(927, 39);
-            this.btnEditOrderRecord.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnEditOrderRecord.Name = "btnEditOrderRecord";
-            this.btnEditOrderRecord.Size = new System.Drawing.Size(150, 30);
-            this.btnEditOrderRecord.TabIndex = 1;
-            this.btnEditOrderRecord.Text = "Редактировать";
-            this.btnEditOrderRecord.UseVisualStyleBackColor = true;
-            this.btnEditOrderRecord.Click += new System.EventHandler(this.btnEditOrderRecord_Click);
+            btnEditOrderRecord.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnEditOrderRecord.Location = new System.Drawing.Point(927, 39);
+            btnEditOrderRecord.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnEditOrderRecord.Name = "btnEditOrderRecord";
+            btnEditOrderRecord.Size = new System.Drawing.Size(150, 30);
+            btnEditOrderRecord.TabIndex = 1;
+            btnEditOrderRecord.Text = "Редактировать";
+            btnEditOrderRecord.UseVisualStyleBackColor = true;
+            btnEditOrderRecord.Click += btnEditOrderRecord_Click;
             // 
             // btnCreateOrderRecord
             // 
-            this.btnCreateOrderRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreateOrderRecord.Location = new System.Drawing.Point(927, 3);
-            this.btnCreateOrderRecord.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnCreateOrderRecord.Name = "btnCreateOrderRecord";
-            this.btnCreateOrderRecord.Size = new System.Drawing.Size(150, 30);
-            this.btnCreateOrderRecord.TabIndex = 1;
-            this.btnCreateOrderRecord.Text = "Создать";
-            this.btnCreateOrderRecord.UseVisualStyleBackColor = true;
-            this.btnCreateOrderRecord.Click += new System.EventHandler(this.btnCreateOrderRecord_Click);
+            btnCreateOrderRecord.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btnCreateOrderRecord.Location = new System.Drawing.Point(927, 3);
+            btnCreateOrderRecord.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCreateOrderRecord.Name = "btnCreateOrderRecord";
+            btnCreateOrderRecord.Size = new System.Drawing.Size(150, 30);
+            btnCreateOrderRecord.TabIndex = 1;
+            btnCreateOrderRecord.Text = "Создать";
+            btnCreateOrderRecord.UseVisualStyleBackColor = true;
+            btnCreateOrderRecord.Click += btnCreateOrderRecord_Click;
             // 
             // gridOrdersReestr
             // 
-            this.gridOrdersReestr.AllowUserToAddRows = false;
-            this.gridOrdersReestr.AllowUserToDeleteRows = false;
-            this.gridOrdersReestr.AllowUserToResizeColumns = false;
-            this.gridOrdersReestr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridOrdersReestr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridOrdersReestr.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.Date,
-            this.Label});
-            this.gridOrdersReestr.Location = new System.Drawing.Point(3, 3);
-            this.gridOrdersReestr.MultiSelect = false;
-            this.gridOrdersReestr.Name = "gridOrdersReestr";
-            this.gridOrdersReestr.ReadOnly = true;
-            this.gridOrdersReestr.RowHeadersVisible = false;
-            this.gridOrdersReestr.RowTemplate.Height = 25;
-            this.gridOrdersReestr.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridOrdersReestr.Size = new System.Drawing.Size(917, 586);
-            this.gridOrdersReestr.TabIndex = 0;
+            gridOrdersReestr.AllowUserToAddRows = false;
+            gridOrdersReestr.AllowUserToDeleteRows = false;
+            gridOrdersReestr.AllowUserToResizeColumns = false;
+            gridOrdersReestr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            gridOrdersReestr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridOrdersReestr.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { Id, Date, Label });
+            gridOrdersReestr.Location = new System.Drawing.Point(3, 3);
+            gridOrdersReestr.MultiSelect = false;
+            gridOrdersReestr.Name = "gridOrdersReestr";
+            gridOrdersReestr.ReadOnly = true;
+            gridOrdersReestr.RowHeadersVisible = false;
+            gridOrdersReestr.RowTemplate.Height = 25;
+            gridOrdersReestr.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            gridOrdersReestr.Size = new System.Drawing.Size(917, 586);
+            gridOrdersReestr.TabIndex = 0;
             // 
             // Id
             // 
-            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Id.DataPropertyName = "Id";
-            this.Id.FillWeight = 75F;
-            this.Id.HeaderText = "Номер";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Width = 70;
+            Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            Id.DataPropertyName = "Id";
+            Id.FillWeight = 75F;
+            Id.HeaderText = "Номер";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Width = 70;
             // 
             // Date
             // 
-            this.Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Date.DataPropertyName = "Date";
-            this.Date.FillWeight = 75F;
-            this.Date.HeaderText = "Дата";
-            this.Date.Name = "Date";
-            this.Date.ReadOnly = true;
-            this.Date.Width = 57;
+            Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            Date.DataPropertyName = "Date";
+            Date.FillWeight = 75F;
+            Date.HeaderText = "Дата";
+            Date.Name = "Date";
+            Date.ReadOnly = true;
+            Date.Width = 57;
             // 
             // Label
             // 
-            this.Label.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Label.DataPropertyName = "Label";
-            this.Label.HeaderText = "Название";
-            this.Label.Name = "Label";
-            this.Label.ReadOnly = true;
-            this.Label.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            Label.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            Label.DataPropertyName = "Label";
+            Label.HeaderText = "Название";
+            Label.Name = "Label";
+            Label.ReadOnly = true;
+            Label.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ordersReestrPrintDocument
             // 
-            this.ordersReestrPrintDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.ordersReestrPrintDocument_PrintPage);
+            ordersReestrPrintDocument.PrintPage += ordersReestrPrintDocument_PrintPage;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1094, 620);
-            this.Controls.Add(this.tabsControl);
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Помощник (v.1.3.1)";
-            this.Load += new System.EventHandler(this.MainFormLoad);
-            ((System.ComponentModel.ISupportInitialize)(this.newsDataGrid)).EndInit();
-            this.newsPanel.ResumeLayout(false);
-            this.tabsControl.ResumeLayout(false);
-            this.tabNews.ResumeLayout(false);
-            this.tabSaleCollections.ResumeLayout(false);
-            this.splitContainerCollections.Panel1.ResumeLayout(false);
-            this.splitContainerCollections.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerCollections)).EndInit();
-            this.splitContainerCollections.ResumeLayout(false);
-            this.tabProgramsOfConferences.ResumeLayout(false);
-            this.splitContainer.Panel1.ResumeLayout(false);
-            this.splitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
-            this.splitContainer.ResumeLayout(false);
-            this.tabFiles.ResumeLayout(false);
-            this.tabOrdersReestr.ResumeLayout(false);
-            this.tabOrdersReestr.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridOrdersReestr)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1094, 620);
+            Controls.Add(tabsControl);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "MainForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Помощник (v.1.3.1)";
+            Load += MainFormLoad;
+            ((System.ComponentModel.ISupportInitialize)newsDataGrid).EndInit();
+            newsPanel.ResumeLayout(false);
+            tabsControl.ResumeLayout(false);
+            tabNews.ResumeLayout(false);
+            tabSaleCollections.ResumeLayout(false);
+            splitContainerCollections.Panel1.ResumeLayout(false);
+            splitContainerCollections.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainerCollections).EndInit();
+            splitContainerCollections.ResumeLayout(false);
+            tabProgramsOfConferences.ResumeLayout(false);
+            splitContainer.Panel1.ResumeLayout(false);
+            splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer).EndInit();
+            splitContainer.ResumeLayout(false);
+            tabFiles.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)qrCodeBox).EndInit();
+            tabOrdersReestr.ResumeLayout(false);
+            tabOrdersReestr.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gridOrdersReestr).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -811,6 +811,7 @@ namespace NewsEditor
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Label;
+        private System.Windows.Forms.PictureBox qrCodeBox;
     }
 }
 
