@@ -479,6 +479,7 @@ namespace NewsEditor
             // 
             // qrCodeBox
             // 
+            qrCodeBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             qrCodeBox.BackColor = System.Drawing.Color.White;
             qrCodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             qrCodeBox.Cursor = System.Windows.Forms.Cursors.Hand;
