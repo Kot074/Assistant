@@ -174,7 +174,8 @@ namespace NewsEditor
                     var qrCode = new QRCode(qrCodeData);
 
                     var img = qrCode.GetGraphic(5);
-                    qrCodeBox.Image = img;
+
+                    qrCodeBox.Image = new Bitmap(img, new Size(200, 200));
                 }
                 catch
                 {
